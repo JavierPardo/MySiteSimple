@@ -1,13 +1,16 @@
 <li *ngFor="let item of items; let i = index">
-  <a [routerLink]="[item.url]" *ngIf="item.url !==null" title="{{item.text}}">
+  <a [routerLink]="[item.url]" *ngIf="item.url !==null && !isChild" title="{{item.text}}">
 
     <i class="{{item.class}}"></i>
     <span class="nav-label">{{item.text}}</span>
   </a>
-  <a *ngIf="item.url ==null" title="{{item.text}}">
+  <a *ngIf="item.url ==null && !isChild" title="{{item.text}}">
 
     <i class="{{item.class}}"></i>
     <span class="nav-label">{{item.text}}</span>
+  </a>
+  <a *ngIf="isChild" title="{{item.text}}">
+    {{item.text}}
   </a>
 
   <ul class="nav nav-second-level" *ngIf="item.items.length>0">
