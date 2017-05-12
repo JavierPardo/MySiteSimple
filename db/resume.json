@@ -1,0 +1,17 @@
+{
+    "genInfo": [
+        {
+            "id": 0,
+            "name": "AngularJS",
+            "state": "main.angular",
+            "inscritos": [
+                {
+                    "id": 10,
+                    "nombre": "Juan",
+                    "apellido": "Perez",
+                    "fechaNacimiento": "1990-05-01T00:00:00-04:00"
+                }
+            ]
+        }
+    ]
+}

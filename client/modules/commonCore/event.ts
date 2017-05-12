@@ -10,3 +10,13 @@ export const LoadingIndicatorEvent = {
     Show: "show",
     Hide: "hide"
 };
+
+export const CommonEvent = {
+    ValidationFail: "ValidationFail"
+};
+
+export const HttpCode = {
+    NotFound: 404,
+    UnAuthorized: 401,
+    BadRequest: 400
+};

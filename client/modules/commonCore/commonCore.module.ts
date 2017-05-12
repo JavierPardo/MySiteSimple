@@ -28,6 +28,7 @@ import { CommonModule } from "@angular/common";
         RouterModule.forRoot([])
     ],
     exports: [
+        BrowserModule,
         DefaultLayout,
         DefaultUnauthenticatedLayout,
         MenuSidebar,
