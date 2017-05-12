@@ -9,7 +9,7 @@
     <i class="{{item.class}}"></i>
     <span class="nav-label">{{item.text}}</span>
   </a>
-  <a *ngIf="isChild" title="{{item.text}}">
+  <a *ngIf="isChild" title="{{item.text}}"  [routerLink]="[item.url]">
     {{item.text}}
   </a>
 
