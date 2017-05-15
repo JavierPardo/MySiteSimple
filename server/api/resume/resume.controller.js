@@ -19,6 +19,7 @@ exports.getGeneralInformation = function (req, res) {
   };
   res.json({data:generalInformation, errors:[]});
 };
+
 exports.getPersonalObjectives = function (req, res) {
   var personalObjectives = 
   [
@@ -26,4 +27,30 @@ exports.getPersonalObjectives = function (req, res) {
     "Learn new technologies with courses or on my own in order to be updated."
   ];
   res.json({data:personalObjectives, errors:[]});
+};
+
+
+exports.collegeHistory = function (req, res) {
+  var collegeHistory = 
+  [
+    {
+      'collegeName':'Colegio Argentino Boliviano',
+      'location':'Santa Cruz de la Sierra - Boliviano',
+      'startYear':'1995',
+      'endYear':'2002'
+    },
+    {
+      'collegeName':'Centro Educativo Integral Cochabamba',
+      'location':'Cochabamba - Boliviano',
+      'startYear':'2003',
+      'endYear':'2003'
+    },
+    {
+      'collegeName':'Unidad Educativa “La Salle”',
+      'location':'Cochabamba - Boliviano',
+      'startYear':'2004',
+      'endYear':'2006'
+    },
+  ];
+  res.json({data:collegeHistory, errors:[]});
 };

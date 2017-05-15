@@ -11,6 +11,7 @@ var router = express.Router();
 
 router.get('/gen-info', controller.getGeneralInformation);
 router.get('/per-obj', controller.getPersonalObjectives);
+router.get('/education/college', controller.collegeHistory);
 //router.put('/:id', controller.put);
 //router.post('/:id', controller.post);
 //router.delete('/:id', controller.delete);
