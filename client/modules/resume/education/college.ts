@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class College extends BasePage {
 
-    public colHist: CollegeModel = new CollegeModel();;
+    public colHist: Array<CollegeModel>= new Array<CollegeModel>();
 
     constructor(routedActivated: ActivatedRoute) {
 
@@ -26,7 +26,7 @@ export class College extends BasePage {
                 for (let colDet of genCollHist) {
                     var college=new CollegeModel();
                     college.import(genCollHist);
-                    self.colHist.import(college);
+                    self.colHist.add(college);
                 }
             })
 

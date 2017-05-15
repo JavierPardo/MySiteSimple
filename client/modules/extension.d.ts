@@ -13,6 +13,7 @@ declare interface Array<T> {
     firstOrDefault(callback: any): any;
     removeItem(item: any): Array<any>;
     any(callback: any): boolean;
+    add(item: any): void;
 }
 interface RouteData {
     authentication: any;
