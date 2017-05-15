@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class College extends BasePage {
 
-    public colHist: any[]= [];
+    public colHist: any[] = [];
 
     constructor(routedActivated: ActivatedRoute) {
 
@@ -24,9 +24,9 @@ export class College extends BasePage {
             })
             .then(function (genCollHist: any) {
                 for (let colDet of genCollHist) {
-                    var college=new CollegeModel();
+                    var college = new CollegeModel();
                     college.import(genCollHist);
-                    self.colHist.add(college);
+                    self.colHist[self.colHist.length] = college;
                 }
             })
 
