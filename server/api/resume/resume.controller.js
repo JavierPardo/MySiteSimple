@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 exports.getGeneralInformation = function (req, res) {
   var generalInformation = {
-    'nombre': 'Javier P G',
+    'name': 'Javier P G',
     'location': 'Cochabamba - Bolivia',
     'email': [
       'javier_p_g1989@hotmail.com',
@@ -17,5 +17,5 @@ exports.getGeneralInformation = function (req, res) {
     ],
     'birthdate': 'September, 1989'
   };
-  res.json(generalInformation);
+  res.json({data:generalInformation, errors:[]});
 };

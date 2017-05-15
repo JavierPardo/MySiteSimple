@@ -15,12 +15,16 @@
   <div class="panel-heading">
     <h3 class="panel-title">Email Adress</h3>
   </div>
-  <div class="panel-body"> javier_p_g1989@hotmail.com - javier.p.g1989@gmail.com </div>
-  <a *ngFor='let email of model.emailAdresses; let i = index' >{{email}}</a>
+  <ul>
+    <li *ngFor='let email of model.emailAdresses; let i = index'> 
+      <a href="mailto:{{email}}">{{email}}</a>
+      </li>
+  </ul>
+
 </div>
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">Birth date:</h3>
   </div>
-  <div class="panel-body"> {{model.birtdate}} </div>
+  <div class="panel-body"> {{model.birthDate}} </div>
 </div>

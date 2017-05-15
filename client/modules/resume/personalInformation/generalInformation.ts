@@ -23,7 +23,6 @@ export class GeneralInformation extends BasePage {
             );
         })
         .then(function (genInfoItem:any){
-            console.log(genInfoItem);
             self.model.import(genInfoItem);
         })
         

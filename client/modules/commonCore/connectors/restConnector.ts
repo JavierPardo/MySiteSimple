@@ -63,7 +63,7 @@ export class RESTConnector implements IConnector {
         RESTConnector.eventManager.publish(LoadingIndicatorEvent.Show);
         let def = PromiseFactory.create();
         let headers = new JsonHeaders();
-        RESTConnector.http.options(url, { headers: headers })
+        RESTConnector.http.get(url, { headers: headers })
             .map((response: any) => response.json())
             .subscribe(
             (data: any) => this.handleResponse(def, data),
@@ -87,8 +87,8 @@ export class RESTConnector implements IConnector {
 
     private handleResponse(def: Promise, response: any): any {
         RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
-        if (response.errors.length === 0) {
-            def.resolve(response.data);
+        if (!response.errors || response.errors.length === 0) {
+            def.resolve(response.data); 
             return;
         }
         let validationEror: ValidationException = this.getValidationExceptionFromResponse(response.errors);
