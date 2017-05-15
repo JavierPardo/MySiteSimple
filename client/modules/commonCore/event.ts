@@ -20,3 +20,7 @@ export const HttpCode = {
     UnAuthorized: 401,
     BadRequest: 400
 };
+
+export const AuthenticatedEvent = {
+    AuthenticationChanged: "AuthenticationChanged"
+};

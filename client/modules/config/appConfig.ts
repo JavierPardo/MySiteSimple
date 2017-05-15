@@ -24,7 +24,7 @@ export default {
         token: "authtoken"
     },
     api: {
-          baseUrl: "http://localhost:9000/api/"
+          baseUrl: "http://www.javing.tech/api/"
     },
     localeUrl: "/assets/locales/"
 };
