@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class College extends BasePage {
 
-    public colHist: Array<CollegeModel>= new Array<CollegeModel>();
+    public colHist: any[]= [];
 
     constructor(routedActivated: ActivatedRoute) {
 
