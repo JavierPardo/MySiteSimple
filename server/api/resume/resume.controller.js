@@ -19,3 +19,11 @@ exports.getGeneralInformation = function (req, res) {
   };
   res.json({data:generalInformation, errors:[]});
 };
+exports.getPersonalObjectives = function (req, res) {
+  var personalObjectives = 
+  [
+    "Expand and improve my knowledge and my skills to solve problems efficiently, both in the workplace and personal.",
+    "Learn new technologies with courses or on my own in order to be updated."
+  ];
+  res.json({data:personalObjectives, errors:[]});
+};
