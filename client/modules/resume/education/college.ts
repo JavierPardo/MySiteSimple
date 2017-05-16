@@ -25,7 +25,7 @@ export class College extends BasePage {
             .then(function (genCollHist: any) {
                 for (let colDet of genCollHist) {
                     var college = new CollegeModel();
-                    college.import(genCollHist);
+                    college.import(colDet);
                     self.colHist[self.colHist.length] = college;
                 }
             })
