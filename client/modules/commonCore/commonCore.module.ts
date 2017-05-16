@@ -1,3 +1,6 @@
+import helper from './helpers';
+import { ValidationDirective } from './directives/validation';
+import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
 import { BasePage } from './models/ui/basePage';
 import { MenuItem } from './layouts/default/directives/menus/menuItem';
 import { MenuSidebar } from './layouts/default/directives/menus/menuSidebar';
@@ -17,23 +20,31 @@ import { CommonModule } from "@angular/common";
         DefaultLayout,
         DefaultUnauthenticatedLayout,
         MenuSidebar,
+        MenuTopbar,
         MenuItem,
         BasePage,
+        ValidationDirective
     ],
     imports: [
         BrowserModule,
         FormsModule,
         CommonModule,
         HttpModule,
-        RouterModule.forRoot([])
+        RouterModule.forRoot([
+                  { path: '', redirectTo: helper.config.getAppConfig().defaultUrl, pathMatch:'prefix' },
+        ])
     ],
-    exports: [
+    exports: [        
         BrowserModule,
+        FormsModule,
+        CommonModule,
+        HttpModule,
         DefaultLayout,
         DefaultUnauthenticatedLayout,
         MenuSidebar,
         MenuItem,
         BasePage,
+        ValidationDirective
     ],
     providers: [],
     bootstrap: []

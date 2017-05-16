@@ -9,6 +9,7 @@ import { CommonCoreModule } from './commonCore/commonCore.module';
 import { ConfigurationService } from './config/configurationService';
 import { DefaultLayout } from './commonCore/layouts/default/defaultLayout';
 import { ResumeModule } from "./resume/resume.module";
+import { SecurityModule } from "modules/security/security.module";
 
 export function initialConfigLoad() {
   var config = new ConfigurationService();
@@ -23,7 +24,8 @@ export function initialConfigLoad() {
       {path:'', redirectTo:'resume', pathMatch:'full'}
     ]),
     CommonCoreModule,
-    ResumeModule
+    ResumeModule,
+    SecurityModule
   ],
   providers: [
     {

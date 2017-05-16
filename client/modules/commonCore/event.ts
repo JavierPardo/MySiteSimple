@@ -24,3 +24,8 @@ export const HttpCode = {
 export const AuthenticatedEvent = {
     AuthenticationChanged: "AuthenticationChanged"
 };
+
+
+export const ValidationEvent = {
+    ValidationFail: "ValidationFail"
+};

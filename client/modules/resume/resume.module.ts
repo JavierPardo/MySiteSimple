@@ -27,7 +27,6 @@ import { GeneralInformation } from "modules/resume/personalInformation/generalIn
   imports: [
     CommonCoreModule,
     RouterModule.forRoot([
-      { path: 'resume', redirectTo: route.personalInformation.generalInformation.path, pathMatch:'full' },
       { path: route.personalInformation.generalInformation.path,  component: GeneralInformation, data: { authentication: AuthenticationMode.None }  },
       { path: route.personalInformation.objectives.path,  component: Objectives, data: { authentication: AuthenticationMode.None }  },
       { path: route.education.career.path,  component: Career, data: { authentication: AuthenticationMode.None }  },
