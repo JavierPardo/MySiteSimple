@@ -7,7 +7,8 @@ let resumeService = {
     getGenInfo: getGeneralInformation,
     getObjectives: getPersonalObjectives,
     education: {
-        getCollegeHist:getCollegeHist
+        getCollegeHist:getCollegeHist,
+        getCertifications:getCertifications
     }
 };
 export default resumeService;
@@ -26,5 +27,11 @@ function getPersonalObjectives(): Promise {
 function getCollegeHist(){
     let connector = window.ioc.resolve("IConnector");
     let url = configHelper.getAppConfig().api.baseUrl + "resume/education/college";
+    return connector.get(url);
+}
+
+function getCertifications(){
+    let connector = window.ioc.resolve("IConnector");
+    let url = configHelper.getAppConfig().api.baseUrl + "resume/education/certification";
     return connector.get(url);
 }

@@ -5,7 +5,7 @@ export class CollegeModel {
      public startYear: string ="";
      public endYear: string ="";
     
-    public import(item: CollegeModel) {
+    public import(item: any) {
         this.location = item.location;
         this.startYear = item.startYear;
         this.endYear=item.endYear;

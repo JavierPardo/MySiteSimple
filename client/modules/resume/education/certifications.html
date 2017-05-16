@@ -1,7 +1,7 @@
-<div class="col-lg-6">
+<div class="col-lg-6" *ngFor='let cert of certifications; let i = index'>
   <div class="ibox float-e-margins">
     <div class="ibox-title">
-      <h5>Scrum Master</h5>
+      <h5>{{cert.name}}</h5>
       <div class="ibox-tools">
         <a class="collapse-link binded">
           <i class="fa fa-chevron-up"></i>
@@ -13,29 +13,7 @@
     </div>
     <div class="ibox-content">
       <p>
-        Scrum Master Certification by Kleer ( Martin Alaimo ) (2013 - 2015 )
-      </p>
-    </div>
-  </div>
-</div>
-
-
-<div class="col-lg-6">
-  <div class="ibox float-e-margins">
-    <div class="ibox-title">
-      <h5>Angular</h5>
-      <div class="ibox-tools">
-        <a class="collapse-link binded">
-          <i class="fa fa-chevron-up"></i>
-        </a>        
-        <a class="close-link binded">
-          <i class="fa fa-times"></i>
-        </a>
-      </div>
-    </div>
-    <div class="ibox-content">
-      <p>
-        Angular Certification by Tekhne ( Luis Aviles ) (2016 )
+        {{cert.description}} by {{cert.institution}} ( {{cert.instructor}} ) ( {{cert.date}} )
       </p>
     </div>
   </div>
