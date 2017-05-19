@@ -10,5 +10,9 @@ module.exports = {
   SESSION_SECRET:   'proyectofullstack-secret',
 
   // Control debug level for modules using visionmedia/debug
-  DEBUG: ''
+  DEBUG: '',
+  secret: 'JavierSecretKey',
+  encKey: 'encrypt!@#!%%',
+  database: 'mongodb://noder:noderauth&54;proximus.modulusmongo.net:27017/so9pojyN'
+
 };

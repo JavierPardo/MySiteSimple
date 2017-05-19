@@ -8,12 +8,22 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
+var morgan = require('morgan');
 var config = require('./config/environment');
-
+var utils = require("./utils")
+var localconfig = require('./config/local.env.sample'); // get our config file
+ 
 // Setup server
 var app = express();
+
+app.set('superSecret', localconfig.secret); 
+app.set('encryptationKey', localconfig.encKey); 
 var server = require('http').createServer(app);
 require('./config/express')(app);
+app.use(morgan('dev'));
+
+utils.getInstance();
+utils.setApp(app);
 require('./routes')(app);
 
 // Start server
