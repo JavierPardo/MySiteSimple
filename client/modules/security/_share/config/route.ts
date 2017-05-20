@@ -1,6 +1,7 @@
 let route = {
-    authentication: {
-        login: { name: "User Log in ", path: "user/login" }
+    users: {
+        login: { name: "User Log in ", path: "user/login" },
+        register: { name: "User Registration ", path: "user/register" }
     }
 };
 export default route;

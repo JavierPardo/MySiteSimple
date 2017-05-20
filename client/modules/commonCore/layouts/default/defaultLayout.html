@@ -1,3 +1,5 @@
 <div >
-  <default-unauthenticated-layout ></default-unauthenticated-layout>
+    <default-authenticated-layout *ngIf='isAuthenticated'></default-authenticated-layout>
+
+  <default-unauthenticated-layout *ngIf='!isAuthenticated'></default-unauthenticated-layout>
 </div>

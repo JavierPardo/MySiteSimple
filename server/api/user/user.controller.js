@@ -5,37 +5,44 @@ var jsonfile = require('jsonfile');
 var path = require('path');
 var FILE = path.resolve('db', 'resume.json');
 var bodyParser = require('body-parser');
-var utils = require('../../utils');
+var utils = require('../../utils').getInstance();
 
 
-exports.userController = function () {
-  this.authenticate = function (req, res) {
-    console.log(req.query.usr);
-    console.log(req.query.psw);
+exports.authenticate = function (req, res) {
+  console.log(req.query.usr);
+  console.log(req.query.psw);
+  utils
+  var token = utils.tokenizer.sign({
+    id: req.query.usr + "-" + req.query.psw
+  });
+  token = utils.encryptation.encrypt(token);
+  res.json({
+    data: {
+      token: token
+    },
+    errors: []
+  });
+}
 
-    var token = utils.getInstance().tokenizer.sign({
-      id: req.query.usr + "-" + req.query.psw
-    });
-    token = utils.getInstance().encryptation.encrypt(token);
-    console.log(token);
-    res.json({
-      data: {
-        token: token
+exports.validate = function (req, res) {
+  res.json({
+    data: {},
+    errors: []
+  });
+};
+
+exports.signin = function (req, res) {
+
+  res.json({
+    data: {
+      token: {
+        value: "mytoken"
       },
-      errors: []
-    });
-  }
-
-  this.validate = function (req, res) {
-    console.log(req.query.tkn);
-    console.log("-+-");
-
-    console.log(utils.getInstance().encryptation.decrypt(req.query.tkn));
-    res.json({
-      data: {},
-      errors: []
-    });
-  }
-
-
+      profile: {
+        name: "Javier PG",
+        lastname: 'PG'
+      }
+    },
+    errors: []
+  });
 };

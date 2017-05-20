@@ -1,3 +1,4 @@
+import { DefaultAuthenticatedLayout } from './layouts/default/authenticatedLayout';
 import helper from './helpers';
 import { ValidationDirective } from './directives/validation';
 import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
@@ -19,6 +20,7 @@ import { CommonModule } from "@angular/common";
     declarations: [
         DefaultLayout,
         DefaultUnauthenticatedLayout,
+        DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuTopbar,
         MenuItem,
@@ -41,6 +43,7 @@ import { CommonModule } from "@angular/common";
         HttpModule,
         DefaultLayout,
         DefaultUnauthenticatedLayout,
+        DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuItem,
         BasePage,

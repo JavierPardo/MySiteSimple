@@ -12,5 +12,5 @@ function signin(signinModel: UserLoginModel): Promise {
     return connector.post(url, signinModel);
 }
 function getAPISigninUrl(): string {
-    return helper.config.getAppConfig().api.baseUrl + "users/signin";
+    return helper.config.getAppConfig().api.baseUrl + "user/signin";
 }
