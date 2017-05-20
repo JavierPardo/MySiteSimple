@@ -15,8 +15,8 @@ export default {
     },
     ioc: "./config/ioc",
     modules: modules,
-    loginUrl: "/Login",
-    defaultUrl: "/MyResume",
+    loginUrl: "user/Login",
+    defaultUrl: "resume/generalInformation",
     localization: {
         lang: Languages.EN
     },
@@ -24,7 +24,7 @@ export default {
         token: "authtoken"
     },
     api: {
-          baseUrl: "http://www.javing.tech/api/"
+          baseUrl: "http://www.Javing.tech/api/"
     },
     localeUrl: "/assets/locales/"
 };
