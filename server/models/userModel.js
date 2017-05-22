@@ -21,12 +21,12 @@ User.findById = function (id, callback) {
 }
 
 User.prototype.create = function () {
-  
+
   var ret = {
     errors: [],
     success: false
   };
-  
+
   var newUser = new UserDb({
     name: this.name,
     password: this.password,

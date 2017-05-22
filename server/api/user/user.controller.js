@@ -37,12 +37,12 @@ exports.register = function (req, res) {
   var newUser = new User(req.body);
   console.log(req.body);
   var validUser = newUser.validate(true);
-  if (!validUser) {
+  if (!validUser.success) {
     res.json({
       data: {
         messages: []
       },
-      errors: valid.errors
+      errors: validUser.errors
     });
     return;
   }
@@ -59,7 +59,7 @@ exports.register = function (req, res) {
       data: {
         messages: []
       },
-      errors: valid.errors
+      errors: validUser.errors
     });
 };
 
