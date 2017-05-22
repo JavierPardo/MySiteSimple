@@ -24,18 +24,22 @@ User.prototype.create = function (res) {
   var newUser = new UserDb({
     name: this.name,
     password: this.password,
+    email: this.email,
     admin: false
   });
 
-  // save the sample user
+  // save the sample user  
+    var ret={};
   newUser.save(function (err) {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      throw err;
+    }
 
     console.log('User saved successfully');
-    res.json({
-      success: true
-    });
+    ret.success=true;
   });
+  return ret;
 }
 
 module.exports = User;

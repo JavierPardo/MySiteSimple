@@ -36,12 +36,22 @@ exports.register = function (req, res) {
   
   var newUser = new User(req.body);
 
-  newUser.create();
+  var dataCreate=newUser.create();
+  if(dataCreate && dataCreate.success)
   res.json({
     data: {
       messages: ["your Email will be verified soon."]
     },
     errors: []
+  });
+  else
+  res.json({
+    data: {
+      messages: ["your Email will be verified soon."]
+    },
+    errors: [
+      "errors inside please contact to administrator"
+    ]
   });
 };
 
