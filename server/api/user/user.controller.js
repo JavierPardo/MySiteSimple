@@ -35,7 +35,8 @@ exports.validate = function (req, res) {
 exports.register = function (req, res) {
   
   var newUser = new User(req.body);
-
+console.log(req.body);
+console.log(req.body.toString());
   var dataCreate=newUser.create();
   console.log(dataCreate);
   if(dataCreate && dataCreate.success)
