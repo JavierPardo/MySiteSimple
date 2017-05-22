@@ -34,16 +34,20 @@ User.prototype.create = function () {
     admin: false
   });
 
-  newUser.save(function (err) {
-    if (err) {
-      console.log(err);
-      throw err;
-    }
+  var saving = newUser.save(function (err, product, numAffected) {
 
-    console.log('User saved successfully');
-    ret.success = true;
-  });
-  console.log(ret);
+    }).then(function (user) {
+
+      console.log('User saved successfully');
+      ret.success = true;
+    })
+    .catch(function (err) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+      ret.success = false;
+    });
   return ret;
 }
 
