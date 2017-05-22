@@ -13,6 +13,6 @@ module.exports = {
   DEBUG: '',
   secret: 'JavierSecretKey',
   encKey: 'encrypt!@#!%%',
-  database: 'mongodb://noder:noderauth&54;proximus.modulusmongo.net:27017/so9pojyN'
+  database: 'mongodb://root:root@ds149511.mlab.com:49511/usrsdb'
 
 };
