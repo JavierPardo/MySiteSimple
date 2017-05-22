@@ -2,9 +2,10 @@ var UserDb = require("./userDb");
 
 var User = function (data) {
 
-  this.name = data.usrName;
-  this.password = data.pwd
-  this.admin = data.email;
+  this.name = data.name;
+  this.password = data.password
+  this.email = data.email;
+  this.admin=false;
 }
 
 User.prototype.name = "";
