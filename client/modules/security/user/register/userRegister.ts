@@ -26,14 +26,16 @@ export class UserRegister extends BasePage {
         // this.router.navigate(["Forgot Password"]);
         // console.log(this.i18n.resolve('signin.yourEmail'));
     }
-    public onSignInClicked(event: any) {
+    public onRegisterClicked(event: any) {
         let self: UserRegister = this;
         if (!this.model.isValid()) { return; }
-        userService.signin(this.model).then(function (token: any) {
-            authService.setAuth(token);
-            self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
-            self.router.navigate([helper.config.getAppConfig().defaultUrl]);
-        });
+        userService.postUser(this.model).error(function (error: any) {
+                console.log(error
+                );
+            })
+            .then(function (messages: any) {
+                console.log(messages);
+            });
         return false;
     }
 }
