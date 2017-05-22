@@ -57,6 +57,7 @@ User.prototype.validate = function (isNew) {
     errors: [],
     success: false
   };
+  console.log(this);
   if (!this.name) {
     ret.errors.push("Name is required");
   }
