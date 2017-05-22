@@ -1,4 +1,5 @@
 var UserDb = require("./userDb");
+
 var User = function (data) {
 
   this.name = data.usrName;
@@ -21,23 +22,6 @@ User.findById = function (id, callback) {
 
 User.prototype.create = function () {
 
-    var ret={
-      errors:[],
-      success:false
-    };
-if(!this.name){
-  ret.errors.push("Name is required");
-} 
-if(!this.password){
-  ret.errors.push("Password is required");  
-} 
-if(!this.email){
-  ret.errors.push("Email is required");
-}
-if(ret.errors.length>0){
-  return ret;
-}
-
   var newUser = new UserDb({
     name: this.name,
     password: this.password,
@@ -45,7 +29,6 @@ if(ret.errors.length>0){
     admin: false
   });
 
-  // save the sample user  
   newUser.save(function (err) {
     if (err) {
       console.log(err);
@@ -53,9 +36,30 @@ if(ret.errors.length>0){
     }
 
     console.log('User saved successfully');
-    ret.success=true;
+    ret.success = true;
   });
   console.log(ret);
+  return ret;
+}
+
+User.prototype.valid = function () {
+
+  var ret = {
+    errors: [],
+    success: false
+  };
+  if (!this.name) {
+    ret.errors.push("Name is required");
+  }
+  if (!this.password) {
+    ret.errors.push("Password is required");
+  }
+  if (!this.email) {
+    ret.errors.push("Email is required");
+  }
+  if (ret.errors.length == 0) {
+    ret.success = true;
+  }
   return ret;
 }
 

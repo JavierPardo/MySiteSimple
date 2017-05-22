@@ -33,28 +33,34 @@ exports.validate = function (req, res) {
 };
 
 exports.register = function (req, res) {
-  
+
   var newUser = new User(req.body);
-console.log(req.body);
-console.log(req.body.toString());
-  var dataCreate=newUser.create();
-  console.log(dataCreate);
-  if(dataCreate && dataCreate.success)
-  res.json({
-    data: {
-      messages: ["your Email will be verified soon."]
-    },
-    errors: []
-  });
+  console.log(req.body);
+  var validUser = newUser.validate(true);
+  if (!validUser) {
+    res.json({
+      data: {
+        messages: []
+      },
+      errors: valid.errors
+    });
+    return;
+  }
+  var dataCreate = newUser.create();
+  if (dataCreate && dataCreate.success)
+    res.json({
+      data: {
+        messages: ["your Email will be verified soon."]
+      },
+      errors: []
+    });
   else
-  res.json({
-    data: {
-      messages: ["your Email will be verified soon."]
-    },
-    errors: [
-      "errors inside please contact to administrator"
-    ]
-  });
+    res.json({
+      data: {
+        messages: []
+      },
+      errors: valid.errors
+    });
 };
 
 exports.signin = function (req, res) {
