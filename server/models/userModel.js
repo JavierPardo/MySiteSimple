@@ -19,7 +19,24 @@ User.findById = function (id, callback) {
   });
 }
 
-User.prototype.create = function (res) {
+User.prototype.create = function () {
+
+    var ret={
+      errors:[],
+      success:false
+    };
+if(!this.name){
+  ret.errors.push("Name is required");
+} 
+if(!this.password){
+  ret.errors.push("Password is required");  
+} 
+if(!this.email){
+  ret.errors.push("Email is required");
+}
+if(ret.errors.length>0){
+  return ret;
+}
 
   var newUser = new UserDb({
     name: this.name,
@@ -29,7 +46,6 @@ User.prototype.create = function (res) {
   });
 
   // save the sample user  
-    var ret={};
   newUser.save(function (err) {
     if (err) {
       console.log(err);
@@ -39,6 +55,7 @@ User.prototype.create = function (res) {
     console.log('User saved successfully');
     ret.success=true;
   });
+  console.log(ret);
   return ret;
 }
 
