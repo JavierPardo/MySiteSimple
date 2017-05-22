@@ -37,6 +37,7 @@ exports.register = function (req, res) {
   var newUser = new User(req.body);
 
   var dataCreate=newUser.create();
+  console.log(dataCreate);
   if(dataCreate && dataCreate.success)
   res.json({
     data: {
