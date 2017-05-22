@@ -42,7 +42,7 @@ User.prototype.create = function () {
   return ret;
 }
 
-User.prototype.valid = function () {
+User.prototype.validate = function (isNew) {
 
   var ret = {
     errors: [],
