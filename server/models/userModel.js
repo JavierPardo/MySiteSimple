@@ -23,10 +23,6 @@ User.findById = function (id, callback) {
 
 User.prototype.create = function () {
 
-  var ret = {
-    errors: [],
-    success: false
-  };
 
   var newUser = new UserDb({
     name: this.name,
@@ -35,21 +31,13 @@ User.prototype.create = function () {
     admin: false
   });
 
-  var saving = newUser.save(function (err, product, numAffected) {
+  return newUser.save(function (err, product, numAffected) {
 
-    }).then(function (user) {
-
-      console.log('User saved successfully');
-      ret.success = true;
-    })
-    .catch(function (err) {
       if (err) {
         console.log(err);
         throw err;
       }
-      ret.success = false;
     });
-  return ret;
 }
 
 User.prototype.validate = function (isNew) {
@@ -58,7 +46,7 @@ User.prototype.validate = function (isNew) {
     errors: [],
     success: false
   };
-  console.log(this);
+  
   if (!this.name) {
     ret.errors.push("Name is required");
   }

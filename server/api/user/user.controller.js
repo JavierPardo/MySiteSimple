@@ -46,21 +46,31 @@ exports.register = function (req, res) {
     return;
   }
   var dataCreate = newUser.create();
-  console.log(dataCreate);
-  if (dataCreate && dataCreate.success)
-    res.json({
-      data: {
-        messages: ["your Email will be verified soon."]
-      },
-      errors: []
-    });
-  else
-    res.json({
-      data: {
-        messages: []
-      },
-      errors: validUser.errors
-    });
+
+  var ret = {
+    errors: [],
+    success: false
+  };
+  dataCreate.then(function (user) {
+
+      console.log('User saved successfully');
+      res.json({
+        data: {
+          messages: ["your Email will be verified soon."]
+        },
+        errors: []
+      });
+    })
+    .catch(function (err) {
+      ret.success = false;
+      res.json({
+        data: {
+          messages: []
+        },
+        errors: validUser.errors
+      });
+    })
+
 };
 
 exports.signin = function (req, res) {
