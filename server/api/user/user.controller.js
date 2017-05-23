@@ -18,25 +18,33 @@ exports.authenticate = function (req, res) {
       email: req.body.email
     })
     .then(function (data) {
-      console.log('data');
-      console.log(data);
-      var token = utils.tokenizer.sign({
-        id: data._id
-      });
-      token = utils.encryptation.encrypt(token);
+      if (data.length != 1) {
+        res.json({
+          data: {},
+          errors: ["Email, Username or Password is wrong"]
+        });
+        res.statusCode
+      } else {
+        data = data[0];
+        var token = utils.tokenizer.sign({
+          id: data._id
+        });
+        console.log('user logged: ',data._id);
+        token = utils.encryptation.encrypt(token);
 
-      res.json({
-        data: {
-          token: {
-            value: token
+        res.json({
+          data: {
+            token: {
+              value: token
+            },
+            profile: {
+              name: data.name,
+              lastname: 'PG'
+            }
           },
-          profile: {
-            name: data.name,
-            lastname: 'PG'
-          }
-        },
-        errors: []
-      });
+          errors: []
+        });
+      }
     })
     .catch(function (err) {
       console.log(err);

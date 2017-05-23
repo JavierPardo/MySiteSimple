@@ -29,10 +29,13 @@ export class UserLogin extends BasePage {
     public onSignInClicked(event: any) {
         let self: UserLogin = this;
         if (!this.model.isValid()) { return; }
-        userService.signin(this.model).then(function (token: any) {
+        userService.signin(this.model)
+        .then(function (token: any) {
             authService.setAuth(token);
             self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
             self.router.navigate([helper.config.getAppConfig().defaultUrl]);
+        }).error(function(errors){
+                errors.forEach(element => { alert(element); });
         });
         return false;
     }

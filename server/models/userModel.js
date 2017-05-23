@@ -30,12 +30,12 @@ User.findByEmailOrUserNameAndPassword = function (user, callbackError, callbackS
   if (validator.validate(user.email)) {
     userToFind = {
       email: user.email,
-      password: user.pwd
+      password: user.password
     }
   } else {
     userToFind = {
       userName: user.email,
-      password: user.pwd
+      password: user.password
     };
   }
   return new Promise(function (resolve, reject) {
