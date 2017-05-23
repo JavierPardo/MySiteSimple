@@ -10,11 +10,16 @@ var utils = require('../../utils').getInstance();
 
 
 exports.authenticate = function (req, res) {
-  console.log(req.query.usr);
-  console.log(req.query.psw);
-  utils
+  console.log(req.body.email);
+  console.log(req.body.pwd);
+  var userDb = User.findByEmailOrUserNameAndPassword({
+    userName: req.body.email,
+    password: req.body.pwd,
+    email: req.body.email
+  });
+  console.log(userDb);
   var token = utils.tokenizer.sign({
-    id: req.query.usr + "-" + req.query.psw
+    id: req.body.email + "-" + req.body.email
   });
   token = utils.encryptation.encrypt(token);
   res.json({

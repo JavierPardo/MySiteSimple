@@ -1,13 +1,13 @@
 var UserDb = require("./userDb");
 var validator = require("email-validator");
- 
+
 var User = function (data) {
 
   this.userName = data.userName;
   this.name = data.name;
   this.password = data.password
   this.email = data.email;
-  this.admin=false;
+  this.admin = false;
 }
 
 User.prototype.userName = "";
@@ -24,8 +24,15 @@ User.findById = function (id, callback) {
   });
 }
 
-User.prototype.create = function () {
+User.findByEmailOrUserNameAndPassword = function (user) {
+  var userFound;
+  UserDb.find(user).exec(function (data) {
+    userFound = data;
+  });
+  return userFound;
+}
 
+User.prototype.create = function () {
 
   var newUser = new UserDb({
     name: this.name,
@@ -37,11 +44,11 @@ User.prototype.create = function () {
 
   return newUser.save(function (err, product, numAffected) {
 
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-    });
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+  });
 }
 
 User.prototype.validate = function (isNew) {
@@ -50,7 +57,7 @@ User.prototype.validate = function (isNew) {
     errors: [],
     success: false
   };
-  
+
   if (!this.name) {
     ret.errors.push("Name is required");
   }
@@ -59,7 +66,7 @@ User.prototype.validate = function (isNew) {
   }
   if (!this.email) {
     ret.errors.push("Email is required");
-  } else if(!validator.validate(this.email)){
+  } else if (!validator.validate(this.email)) {
     ret.errors.push("Email is not valid");
   }
   if (ret.errors.length == 0) {
