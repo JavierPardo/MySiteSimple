@@ -34,9 +34,9 @@ export class UserRegister extends BasePage {
                 console.log(error
                 );
             })
-            .then(function (messages: any) {
-                messages.forEach(element => { alert(element); });
-                console.log(messages);
+            .then(function (responseServer: any) {
+                responseServer.messages.forEach(element => { alert(element); });
+                console.log(responseServer.messages);
             });
         return false;
     }

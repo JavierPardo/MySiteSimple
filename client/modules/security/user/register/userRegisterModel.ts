@@ -22,16 +22,4 @@ export class UserRegisterModel {
         validationErrors.throwIfHasError();
         return !validationErrors.hasError();
     }
-
-    public registerUser(): void {
-        
-        userService.postUser(this)
-            .error(function (error: any) {
-                console.log(error
-                );
-            })
-            .then(function (messages: any) {
-                console.log(messages);
-            });
-    }
 }
