@@ -24,9 +24,9 @@ User.findById = function (id, callback) {
   });
 }
 
-User.findByEmailOrUserNameAndPassword = function (user) {
+User.findByEmailOrUserNameAndPassword = function (user, callbackError, callbackSuccess) {
   var userFound;
-  var userToFind;
+  var userToFind;  
   if (validator.validate(user.email)) {
     userToFind = {
       email: user.email,
@@ -39,9 +39,10 @@ User.findByEmailOrUserNameAndPassword = function (user) {
     }
   }
   UserDb.find(userToFind , function (err, users) {
-
-    console.log(err);
-    console.log(users);
+    if(err && err.length>0)
+    callbackError(err);
+    else
+    callbackSuccess(users);
   });
   return userFound;
 }
