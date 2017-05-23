@@ -15,6 +15,7 @@ function isAuthorized(routeInstruction: any) {
     return isAuthenticated(profile);
 }
 function removeAuth(): void {
+    console.log("Remove Authorization....");
     cacheService.remove(CACHE_CONSTANT.USER_PROFILE);
     cacheService.remove(CACHE_CONSTANT.TOKEN);
 }
