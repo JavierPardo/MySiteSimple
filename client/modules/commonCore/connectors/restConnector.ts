@@ -5,10 +5,10 @@ import 'rxjs/Rx';
 
 import { ValidationException } from '../models/exceptions';
 import { JsonHeaders } from '../models/http/jsonHeader';
-import {PromiseFactory, Promise} from "../models/promise";
+import { PromiseFactory, Promise } from "../models/promise";
 import { CommonEvent, HttpCode, LoadingIndicatorEvent } from '../event';
-import {EventManager} from "../eventManager";
-import {IConnector} from "./iconnector";
+import { EventManager } from "../eventManager";
+import { IConnector } from "./iconnector";
 @Injectable()
 export class RESTConnector implements IConnector {
     private static http: Http;
@@ -39,8 +39,8 @@ export class RESTConnector implements IConnector {
         RESTConnector.http.post(url, dataToSend, { headers: headers })
             .map((response: any) => response.json())
             .subscribe(
-                (data: any) => this.handleResponse(def, data),
-                (exception: any) => this.handleException(def, exception)
+            (data: any) => this.handleResponse(def, data),
+            (exception: any) => this.handleException(def, exception)
             );
         return def;
     }
@@ -88,7 +88,7 @@ export class RESTConnector implements IConnector {
     private handleResponse(def: Promise, response: any): any {
         RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
         if (!response.errors || response.errors.length === 0) {
-            def.resolve(response.data); 
+            def.resolve(response.data);
             return;
         }
         let validationEror: ValidationException = this.getValidationExceptionFromResponse(response.errors);

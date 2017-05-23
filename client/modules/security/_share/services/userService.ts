@@ -19,7 +19,7 @@ function getAPISigninUrl(): string {
 function postUser(user: UserRegisterModel): Promise{
     let connector = window.ioc.resolve("IConnector");
     let url = getAPIRegisterUrl();
-    return connector.post(url, user);
+    return connector.put(url, user);
 }
 function getAPIRegisterUrl(): string {
     return helper.config.getAppConfig().api.baseUrl + "user/register";
