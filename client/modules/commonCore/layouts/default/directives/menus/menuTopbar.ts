@@ -22,8 +22,4 @@ export class MenuTopbar implements AfterViewInit {
        
     }
     /* tslint:enable */
-
-    public onLoginClicked(event: any){
-        this.router.navigate(["user/login"]);
-    }
 }

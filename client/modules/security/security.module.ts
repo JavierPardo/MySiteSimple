@@ -19,6 +19,7 @@ import route from './_share/config/route';
     RouterModule.forRoot([
       { path: route.users.login.path,  component: UserLogin, data: { authentication: AuthenticationMode.None }  },
       { path: route.users.register.path,  component: UserRegister, data: { authentication: AuthenticationMode.None }  },
+      { path: route.users.logout.path,  redirectTo:  route.users.login.path, data: { authentication: AuthenticationMode.None }  },
     ])
   ],
   providers: [
