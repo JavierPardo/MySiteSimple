@@ -7,31 +7,31 @@ let resumeService = {
     getGenInfo: getGeneralInformation,
     getObjectives: getPersonalObjectives,
     education: {
-        getCollegeHist:getCollegeHist,
-        getCertifications:getCertifications
+        getCollegeHist: getCollegeHist,
+        getCertifications: getCertifications
     }
 };
 export default resumeService;
 function getGeneralInformation(): Promise {
     let connector = window.ioc.resolve("IConnector");
-    let url = configHelper.getAppConfig().api.baseUrl + "resume/gen-info";
+    let url = configHelper.getUrlCombined(configHelper.getAppConfig().api.baseUrl + "/resume/gen-info");
     return connector.get(url);
 }
 
 function getPersonalObjectives(): Promise {
     let connector = window.ioc.resolve("IConnector");
-    let url = configHelper.getAppConfig().api.baseUrl + "resume/per-obj";
+    let url = configHelper.getUrlCombined(configHelper.getAppConfig().api.baseUrl + "/resume/per-obj");
     return connector.get(url);
 }
 
-function getCollegeHist(){
+function getCollegeHist() {
     let connector = window.ioc.resolve("IConnector");
-    let url = configHelper.getAppConfig().api.baseUrl + "resume/education/college";
+    let url = configHelper.getUrlCombined(configHelper.getAppConfig().api.baseUrl + "/resume/education/college");
     return connector.get(url);
 }
 
-function getCertifications(){
+function getCertifications() {
     let connector = window.ioc.resolve("IConnector");
-    let url = configHelper.getAppConfig().api.baseUrl + "resume/education/certification";
+    let url = configHelper.getUrlCombined(configHelper.getAppConfig().api.baseUrl + "/resume/education/certification");
     return connector.get(url);
 }

@@ -1,3 +1,4 @@
+import { forEach } from '@angular/router/src/utils/collection';
 import { UserRegisterModel } from './userRegisterModel';
 import authService from '../../../commonCore/services/authService';
 import { AuthenticatedEvent } from '../../../commonCore/event';
@@ -34,6 +35,7 @@ export class UserRegister extends BasePage {
                 );
             })
             .then(function (messages: any) {
+                messages.forEach(element => { alert(element); });
                 console.log(messages);
             });
         return false;

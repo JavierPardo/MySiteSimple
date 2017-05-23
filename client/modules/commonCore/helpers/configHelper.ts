@@ -1,3 +1,4 @@
+import  join  from 'url-join';
 import appConfig from '../../config/appConfig';
 import { IModule, MenuItemModel } from '../models/app/imodule';
 
@@ -6,11 +7,15 @@ import { Routes } from "@angular/router";
 let configHelper = {
     getModuleMenuItems: getModuleMenuItems,
     getRoutes: getRoutes,
-    getAppConfig: getAppConfig
+    getAppConfig: getAppConfig,
+    getUrlCombined: getUrlCombined
 };
 export default configHelper;
 function getAppConfig() {
     return appConfig;
+}
+function getUrlCombined(pathToCombine: String): String{
+    return join(window.location.origin, pathToCombine);
 }
 function getRoutes() {
     let items: Routes = [];
