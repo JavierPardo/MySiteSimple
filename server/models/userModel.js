@@ -26,10 +26,22 @@ User.findById = function (id, callback) {
 
 User.findByEmailOrUserNameAndPassword = function (user) {
   var userFound;
-  UserDb.find({_id:'59248d9f58a8500004e2829'}, function(err,users){
+  var userToFind;
+  if (validator.validate(user.email)) {
+    userToFind = {
+      email: user.email,
+      password: user.pwd
+    }
+  } else {
+    userToFind = {
+      userName: user.email,
+      password: user.pwd
+    }
+  }
+  UserDb.find(userToFind , function (err, users) {
 
-console.log(err);
-console.log(users);
+    console.log(err);
+    console.log(users);
   });
   return userFound;
 }
