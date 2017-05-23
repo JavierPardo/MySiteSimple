@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "user-register",
-    templateUrl: "userRegister.html", 
+    templateUrl: "userRegister.html",
 })
 export class UserRegister extends BasePage {
     public model: UserRegisterModel = new UserRegisterModel();
@@ -30,10 +30,10 @@ export class UserRegister extends BasePage {
     public onRegisterClicked(event: any) {
         let self: UserRegister = this;
         if (!this.model.isValid()) { return; }
-        userService.postUser(this.model).error(function (error: any) {
-                console.log(error
-                );
-            })
+        userService.postUser(this.model).error(function (errors: any) {
+            errors.forEach(element => { alert(element); });
+
+        })
             .then(function (responseServer: any) {
                 responseServer.messages.forEach(element => { alert(element); });
                 console.log(responseServer.messages);
