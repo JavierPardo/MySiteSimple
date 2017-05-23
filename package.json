@@ -1,7 +1,10 @@
 {
   "name": "my-site-simple",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "MIT",  
+  "engines": {
+    "node": "6.9.2"
+  },
   "scripts": {
     "ng": "./node_modules/.bin/ng",
     "start": "ng serve",
