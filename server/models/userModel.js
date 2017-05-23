@@ -1,13 +1,16 @@
 var UserDb = require("./userDb");
-
+var validator = require("email-validator");
+ 
 var User = function (data) {
 
+  this.userName = data.userName;
   this.name = data.name;
   this.password = data.password
   this.email = data.email;
   this.admin=false;
 }
 
+User.prototype.userName = "";
 User.prototype.name = "";
 User.prototype.password = "";
 User.prototype.admin = "";
@@ -28,6 +31,7 @@ User.prototype.create = function () {
     name: this.name,
     password: this.password,
     email: this.email,
+    userName: this.userName,
     admin: false
   });
 
@@ -55,6 +59,8 @@ User.prototype.validate = function (isNew) {
   }
   if (!this.email) {
     ret.errors.push("Email is required");
+  } else if(validator.validate(this.email)){
+    ret.errors.push("Email is not valid"):
   }
   if (ret.errors.length == 0) {
     ret.success = true;
