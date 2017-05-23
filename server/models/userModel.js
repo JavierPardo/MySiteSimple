@@ -60,7 +60,7 @@ User.prototype.validate = function (isNew) {
   if (!this.email) {
     ret.errors.push("Email is required");
   } else if(validator.validate(this.email)){
-    ret.errors.push("Email is not valid"):
+    ret.errors.push("Email is not valid");
   }
   if (ret.errors.length == 0) {
     ret.success = true;
