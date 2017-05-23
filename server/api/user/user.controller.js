@@ -13,27 +13,39 @@ exports.authenticate = function (req, res) {
   console.log(req.body.email);
   console.log(req.body.pwd);
   var userDb = User.findByEmailOrUserNameAndPassword({
-    userName: req.body.email,
-    password: req.body.pwd,
-    email: req.body.email
-  });
-  console.log(userDb);
-  var token = utils.tokenizer.sign({
-    id: req.body.email + "-" + req.body.email
-  });
-  token = utils.encryptation.encrypt(token);
-  res.json({
-    data: {
-      token: {
-        value: token
-      },
-      profile: {
-        name: "Javier PG",
-        lastname: 'PG'
-      }
-    },
-    errors: []
-  });
+      userName: req.body.email,
+      password: req.body.pwd,
+      email: req.body.email
+    })
+    .then(function (data) {
+      console.log('data');
+      console.log(data);
+      var token = utils.tokenizer.sign({
+        id: data._id
+      });
+      token = utils.encryptation.encrypt(token);
+
+      res.json({
+        data: {
+          token: {
+            value: token
+          },
+          profile: {
+            name: data.name,
+            lastname: 'PG'
+          }
+        },
+        errors: []
+      });
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.json({
+        data: {},
+        errors: [err]
+      });
+    });
+
 }
 
 exports.validate = function (req, res) {

@@ -36,15 +36,16 @@ User.findByEmailOrUserNameAndPassword = function (user, callbackError, callbackS
     userToFind = {
       userName: user.email,
       password: user.pwd
-    }
+    };
   }
-  UserDb.find(userToFind , function (err, users) {
+  return new Promise(function (resolve, reject) {
+    UserDb.find(userToFind , function (err, users) {
     if(err && err.length>0)
-    callbackError(err);
+    reject(err);
     else
-    callbackSuccess(users);
+    resolve(users);
   });
-  return userFound;
+  });
 }
 
 User.prototype.create = function () {
