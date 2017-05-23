@@ -14,7 +14,7 @@ function signin(signinModel: UserLoginModel): Promise {
     return connector.post(url, signinModel);
 }
 function getAPISigninUrl(): String {
-    return helper.config.getUrlCombined(helper.config.getAppConfig().api.baseUrl + "/user/signin");
+    return helper.config.getUrlCombined(helper.config.getAppConfig().api.baseUrl + "/user/authenticate");
 }
 function postUser(user: UserRegisterModel): Promise{
     let connector = window.ioc.resolve("IConnector");
