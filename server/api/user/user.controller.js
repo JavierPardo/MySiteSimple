@@ -19,7 +19,13 @@ exports.authenticate = function (req, res) {
   token = utils.encryptation.encrypt(token);
   res.json({
     data: {
-      token: token
+      token: {
+        value: token
+      },
+      profile: {
+        name: "Javier PG",
+        lastname: 'PG'
+      }
     },
     errors: []
   });

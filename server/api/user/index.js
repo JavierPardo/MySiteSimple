@@ -9,7 +9,7 @@ var router = express.Router();
 var utils = require('../../utils').getInstance();
 
 // route middleware to verify a token
-router.get('/authenticate', userController.authenticate);
+router.post('/authenticate', userController.authenticate);
 router.get('/validate', userController.validate);
 router.post('/signin', userController.signin);
 router.put('/register', userController.register);
