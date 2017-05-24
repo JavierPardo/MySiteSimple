@@ -1,3 +1,5 @@
+import { SystemMessage } from './layouts/default/directives/common/systemMessage';
+import { LoadingIndicator } from './layouts/default/directives/common/loadingIndicator';
 import { DefaultAuthenticatedLayout } from './layouts/default/authenticatedLayout';
 import helper from './helpers';
 import { ValidationDirective } from './directives/validation';
@@ -25,6 +27,8 @@ import { CommonModule } from "@angular/common";
         MenuTopbar,
         MenuItem,
         BasePage,
+        LoadingIndicator,
+        SystemMessage,
         ValidationDirective
     ],
     imports: [
@@ -46,7 +50,9 @@ import { CommonModule } from "@angular/common";
         DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuItem,
+        SystemMessage,
         BasePage,
+        LoadingIndicator,
         ValidationDirective
     ],
     providers: [],

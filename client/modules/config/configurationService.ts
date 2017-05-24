@@ -34,8 +34,6 @@ export class ConfigurationService {
     this.configIoC();
     this.configI18N();
     let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-    console.log(resourceHelper);
-    console.log('resource loaded');
 
   }
 

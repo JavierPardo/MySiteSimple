@@ -1,7 +1,8 @@
+import { ValidationException } from '../../../commonCore/models/exceptions';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UserRegisterModel } from './userRegisterModel';
 import authService from '../../../commonCore/services/authService';
-import { AuthenticatedEvent } from '../../../commonCore/event';
+import { AuthenticatedEvent, CommonEvent } from '../../../commonCore/event';
 import helper from '../../../commonCore/helpers';
 import userService from '../../_share/services/userService';
 import { BasePage } from '../../../commonCore/models/ui/basePage';
@@ -31,12 +32,19 @@ export class UserRegister extends BasePage {
         let self: UserRegister = this;
         if (!this.model.isValid()) { return; }
         userService.postUser(this.model).error(function (errors: any) {
-            errors.forEach(element => { alert(element); });
+            let exceptions = new ValidationException();
+            errors.forEach(error => {
+                exceptions.add(error);
+            });
+            self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
+
 
         })
             .then(function (responseServer: any) {
-                responseServer.messages.forEach(element => { alert(element); });
-                console.log(responseServer.messages);
+                responseServer.messages.forEach(element => {
+                    self.eventManager.publish(CommonEvent.ShowMessage, responseServer.messages);
+                });
+
             });
         return false;
     }
