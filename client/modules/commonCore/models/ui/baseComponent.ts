@@ -1,9 +1,9 @@
+import { ResourceHelper } from '../../helpers/resourceHelper';
 import { EventManager } from '../../eventManager';
 import { ComponentType } from './componentType';
 import { Hashtable } from "../list/hashtable";
 // import { AuthenticatedEvent, ApplicationStateEvent } from "../../event";
 // import { IConnector } from "../../connectors/iconnector";
-// import { ResourceHelper } from "../../helpers/resourceHelper";
 // import { EventManager } from "../../eventManager";
 // import authService from "../../services/authService";
 // import { AuthenticationMode } from "../../enum";
@@ -18,7 +18,7 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     protected eventManager: EventManager;
     protected events: Hashtable<any>;
     public i18n: any;
-    //public i18nHelper: ResourceHelper;
+    public i18nHelper: ResourceHelper;
     //public id: string = helper.guid.create();
     constructor(http: Http, componentType: any = ComponentType.Layout, routeActivated: ActivatedRoute) {
         if (routeActivated != null)
@@ -26,9 +26,9 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
         ///TODO
         //this.connector = window.ioc.resolve("IConnector");
         this.eventManager = window.ioc.resolve("IEventManager");
-        //let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-        ///this.i18nHelper = resourceHelper;
-        ///this.i18n = resourceHelper.getResourceData();
+        let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+        this.i18nHelper = resourceHelper;
+        this.i18n = resourceHelper.getResourceData();
         this.events = new Hashtable<any>();
         // if (componentType === ComponentType.Layout) {
         //     this.connector.setHttp(http);
@@ -70,8 +70,8 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     }
     protected onChange() { }
     protected setResources(resources: Array<string>) {
-        //let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-        //resourceHelper.load(resources);
+        let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+        resourceHelper.load(resources);
     }
     protected onInit() {
     }
