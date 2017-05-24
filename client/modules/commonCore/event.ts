@@ -7,12 +7,13 @@ export const ApplicationStateEvent = {
 };
 
 export const LoadingIndicatorEvent = {
-    Show: "show",
-    Hide: "hide"
+    Show: "loading.show",
+    Hide: "loading.hide"
 };
 
 export const CommonEvent = {
-    ValidationFail: "ValidationFail"
+    ValidationFail: "ValidationFail",
+    ShowMessage: "ShowMessage"
 };
 
 export const HttpCode = {

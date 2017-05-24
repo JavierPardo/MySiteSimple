@@ -1,4 +1,5 @@
-import {ValidationError} from "./validationError";
+import { MessageModel } from '../ui/messageModel';
+
 import {CommonEvent} from "../../event";
 export class ValidationException {
     constructor(key: string = "", params: any = {}) {
@@ -6,9 +7,9 @@ export class ValidationException {
             this.add(key, params);
         }
     }
-    public errors: Array<ValidationError> = [];
+    public errors: Array<MessageModel> = [];
     public add(key: string, params: any = {}): any {
-        this.errors.push(new ValidationError(key, params));
+        this.errors.push(new MessageModel(key, params));
     }
     public hasError(): boolean {
         return this.errors.length > 0;

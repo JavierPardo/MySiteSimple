@@ -16,7 +16,7 @@ var mongoose    = require('mongoose');
  
 // Setup server
 var app = express();
-mongoose.connect(localconfig.database); // connect to database
+//mongoose.connect(localconfig.database); // connect to database
 app.set('superSecret', localconfig.secret); 
 app.set('encryptationKey', localconfig.encKey); 
 var server = require('http').createServer(app);

@@ -20,10 +20,6 @@ export class MenuTopbar extends BaseComponent implements AfterViewInit {
         this.router = router;
         
     let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-    let aux=resourceHelper.getResourceData();
-    console.log(aux);
-    console.log(aux.topmenu);
-    console.log(resourceHelper.getResourceData());
     }
     ngAfterViewInit() {
         this.initializedSidebar();

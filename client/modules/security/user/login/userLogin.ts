@@ -1,5 +1,6 @@
+import { ValidationException } from '../../../commonCore/models/exceptions';
 import authService from '../../../commonCore/services/authService';
-import { AuthenticatedEvent } from '../../../commonCore/event';
+import { AuthenticatedEvent, CommonEvent, LoadingIndicatorEvent } from '../../../commonCore/event';
 import helper from '../../../commonCore/helpers';
 import userService from '../../_share/services/userService';
 import { BasePage } from '../../../commonCore/models/ui/basePage';
@@ -34,8 +35,14 @@ export class UserLogin extends BasePage {
             authService.setAuth(token);
             self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
             self.router.navigate([helper.config.getAppConfig().defaultUrl]);
+            self.eventManager.publish(CommonEvent.ShowMessage, ['Welcome to the system']);
+            
         }).error(function(errors){
-                errors.forEach(element => { alert(element); });
+            let exceptions = new ValidationException();
+            errors.forEach(error => {
+                exceptions.add(error);
+            });
+            self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
         });
         return false;
     }
