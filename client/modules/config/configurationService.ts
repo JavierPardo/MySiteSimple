@@ -32,6 +32,7 @@ export class ConfigurationService {
   load(): void {
     this.configInjector(this.injector);
     this.configIoC();
+    this.configI18N();
     let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
     console.log(resourceHelper);
     console.log('resource loaded');
@@ -47,8 +48,9 @@ export class ConfigurationService {
     let ioc: IoCContainer = IoCFactory.create();
     ioc.import(config.ioc);
     window.ioc = ioc;
+  }
+  configI18N(): void {
     let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-    console.log(resourceHelper);
-    resourceHelper.load(["topMenu"]);
+    resourceHelper.load(["topmenu"]);
   }
 }

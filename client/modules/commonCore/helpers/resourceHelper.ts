@@ -50,17 +50,19 @@ export class ResourceHelper {
         }*/
         // return def;
     }
-    private loadResource(moduleName: string): Promise {
-        let def = PromiseFactory.create();
+    private loadResource(moduleName: string): void {
         let lang: string = userProfileHelper.getLang();
         let resourcePath = String.format("{0}{1}.{2}.json", configHelper.getAppConfig().localeUrl, moduleName, lang);
         let connector = window.ioc.resolve("IConnector");
         let self: ResourceHelper = this;
+        let waitUntilLoaded=true;
         connector.getJSON(resourcePath).then(function (data: any) {
             self.resources.set(moduleName, data);
-            def.resolve({ module: moduleName, json: data });
+            waitUntilLoaded=false;
         });
-        return def;
+        while(waitUntilLoaded){
+
+        }
     }
     private onNewResourceLoaded(params: any) {
         let moduleJson: any = params.json;
