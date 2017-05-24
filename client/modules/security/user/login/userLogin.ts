@@ -43,8 +43,6 @@ export class UserLogin extends BasePage {
                 exceptions.add(error);
             });
             self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
-
-                errors.forEach(element => { alert(element); });
         });
         return false;
     }
