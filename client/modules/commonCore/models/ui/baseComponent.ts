@@ -1,3 +1,4 @@
+import { IConnector } from '../../connectors/iconnector';
 import { ResourceHelper } from '../../helpers/resourceHelper';
 import { EventManager } from '../../eventManager';
 import { ComponentType } from './componentType';
@@ -14,7 +15,7 @@ import { OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges } from "@
 import { ActivatedRoute } from "@angular/router";
 import { Http } from "@angular/http";
 export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
-    //protected connector: IConnector;
+    protected connector: IConnector;
     protected eventManager: EventManager;
     protected events: Hashtable<any>;
     public i18n: any;
@@ -23,16 +24,15 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     constructor(http: Http, componentType: any = ComponentType.Layout, routeActivated: ActivatedRoute) {
         if (routeActivated != null)
             routeActivated.params.subscribe(params => this.routerOnActivate(params));
-        ///TODO
-        //this.connector = window.ioc.resolve("IConnector");
+        this.connector = window.ioc.resolve("IConnector");
         this.eventManager = window.ioc.resolve("IEventManager");
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
         this.i18nHelper = resourceHelper;
         this.i18n = resourceHelper.getResourceData();
         this.events = new Hashtable<any>();
-        // if (componentType === ComponentType.Layout) {
-        //     this.connector.setHttp(http);
-        // }
+         if (componentType === ComponentType.Layout) {
+             this.connector.setHttp(http);
+         }
     }
     routerOnActivate(next: any): boolean | Promise<boolean> {
         //console.log(next);
@@ -44,6 +44,7 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
         //  }
         return false;
     }
+
     ngOnInit() {
         this.onInit();
         let self: BaseComponent = this;
@@ -52,12 +53,15 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
             self.eventManager.subscribe(key, handler);
         });
     }
+
     ngAfterContentInit() {
         this.onBeforeReady();
     }
+
     ngAfterViewInit() {
         this.onReady();
     }
+
     ngOnDestroy() {
         let self: BaseComponent = this;
         this.events.getKeys().forEach(function (key) {
@@ -65,9 +69,11 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
         });
         this.onUnload();
     }
+
     ngOnChanges() {
         this.onChange();
     }
+
     protected onChange() { }
     protected setResources(resources: Array<string>) {
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");

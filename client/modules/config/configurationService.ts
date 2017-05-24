@@ -1,3 +1,4 @@
+import { ResourceHelper } from '../commonCore/helpers/resourceHelper';
 import { IoCContainer, IoCFactory } from '../commonCore/models/ioc/iocFactory';
 import helper from '../commonCore/helpers';
 import { ApplicationStateFactory } from '../applicationState';
@@ -7,43 +8,47 @@ import { NoCheckCookieXSRFStrategy } from "modules/commonCore/services/noCheckCo
 
 
 export class ConfigurationService {
-  private injector : ReflectiveInjector;
+  private injector: ReflectiveInjector;
 
   constructor() {
-    this.injector=  ReflectiveInjector.resolveAndCreate([
-  {
-    provide: Http,
-    deps: [XHRBackend, BaseRequestOptions],
-    useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-      return new Http(backend, defaultOptions);
-    }
-  },
-  BrowserXhr,
-  BaseRequestOptions,
-  { provide: RequestOptions, useFactory: () => new BaseRequestOptions() },
-  { provide: ResponseOptions, useClass: BaseResponseOptions },
-  XHRBackend,
-  { provide: XSRFStrategy, useFactory: () => new NoCheckCookieXSRFStrategy("", "") },
-]);
+    this.injector = ReflectiveInjector.resolveAndCreate([
+      {
+        provide: Http,
+        deps: [XHRBackend, BaseRequestOptions],
+        useFactory: (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
+          return new Http(backend, defaultOptions);
+        }
+      },
+      BrowserXhr,
+      BaseRequestOptions,
+      { provide: RequestOptions, useFactory: () => new BaseRequestOptions() },
+      { provide: ResponseOptions, useClass: BaseResponseOptions },
+      XHRBackend,
+      { provide: XSRFStrategy, useFactory: () => new NoCheckCookieXSRFStrategy("", "") },
+    ]);
 
-   }
+  }
 
-  load():void {
-  this.configInjector(this.injector);
-  this.configIoC();
+  load(): void {
+    this.configInjector(this.injector);
+    this.configIoC();
+    let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+    console.log(resourceHelper);
+    console.log('resource loaded');
 
-}
+  }
 
- configInjector(injector: any):void {
-  ApplicationStateFactory.getInstance().setInjector(injector);
-  window.appState = ApplicationStateFactory.getInstance();
-}
-configIoC():void {
-  let config: any = helper.config.getAppConfig();
-  let ioc: IoCContainer = IoCFactory.create();
-  ioc.import(config.ioc);
-  window.ioc = ioc;
-  //let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-  //resourceHelper.load(["common"]);
-}
+  configInjector(injector: any): void {
+    ApplicationStateFactory.getInstance().setInjector(injector);
+    window.appState = ApplicationStateFactory.getInstance();
+  }
+  configIoC(): void {
+    let config: any = helper.config.getAppConfig();
+    let ioc: IoCContainer = IoCFactory.create();
+    ioc.import(config.ioc);
+    window.ioc = ioc;
+    let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+    console.log(resourceHelper);
+    resourceHelper.load(["topMenu"]);
+  }
 }

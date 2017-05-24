@@ -1,3 +1,4 @@
+import { ResourceHelper } from '../../../../helpers/resourceHelper';
 import { Http } from '@angular/http';
 import { ComponentType } from '../../../../models/ui/componentType';
 import { BaseComponent } from '../../../../models/ui/baseComponent';
@@ -17,12 +18,13 @@ export class MenuTopbar extends BaseComponent implements AfterViewInit {
     constructor( router: Router, http: Http) {
         super(http, ComponentType.Control,null)      
         this.router = router;
-        this.setResources(["topMenu"]);
+        
+    let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+    let aux=resourceHelper.getResourceData();
+    console.log(resourceHelper.getResourceData());
     }
     ngAfterViewInit() {
         this.initializedSidebar();
-        
-        console.log(this.i18n);
     }
     /* tslint:disable */
     private initializedSidebar(): any {
