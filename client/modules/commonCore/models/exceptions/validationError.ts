@@ -1,4 +1,4 @@
-export class MessageModel {
+export class ValidationError {
     constructor(key: string, params: any) {
         this.key = key;
         this.params = params;

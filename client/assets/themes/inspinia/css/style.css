@@ -5,28 +5,6 @@
  *   Copyright 2014 Webapplayers.com
  *
 */
-
-.loading {
-    opacity: 0;
-    transition: opacity .8s ease-in-out;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: #000;
-    z-index: -1;
-    
-}
-.loading.show{
-    display: block;
-    opacity: 0.5;
-    z-index: 2147483647;
-    background-image: url("../img/loading.gif");
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 64px;
-}
 h1,
 h2,
 h3,

@@ -1,4 +1,3 @@
-import { IConnector } from '../connectors/iconnector';
 import {PromiseFactory, Promise} from "../models/promise";
 import {Hashtable} from "../models/list/hashtable";
 import appConfig from "../../config/appConfig";
@@ -28,9 +27,6 @@ export class ResourceHelper {
         }
         let keyItems = key.split(".");
         let moduleName = keyItems.shift();
-        if(!this.resources.exist(moduleName)){
-            return String.format("Resources for module {0}, does not exist", moduleName);;
-        }
         let resourceObject = this.resources.get(moduleName);
         let value: string = objectHelper.getByPath(resourceObject, keyItems.join("."));
         return value;
@@ -57,16 +53,16 @@ export class ResourceHelper {
     private loadResource(moduleName: string): void {
         let lang: string = userProfileHelper.getLang();
         let resourcePath = String.format("{0}{1}.{2}.json", configHelper.getAppConfig().localeUrl, moduleName, lang);
-        let connector: IConnector = window.ioc.resolve("IConnector");
+        let connector = window.ioc.resolve("IConnector");
         let self: ResourceHelper = this;
         let waitUntilLoaded=true;
         connector.getJSON(resourcePath).then(function (data: any) {
             self.resources.set(moduleName, data);
-            console.log("loading");
-        })
-        .then(function (data){
-            console.log(data);
+            waitUntilLoaded=false;
         });
+        while(waitUntilLoaded){
+
+        }
     }
     private onNewResourceLoaded(params: any) {
         let moduleJson: any = params.json;

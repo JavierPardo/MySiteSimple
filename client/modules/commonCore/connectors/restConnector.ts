@@ -91,14 +91,14 @@ export class RESTConnector implements IConnector {
             def.resolve(response.data);
             return;
         }
-        let validationError: ValidationException = this.getValidationExceptionFromResponse(response.errors);
-        RESTConnector.eventManager.publish(CommonEvent.ValidationFail, validationError);       
-            def.reject(response.errors);
+        let validationEror: ValidationException = this.getValidationExceptionFromResponse(response.errors);
+        RESTConnector.eventManager.publish(CommonEvent.ValidationFail, validationEror);
+        def.reject(response.errors);
     }
     private handleException(def: Promise, exception: any) {
         RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
         let error: ValidationException = this.getError(exception);
-        def.reject(error.errors);
+        def.reject(error);
         RESTConnector.eventManager.publish(CommonEvent.ValidationFail, error);
     }
     private getValidationExceptionFromResponse(responseErrors: Array<any>) {
