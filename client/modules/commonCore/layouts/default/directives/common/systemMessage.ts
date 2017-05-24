@@ -22,6 +22,7 @@ export class SystemMessage {
         let self: SystemMessage = this;
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
         let errors: Array<MessageModel> = [];
+        console.log(validation.errors);
         validation.errors.forEach(function (error: MessageModel) {
             if (!helper.regex.isMatch(self.pattern, error.key)) { return; }
             console.log(String.format("pattern {0}, value: {1}", self.pattern, error.key));
