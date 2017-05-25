@@ -1,5 +1,5 @@
+import { ApplicationStateFactory } from '../commonCore/applicationState';
 import { ResourceHelper } from '../commonCore/helpers/resourceHelper';
-import { ApplicationState, ApplicationStateFactory } from '../applicationState';
 import { RESTConnector } from '../commonCore/connectors/restConnector';
 import { IoCInstanceType } from '../commonCore/models/ioc/enum';
 

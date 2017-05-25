@@ -1,6 +1,6 @@
-import { ResourceHelper } from '../commonCore/helpers/resourceHelper';
-import { IoCContainer, IoCFactory } from '../commonCore/models/ioc/iocFactory';
-import helper from '../commonCore/helpers';
+import { ResourceHelper } from '../helpers/resourceHelper';
+import { IoCContainer, IoCFactory } from '../models/ioc/iocFactory';
+import helper from '../helpers';
 import { ApplicationStateFactory } from '../applicationState';
 import { HttpModule, Http, XHRBackend, BaseRequestOptions, BrowserXhr, RequestOptions, ResponseOptions, BaseResponseOptions, XSRFStrategy } from '@angular/http';
 import { Injectable, ReflectiveInjector } from "@angular/core";

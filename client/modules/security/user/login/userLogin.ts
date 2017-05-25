@@ -11,7 +11,7 @@ import { UserLoginModel } from "./userLoginModel";
 
 @Component({
     selector: "user-login",
-    templateUrl: "userLogin.html", 
+    templateUrl: "userLogin.html",
 })
 export class UserLogin extends BasePage {
     public model: UserLoginModel = new UserLoginModel();
@@ -32,14 +32,14 @@ export class UserLogin extends BasePage {
         let self: UserLogin = this;
         if (!this.model.isValid()) { return; }
         userService.signin(this.model)
-        .then(function (token: any) {
-            authService.setAuth(token);
-            self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
-            self.router.navigate([helper.config.getAppConfig().defaultUrl]);       
-            var welcomeMessage=new MessageModel('common.welcomeMessage',[ token.profile.name + ' ' + token.profile.lastname]);     
-            self.eventManager.publish(CommonEvent.ShowMessage, [welcomeMessage]);
-            
-        });
+            .then(function (token: any) {
+                authService.setAuth(token);
+                self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
+                self.router.navigate([helper.config.getAppConfig().defaultUrl]);
+                var welcomeMessage = new MessageModel('common.welcomeMessage', [token.profile.name + ', ' + token.profile.lastname]);
+                self.eventManager.publish(CommonEvent.ShowMessage, [welcomeMessage]);
+
+            });
         return false;
     }
 }

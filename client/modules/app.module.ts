@@ -6,15 +6,14 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 
 import { CommonCoreModule } from './commonCore/commonCore.module';
-import { ConfigurationService } from './config/configurationService';
 import { DefaultLayout } from './commonCore/layouts/default/defaultLayout';
 import { ResumeModule } from "./resume/resume.module";
 import { SecurityModule } from "modules/security/security.module";
 
-export function initialConfigLoad() {
-  var config = new ConfigurationService();
-  return () => config.load();
-};
+// export function initialConfigLoad() {
+//   var config = new ConfigurationService();
+//   return () => config.load();
+// };
 
 @NgModule({
   declarations: [
@@ -28,11 +27,7 @@ export function initialConfigLoad() {
     SecurityModule
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initialConfigLoad,
-      multi: true
-    }],
+    ],
   bootstrap: [DefaultLayout]
 })
 export class AppModule { }

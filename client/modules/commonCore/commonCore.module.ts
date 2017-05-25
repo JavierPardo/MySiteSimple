@@ -1,3 +1,5 @@
+import { APP_INITIALIZER } from '@angular/core';
+import { ConfigurationService } from './services/configurationService';
 import { SystemMessage } from './layouts/default/directives/common/systemMessage';
 import { LoadingIndicator } from './layouts/default/directives/common/loadingIndicator';
 import { DefaultAuthenticatedLayout } from './layouts/default/authenticatedLayout';
@@ -16,6 +18,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from "@angular/common";
 
+export function initialConfigLoad() {
+  var config = new ConfigurationService();
+  return () => config.load();
+};
 
 @NgModule({
     schemas:[CUSTOM_ELEMENTS_SCHEMA],
@@ -55,7 +61,11 @@ import { CommonModule } from "@angular/common";
         LoadingIndicator,
         ValidationDirective
     ],
-    providers: [],
+    providers: [{
+      provide: APP_INITIALIZER,
+      useFactory: initialConfigLoad,
+      multi: true
+    }],
     bootstrap: []
 })
 export class CommonCoreModule { }

@@ -1,6 +1,6 @@
-import { ApplicationStateEvent, LoadingIndicatorEvent } from './commonCore/event';
-import { EventManager } from './commonCore/eventManager';
-import { IApplicationState } from './commonCore/models/app/iapplicationState';
+import { ApplicationStateEvent, LoadingIndicatorEvent } from './event';
+import { EventManager } from './eventManager';
+import { IApplicationState } from './models/app/iapplicationState';
 import {Injector} from "@angular/core";
 import {Router} from "@angular/router"; 
 

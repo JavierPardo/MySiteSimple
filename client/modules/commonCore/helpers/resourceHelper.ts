@@ -1,3 +1,4 @@
+import { IConnector } from '../connectors/iconnector';
 import { PromiseFactory, Promise } from "../models/promise";
 import { Hashtable } from "../models/list/hashtable";
 import appConfig from "../../config/appConfig";
@@ -57,11 +58,12 @@ export class ResourceHelper {
     private loadResource(moduleName: string): void {
         let lang: string = userProfileHelper.getLang();
         let resourcePath = String.format("{0}{1}.{2}.json", configHelper.getAppConfig().localeUrl, moduleName, lang);
-        let connector = window.ioc.resolve("IConnector");
+        let connector:IConnector = window.ioc.resolve("IConnector");
         let self: ResourceHelper = this;
         let waitUntilLoaded = true;
         connector.getJSON(resourcePath).then(function (data: any) {
             self.resources.set(moduleName, data);
+            console.log('load:', moduleName);
         });
     }
     private onNewResourceLoaded(params: any) {
