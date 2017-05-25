@@ -1,3 +1,4 @@
+import { MessageModel } from '../../../commonCore/models/ui/messageModel';
 import { ValidationException } from '../../../commonCore/models/exceptions';
 import authService from '../../../commonCore/services/authService';
 import { AuthenticatedEvent, CommonEvent } from '../../../commonCore/event';
@@ -34,15 +35,10 @@ export class UserLogin extends BasePage {
         .then(function (token: any) {
             authService.setAuth(token);
             self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
-            self.router.navigate([helper.config.getAppConfig().defaultUrl]);            
-            self.eventManager.publish(CommonEvent.ShowMessage, ['Welcome to the system']);
+            self.router.navigate([helper.config.getAppConfig().defaultUrl]);       
+            var welcomeMessage=new MessageModel('common.welcomeMessage',[]);     
+            self.eventManager.publish(CommonEvent.ShowMessage, [welcomeMessage]);
             
-        }).error(function(errors){
-            let exceptions = new ValidationException();
-            errors.forEach(error => {
-                exceptions.add(error);
-            });
-            self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
         });
         return false;
     }

@@ -25,26 +25,13 @@ User.findById = function (id, callback) {
 }
 
 User.findByEmailOrUserNameAndPassword = function (user, callbackError, callbackSuccess) {
-  var userFound;
-  var userToFind;  
-  if (validator.validate(user.email)) {
-    userToFind = {
-      email: user.email,
-      password: user.password
-    }
-  } else {
-    userToFind = {
-      userName: user.email,
-      password: user.password
-    };
-  }
   return new Promise(function (resolve, reject) {
-    UserDb.find(userToFind , function (err, users) {
-    if(err && err.length>0)
-    reject(err);
-    else
-    resolve(users);
-  });
+    UserDb.find(user, function (err, users) {
+      if (err && err.length > 0)
+        reject(err);
+      else
+        resolve(users);
+    });
   });
 }
 

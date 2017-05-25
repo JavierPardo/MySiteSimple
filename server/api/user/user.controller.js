@@ -7,21 +7,36 @@ var FILE = path.resolve('db', 'resume.json');
 var bodyParser = require('body-parser');
 var User = require('../../models/userModel');
 var utils = require('../../utils').getInstance();
-
+var validator = require("email-validator");
 
 exports.authenticate = function (req, res) {
   console.log(req.body.email);
   console.log(req.body.pwd);
-  var userDb = User.findByEmailOrUserNameAndPassword({
+  var parameter = '';
+  var userToFind;
+  if (validator.validate(req.body.email)) {
+    userToFind = {
+      email: req.body.email,
+      password: req.body.pwd
+    }
+    parameter = 'email';
+  } else {
+    userToFind = {
       userName: req.body.email,
-      password: req.body.pwd,
-      email: req.body.email
-    })
+      password: req.body.pwd
+    };
+    parameter = 'userName';
+  }
+
+  var userDb = User.findByEmailOrUserNameAndPassword(userToFind)
     .then(function (data) {
       if (data.length != 1) {
         res.json({
           data: {},
-          errors: ["Email, Username or Password is wrong"]
+          errors: [{
+            key: 'user.notFound',
+            params: [parameter, 'password']
+          }]
         });
         res.statusCode
       } else {
@@ -29,7 +44,7 @@ exports.authenticate = function (req, res) {
         var token = utils.tokenizer.sign({
           id: data._id
         });
-        console.log('user logged: ',data._id);
+        console.log('user logged: ', data._id);
         token = utils.encryptation.encrypt(token);
 
         res.json({

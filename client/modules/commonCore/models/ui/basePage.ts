@@ -9,7 +9,6 @@ import { Component } from "@angular/core";
 export class BasePage extends BaseComponent {
     public model: any;
     constructor(routeActivated: ActivatedRoute) {
-        //console.log("startin basepage");
         super(null, ComponentType.Page, routeActivated);
     }
 }

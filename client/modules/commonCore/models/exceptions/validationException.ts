@@ -14,6 +14,7 @@ export class ValidationException {
         return this.errors.length > 0;
     }
     public throwIfHasError(): void {
+        if(this.hasError())
         window.ioc.resolve("IEventManager").publish(CommonEvent.ValidationFail, this);
     }
 }

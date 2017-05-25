@@ -28,7 +28,7 @@ export class ResourceHelper {
         let keyItems = key.split(".");
         let moduleName = keyItems.shift();
         if (!this.resources.exist(moduleName)) {
-            return String.format("Resources for module {0}, does not exist", moduleName);;
+            return String.format("Resources for module {0}, does not exist, key: '{2}' parameters: {1}", moduleName, '{0}', key);
         }
 
         let resourceObject = this.resources.get(moduleName);

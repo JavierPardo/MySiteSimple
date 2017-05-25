@@ -1,3 +1,4 @@
+import { ResourceHelper } from '../helpers/resourceHelper';
 import { ValidationEvent } from '../event';
 import { ValidationException, ValidationMode } from '../models/exceptions';
 import {EventManager} from "../eventManager";
@@ -37,8 +38,8 @@ export class ValidationDirective {
         self.hideError();
     }
     private showError(error: any) {
-        //let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-        let errorMessage: string = "";//resourceHelper.resolve(error.key);
+        let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
+        let errorMessage: string = resourceHelper.resolve(error.key);
         window.jQuery(this.el).addClass(ValidationMode.Invalid);
         this.el.setAttribute("origin-title", this.el.title);
         this.el.title = errorMessage;

@@ -22,11 +22,10 @@ export class SystemMessage {
         let self: SystemMessage = this;
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
         let errors: Array<MessageModel> = [];
-        console.log(validation.errors);
         validation.errors.forEach(function (error: MessageModel) {
             if (!helper.regex.isMatch(self.pattern, error.key)) { return; }
             console.log(String.format("pattern {0}, value: {1}", self.pattern, error.key));
-            error.msg = resourceHelper.resolve(error.key);
+            error.msg = String.format(resourceHelper.resolve(error.key), error.params.join(', '));
             errors.push(error);
         });
         this.errors = errors;
@@ -38,11 +37,11 @@ export class SystemMessage {
         let self: SystemMessage = this;
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
         let msgs: Array<MessageModel> = [];
-        messages.forEach(function (msg: MessageModel) {
-            if (!helper.regex.isMatch(self.pattern, msg.key)) { return; }
-            console.log(String.format("pattern {0}, value: {1}", self.pattern, msg.key));
-            msg.msg = resourceHelper.resolve(msg.key);
-            msgs.push(msg);
+        messages.forEach(function (message: MessageModel) {
+            if (!helper.regex.isMatch(self.pattern, message.key)) { return; }
+            console.log(String.format("pattern {0}, value: {1}", self.pattern, message.key));
+            message.msg = String.format(resourceHelper.resolve(message.key), message.params.join(', '));
+            msgs.push(message);
         });
         this.messages = msgs;
         window.setTimeout(function () {

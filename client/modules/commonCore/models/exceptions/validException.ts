@@ -1,5 +1,5 @@
 import { MessageModel } from '../ui/messageModel';
-import {CommonEvent} from "../../event";
+import { CommonEvent } from "../../event";
 export class ValidationException {
     constructor(key: string = "", params: any = {}) {
         if (key !== "") {
@@ -14,6 +14,7 @@ export class ValidationException {
         return this.errors.length > 0;
     }
     public throwIfHasError(): void {
-        window.ioc.resolve("IEventManager").publish(CommonEvent.ValidationFail, this);
+        if (this.errors && this.errors.length > 0)
+            window.ioc.resolve("IEventManager").publish(CommonEvent.ValidationFail, this);
     }
 }

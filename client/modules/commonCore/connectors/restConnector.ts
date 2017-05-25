@@ -91,8 +91,8 @@ export class RESTConnector implements IConnector {
             def.resolve(response.data);
             return;
         }
-        let validationEror: ValidationException = this.getValidationExceptionFromResponse(response.errors);
-        RESTConnector.eventManager.publish(CommonEvent.ValidationFail, validationEror);
+        let validationError: ValidationException = this.getValidationExceptionFromResponse(response.errors);
+        RESTConnector.eventManager.publish(CommonEvent.ValidationFail, validationError);
         def.reject(response.errors);
     }
     private handleException(def: Promise, exception: any) {
