@@ -49,6 +49,6 @@ export class ConfigurationService {
   }
   configI18N(): void {
     let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
-    resourceHelper.load(["topMenu","user"]);
+    resourceHelper.load(["topMenu","user","common"]);
   }
 }
