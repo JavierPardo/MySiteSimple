@@ -1,3 +1,4 @@
+import { ExcerciseModel } from '../excerciseModel';
 import { Component } from '@angular/core';
 import { BasePage } from "modules/commonCore/models/ui/basePage";
 
@@ -6,5 +7,5 @@ import { BasePage } from "modules/commonCore/models/ui/basePage";
     templateUrl: "./addExcercise.html"
 })
 export class AddExcercise extends BasePage {    
-    public model:  = new UserRegisterModel();
+    public model: ExcerciseModel = new ExcerciseModel();
 }

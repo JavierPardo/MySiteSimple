@@ -1,6 +1,6 @@
 import { ValidationException } from '../../commonCore/models/exceptions';
-import workinService from '../../_share/services/workinService';
-export class UserRegisterModel {
+import workinService from '../_share/services/workinService';
+export class ExcerciseModel {
     public name: string = "";
     public description: string = "";
     public recommendation: string = "";
