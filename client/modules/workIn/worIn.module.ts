@@ -14,11 +14,11 @@ import { CommonCoreModule } from "modules/commonCore/commonCore.module";
   imports: [
     CommonCoreModule,
     RouterModule.forRoot([
-      { path: route.exercise.MyExcercises.path, component: MyExcercise, data: { authentication: AuthenticationMode.None }  },
-      { path: route.exercise.AddExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.None }  },
-      { path: route.exercise.DeleteExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.None }  },
-      { path: route.exercise.EditExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.None }  },
-      { path: route.exercise.ShowExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.None }  },
+      { path: route.exercise.MyExcercises.path, component: MyExcercise, data: { authentication: AuthenticationMode.Require }  },
+      { path: route.exercise.AddExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.Require }  },
+      { path: route.exercise.DeleteExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.Require }  },
+      { path: route.exercise.EditExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.Require }  },
+      { path: route.exercise.ShowExcercise.path, component: MyExcercise, data: { authentication: AuthenticationMode.Require }  },
       ])
   ],
   providers: [
