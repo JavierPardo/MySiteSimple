@@ -31,7 +31,8 @@ export class UserRegister extends BasePage {
     public onRegisterClicked(event: any) {
         let self: UserRegister = this;
         if (!this.model.isValid()) { return; }
-        userService.postUser(this.model).error(function (errors: any) {
+        userService.postUser(this.model)
+        .error(function (errors: any) {
             let exceptions = new ValidationException();
             errors.forEach(error => {
                 exceptions.add(error);

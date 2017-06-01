@@ -1,7 +1,7 @@
 let route = {
     exercise: {
         MyExcercises: { name: "My Excercises", path: "WorkIn/Excercise" },
-        AddExcercise: { name: "Add Excercise", path: "WorkIn/Excercise/Add" },
+        AddExcercise: { name: "Add Excercise", path: "WorkIn/Excercise/Edit" },
         ShowExcercise: { name: "Show Excercise", path: "WorkIn/Excercise/:Id" },
         EditExcercise: { name: "Edit Excercise", path: "WorkIn/Excercise/Edit/:Id" },
         DeleteExcercise: { name: "Delete Excercise", path: "WorkIn/Excercise/Delete/:Id" }

@@ -1,0 +1,21 @@
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+  <div>
+    <h3 *ngIf="isNew" >Create Excercise</h3>
+    <h3 *ngIf="!isNew" >Update Excercise</h3>
+    <form class="m-t" role="form" action="">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Name" required="" [(ngModel)]="model.name" name="name" />
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Description" required="" [(ngModel)]="model.description" name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="recomendation" class="form-control" placeholder="Recomendation" required="" [(ngModel)]="model.recommendation"
+          name="recomendation" />
+      </div>
+      <a (click)=onCreateClicked($event) *ngIf="isNew" class="btn btn-primary block full-width m-b">Create</a>
+      <a (click)=onUpdateClicked($event) *ngIf="!isNew" class="btn btn-primary block full-width m-b">Update</a>
+    </form>
+    <p class="m-t"> <small>Javier PG - Gym App</small> </p>
+  </div>
+</div>
