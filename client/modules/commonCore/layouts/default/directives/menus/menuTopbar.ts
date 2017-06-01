@@ -11,20 +11,17 @@ import helper from '../../../../helpers'
     selector: "menu-topbar",
     templateUrl: "./menuTopbar.html",
 })
-export class MenuTopbar extends BaseComponent implements AfterViewInit {
-    
+export class MenuTopbar extends BaseComponent {
+
+    @Input() showCollapseButton: boolean = true;
+
     private router: Router;
 
-    constructor( router: Router, http: Http) {
-        super(http, ComponentType.Control,null)      
-        this.router = router;        
+    constructor(router: Router, http: Http) {
+        super(http, ComponentType.Control, null)
+        this.router = router;
+        this.menuItems = helper.config.getModuleMenuItems(true);
     }
-    ngAfterViewInit() {
-        this.initializedSidebar();
-    }
-    /* tslint:disable */
-    private initializedSidebar(): any {
-       
-    }
-    /* tslint:enable */
+    public menuItems: any = [];
+    public title: string = "";
 }

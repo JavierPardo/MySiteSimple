@@ -27,14 +27,14 @@ import { GeneralInformation } from "modules/resume/personalInformation/generalIn
   imports: [
     CommonCoreModule,
     RouterModule.forRoot([
-      { path: route.personalInformation.generalInformation.path,  component: GeneralInformation, data: { authentication: AuthenticationMode.None }  },
-      { path: route.personalInformation.objectives.path,  component: Objectives, data: { authentication: AuthenticationMode.None }  },
-      { path: route.education.career.path,  component: Career, data: { authentication: AuthenticationMode.None }  },
-      { path: route.education.certifications.path,  component: Certifications, data: { authentication: AuthenticationMode.None }  },
-      { path: route.education.college.path,  component: College, data: { authentication: AuthenticationMode.None }  },
-      { path: route.experience.experience.path,  component: Experience, data: { authentication: AuthenticationMode.None }  },
-      { path: route.skills.lenguages.path,  component: Lenguages, data: { authentication: AuthenticationMode.None }  },
-      { path: route.skills.technicalSkills.path,  component: TechnicalSkills, data: { authentication: AuthenticationMode.None }  },
+      { path: route.personalInformation.generalInformation.path,   component: GeneralInformation, data: { authentication: AuthenticationMode.None }  },
+      { path: route.personalInformation.objectives.path,   component: Objectives, data: { authentication: AuthenticationMode.None }  },
+      { path: route.education.career.path,   component: Career, data: { authentication: AuthenticationMode.None }  },
+      { path: route.education.certifications.path,   component: Certifications, data: { authentication: AuthenticationMode.None }  },
+      { path: route.education.college.path,   component: College, data: { authentication: AuthenticationMode.None }  },
+      { path: route.experience.experience.path,   component: Experience, data: { authentication: AuthenticationMode.None }  },
+      { path: route.skills.lenguages.path,   component: Lenguages, data: { authentication: AuthenticationMode.None }  },
+      { path: route.skills.technicalSkills.path,   component: TechnicalSkills, data: { authentication: AuthenticationMode.None }  },
     ])
   ],
   providers: [

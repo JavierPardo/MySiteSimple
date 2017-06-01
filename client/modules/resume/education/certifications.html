@@ -5,16 +5,20 @@
       <div class="ibox-tools">
         <a class="collapse-link binded">
           <i class="fa fa-chevron-up"></i>
-        </a>        
+        </a>
         <a class="close-link binded">
           <i class="fa fa-times"></i>
         </a>
       </div>
     </div>
-    <div class="ibox-content">
-      <p>
-        {{cert.description}} by {{cert.institution}} ( {{cert.instructor}} ) ( {{cert.date}} )
-      </p>
+    <div class="ibox-content" style="display: block;">
+      <div>
+        <div class="pull-right text-right">
+          <p>
+            {{cert.description}} by {{cert.institution}} ( {{cert.instructor}} ) ( {{cert.date}} )
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

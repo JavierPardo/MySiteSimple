@@ -38,9 +38,9 @@ function getModuleMenuItems(isPublic: boolean=false): Array<MenuItemModel> {
     return items;
 }
 function appendModuleMenuItems(items: Array<MenuItemModel>, module: IModule, isPublic:boolean) {
-    module.menus.forEach(function (MenuItemModel: MenuItemModel) {
-        if(MenuItemModel.isPublic || !isPublic)
-            items.push(MenuItemModel);
+    module.menus.forEach(function (menuItemModel: MenuItemModel) {
+        if(menuItemModel.isPublic===isPublic)
+            items.push(menuItemModel);
     });
     return items;
 }

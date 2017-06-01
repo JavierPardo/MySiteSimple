@@ -1,0 +1,23 @@
+<li *ngFor="let item of items; let i = index" [ngClass]="{'dropdown':!isChild}">
+
+  <a data-toggle="dropdown" class="dropdown-toggle" style="padding: 0px;" [routerLink]="[item.url]" *ngIf="item.url !==null && !isChild">
+    <span class="clear">
+        <span class="text-muted text-xs block">{{item.text}} <b class="caret"></b></span>
+    </span>
+  </a>
+
+  <a data-toggle="dropdown" class="dropdown-toggle" style="padding: 0px;" *ngIf="item.url ==null && !isChild" title="{{item.text}}">
+    <span class="clear">
+        <span class="text-muted text-xs block">{{item.text}} <b class="caret"></b></span>
+    </span>
+  </a>
+
+  <a *ngIf="isChild" title="{{item.text}}" [routerLink]="[item.url]">
+    {{item.text}}
+  </a>
+
+  <ul class="dropdown-menu animated fadeInRight m-t-xs" *ngIf="item.items.length>0">
+    <simple-menu-item [isChild]=true [items]=item.items></simple-menu-item>
+  </ul>
+
+</li>

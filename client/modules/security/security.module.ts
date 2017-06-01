@@ -1,3 +1,4 @@
+import { UserLogout } from './user/logout/logout';
 import { UserRegister } from './user/register/userRegister';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,14 +13,15 @@ import route from './_share/config/route';
 @NgModule({
   declarations: [
       UserLogin,
-      UserRegister
+      UserRegister,
+      UserLogout 
   ],
   imports: [
     CommonCoreModule,
-    RouterModule.forRoot([
-      { path: route.users.login.path,  component: UserLogin, data: { authentication: AuthenticationMode.None }  },
-      { path: route.users.register.path,  component: UserRegister, data: { authentication: AuthenticationMode.None }  },
-      { path: route.users.logout.path,  redirectTo:  route.users.login.path, data: { authentication: AuthenticationMode.None }  },
+    RouterModule.forChild([
+      { path: route.users.login.path,  component: UserLogin,  pathMatch:'full',  data: { authentication: AuthenticationMode.None }  },
+      { path: route.users.register.path,  component: UserRegister,  data: { authentication: AuthenticationMode.None }  },
+      { path: route.users.logout.path,  component: UserLogout, pathMatch:'full', data: { authentication: AuthenticationMode.None }  },
     ])
   ],
   providers: [

@@ -6,6 +6,7 @@ export class MenuItemModel {
         this.url = url;
         this.class = cssClass;
         this.items = subItems.length > 0 ? subItems : new Array<MenuItemModel>();
+        this.isPublic=isPublic;
     }
     text: string = "";
     url: string = "";

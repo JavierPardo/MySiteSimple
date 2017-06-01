@@ -1,3 +1,4 @@
+import { SimpleMenuItem } from './layouts/default/directives/menus/simpleMenuItem';
 import { APP_INITIALIZER } from '@angular/core';
 import { ConfigurationService } from './services/configurationService';
 import { SystemMessage } from './layouts/default/directives/common/systemMessage';
@@ -31,6 +32,7 @@ export function initialConfigLoad() {
         DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuTopbar,
+        SimpleMenuItem,
         MenuItem,
         BasePage,
         LoadingIndicator,
@@ -51,6 +53,7 @@ export function initialConfigLoad() {
         FormsModule,
         CommonModule,
         HttpModule,
+        SimpleMenuItem,
         DefaultLayout,
         DefaultUnauthenticatedLayout,
         DefaultAuthenticatedLayout,

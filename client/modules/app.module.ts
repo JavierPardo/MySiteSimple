@@ -1,3 +1,4 @@
+import { WorkInModule } from './workIn/worIn.module';
 /// <reference path="extension.d.ts" />
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
@@ -10,10 +11,6 @@ import { DefaultLayout } from './commonCore/layouts/default/defaultLayout';
 import { ResumeModule } from "./resume/resume.module";
 import { SecurityModule } from "modules/security/security.module";
 
-// export function initialConfigLoad() {
-//   var config = new ConfigurationService();
-//   return () => config.load();
-// };
 
 @NgModule({
   declarations: [
@@ -24,7 +21,8 @@ import { SecurityModule } from "modules/security/security.module";
     ]),
     CommonCoreModule,
     ResumeModule,
-    SecurityModule
+    SecurityModule,
+    WorkInModule
   ],
   providers: [
     ],

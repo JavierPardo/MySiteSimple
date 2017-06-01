@@ -1,11 +1,12 @@
 import { IModule } from '../commonCore/models/app/imodule';
 
 import resume from "../resume/_share/config/module";
-//import securiry from "../security/_share/config/module";
+import workin from "../workIn/_share/config/module";
 //import setting from "../setting/_share/config/module";
 import {Languages} from "../commonCore/enum";
 let modules: Array<IModule> = [
-    resume
+    resume,
+    workin
     //securiry,
     //setting
 ];
@@ -16,7 +17,7 @@ export default {
     ioc: "./config/ioc",
     modules: modules,
     loginUrl: "user/Login",
-    defaultUrl: "resume/generalInformation",
+    defaultUrl: "WorkIn/Excercise",
     localization: {
         lang: Languages.EN
     },

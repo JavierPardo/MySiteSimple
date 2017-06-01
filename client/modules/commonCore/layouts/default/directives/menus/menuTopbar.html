@@ -1,37 +1,64 @@
-<ul class="nav navbar-top-links navbar-right">
-  <li>
-    <span class="m-r-sm text-muted welcome-message">
+<div class="row border-bottom">
+  <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header" *ngIf="showCollapseButton">
+      <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i> </a>
+      <form role="search" class="navbar-form-custom" method="post" action="">
+        <div class="form-group">
+        </div>
+      </form>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+      <li>
+        <span class="m-r-sm text-muted welcome-message">
       <!--{{i18n.topMenu.users.lenguages}}-->
     </span>
-  </li>
-  <li class="dropdown">
-    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
-      <i class="fa fa-globe"></i>
-    </a>
-    <ul class="dropdown-menu dropdown-messages">
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+          <i class="fa fa-globe"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-messages">
+          <li>
+            <div class="dropdown-messages-box">
+              <a class="pull-left">
+                <img alt="image" class="img-circle" src="">
+              </a>
+              <div class="media-body">
+                <small class="pull-right">46h ago</small>
+                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
       <li>
-        <div class="dropdown-messages-box">
-          <a class="pull-left">
-            <img alt="image" class="img-circle" src="">
-          </a>
-          <div class="media-body">
-            <small class="pull-right">46h ago</small>
-            <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-          </div>
-        </div>
+        <a routerLink='/user/logout'> <i class="fa fa-sign-out"></i> Logout</a>
+      </li>
+      <li>
+        <a routerLink='/user/login'> <i class="fa fa-sign-in"></i> Log in</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa"></i>
+        </a>
       </li>
     </ul>
-  </li>
-  <li>
-    <a routerLink='/user/logout'> <i class="fa fa-sign-out"></i> Logout</a>
-  </li>
-  <li>
-    <a routerLink='/user/login'> <i class="fa fa-sign-in"></i> Log in</a>
-  </li>
-  <li>
-    <a>
-      <i class="fa"></i>
-    </a>
-  </li>
-</ul>
+
+  </nav>
+
+  <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; min-height: 0px">
+    <ul class="nav navbar-top-links  navbar-mini">
+      <li>
+        <a data-toggle="dropdown" class="dropdown-toggle" style="padding: 0px;">
+          <span class="clear">
+        <span class="text-muted text-xs block">My information<b class="fa fa-arrow-right"></b></span>
+          </span>
+        </a>
+      </li>
+      <simple-menu-item [items]=menuItems [isChild]=false></simple-menu-item>
+
+    </ul>
+
+  </nav>
+</div>
