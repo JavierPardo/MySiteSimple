@@ -12,4 +12,10 @@ export class ExcerciseModel {
         validationErrors.throwIfHasError();
         return !validationErrors.hasError();
     }
+
+    public import(data: any): void {
+        this.name = data.name;
+        this.description = data.description;
+        this.recommendation = data.recommendation;
+    }
 }
