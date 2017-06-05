@@ -18,6 +18,7 @@ import { RouterModule, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from "@angular/common";
+import { ImageContainerComponent } from "modules/commonCore/layouts/default/directives/ui/form/imageContainer";
 
 export function initialConfigLoad() {
   var config = new ConfigurationService();
@@ -28,6 +29,7 @@ export function initialConfigLoad() {
     schemas:[CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
         DefaultLayout,
+        ImageContainerComponent,
         DefaultUnauthenticatedLayout,
         DefaultAuthenticatedLayout,
         MenuSidebar,
@@ -48,7 +50,8 @@ export function initialConfigLoad() {
                   { path: '', redirectTo: helper.config.getAppConfig().defaultUrl, pathMatch:'prefix' },
         ])
     ],
-    exports: [        
+    exports: [ 
+        ImageContainerComponent,       
         BrowserModule,
         FormsModule,
         CommonModule,

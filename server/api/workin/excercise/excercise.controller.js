@@ -15,32 +15,45 @@ exports.create = function (req, res) {
   if (resJson.success) {
     var dataCreate = excercise.create();
     var ret = {
-    errors: [],
-    success: false
-  };
+      errors: [],
+      success: false
+    };
 
-  dataCreate.then(function (user) {
-      console.log('Excersice created successfully');
+    dataCreate.then(function (user) {
+        console.log('Excersice created successfully');
+        res.json({
+          data: {
+            messages: [{
+              key: 'excercise.created',
+              params: []
+            }]
+          },
+          errors: []
+        });
+      })
+      .catch(function (err) {
+        ret.success = false;
+        res.json({
+          data: {
+            messages: []
+          },
+          errors: validUser.errors
+        });
+      })
+  }
+}
+
+exports.getAll = function (req, res) {
+  var excercises = Excercise.getAllExcercises(
+    function (data) {
+
       res.json({
         data: {
-          messages: [{
-            key: 'excercise.created',
-            params: []
-          }]
+          excercises: data
         },
+        messages: [],
         errors: []
       });
-    })
-    .catch(function (err) {
-      ret.success = false;
-      res.json({
-        data: {
-          messages: []
-        },
-        errors: validUser.errors
-      });
-    })
-  }
-  
-  
+    }
+  );
 }

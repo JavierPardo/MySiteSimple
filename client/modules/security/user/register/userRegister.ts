@@ -40,10 +40,6 @@ export class UserRegister extends BasePage {
             self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
         })
             .then(function (responseServer: any) {
-                responseServer.messages.forEach(element => {
-                    self.eventManager.publish(CommonEvent.ShowMessage, responseServer.messages);
-                });
-
             });
         return false;
     }

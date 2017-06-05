@@ -41,9 +41,7 @@ exports.authenticate = function (req, res) {
         res.statusCode
       } else {
         data = data[0];
-        var token = utils.tokenizer.sign({
-          id: data._id
-        });
+        var token = utils.tokenizer.sign({ id: data._id });
         console.log('user logged: ', data._id);
         token = utils.encryptation.encrypt(token);
 

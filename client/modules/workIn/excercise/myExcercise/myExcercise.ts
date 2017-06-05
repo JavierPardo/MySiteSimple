@@ -11,30 +11,27 @@ import { BasePage } from "modules/commonCore/models/ui/basePage";
     templateUrl: "./myExcercise.html"
 })
 export class MyExcercise extends BasePage implements AfterViewInit {
-    public myExcercises: any[];
+    public myExcercises: any[] = [];
 
-   ngAfterViewInit(){
-       this.ngAfterViewInit();
-       let self = this;
-       workinService.getExcercises()
-        .error(function (errors: any) {
-            let exceptions = new ValidationException();
-            errors.forEach(error => {
-                exceptions.add(error);
-            });
-            self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
-        })
-            .then(function (responseServer: any) {
-                responseServer.messages.forEach(element => {
-                    self.eventManager.publish(CommonEvent.ShowMessage, responseServer.messages);
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        let self = this;
+        workinService.getExcercises()
+            .error(function (errors: any) {
+                let exceptions = new ValidationException();
+                errors.forEach(error => {
+                    exceptions.add(error.key, error.params);
                 });
-                responseServer.items.forEach(element => {
+                self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
+            })
+            .then(function (responseServer: any) {
+                responseServer.excercises.forEach(element => {
                     let excercise = new ExcerciseModel();
                     excercise.import(element);
-                    self.myExcercises.add(excercise);
+                    self.myExcercises[self.myExcercises.length] = excercise;
                 });
 
             });
-   }
+    }
 
 }

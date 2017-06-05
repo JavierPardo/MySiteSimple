@@ -2,8 +2,8 @@ import helper from '../../../commonCore/helpers';
 import { PromiseFactory, Promise } from "../../../commonCore/models/promise";
 
 let workinService = {
-    create:create,
-    getExcercises:getExcercises
+    create: create,
+    getExcercises: getExcercises
 };
 
 function create(model: any): Promise {
@@ -13,10 +13,10 @@ function create(model: any): Promise {
 }
 
 function getAPIUrl(path: String): String {
-    return helper.config.getUrlCombined(helper.config.getAppConfig().api.baseUrl + "/"+path);
+    return helper.config.getUrlCombined(helper.config.getAppConfig().api.baseUrl + "/" + path);
 }
-function getExcercises(): Promise{
-    
+function getExcercises(): Promise {
+
     let connector = window.ioc.resolve("IConnector");
     let url = getAPIUrl("WorkIn/Excercise");
     return connector.get(url);

@@ -38,11 +38,25 @@ Excercise.prototype.validate = function (isNew) {
   if (!this.name) {
     ret.errors.push("Name is required");
   }
-  
+
   if (ret.errors.length == 0) {
     ret.success = true;
   }
   return ret;
 }
+Excercise.getAllExcercises = function (handleResponse) {
+  var mydata = [];
+  ExcerciseDb.promiseFind({})
+    .then(function (data) {
+      data.map(function (data) {
 
+        mydata[mydata.length] = new Excercise(data);
+      })
+      handleResponse(mydata);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return mydata;
+}
 module.exports = Excercise;

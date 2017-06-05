@@ -1,10 +1,17 @@
 <div class="middle-box text-center loginscreen   animated fadeInDown">
   <div>
-    <h3 *ngIf="isNew" >Create Excercise</h3>
-    <h3 *ngIf="!isNew" >Update Excercise</h3>
+    <h3 *ngIf="isNew">Create Excercise</h3>
+    <h3 *ngIf="!isNew">Update Excercise</h3>
     <form class="m-t" role="form" action="">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Name" required="" [(ngModel)]="model.name" name="name" />
+      </div>
+      <image-container></image-container>
+      <div class="form-group">
+        <label title="Upload image file" for="inputImage" class="btn btn-primary">
+          <input accept="image/*" name="file" id="inputImage" class="hide" type="file">
+          Upload new image
+          </label>
       </div>
       <div class="form-group">
         <textarea class="form-control" placeholder="Description" required="" [(ngModel)]="model.description" name="description"></textarea>

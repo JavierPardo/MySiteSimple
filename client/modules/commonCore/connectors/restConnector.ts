@@ -1,3 +1,5 @@
+import { MessageModel } from '../models/ui/messageModel';
+import { SystemMessage } from '../layouts/default/directives/common/systemMessage';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
@@ -91,9 +93,19 @@ export class RESTConnector implements IConnector {
             def.resolve(response.data);
             return;
         }
+        if (response.messages && response.messages.length > 0) {
+            this.handleMessages(response);
+        }
         let validationError: ValidationException = this.getValidationExceptionFromResponse(response.errors);
         RESTConnector.eventManager.publish(CommonEvent.ValidationFail, validationError);
         def.reject(response.errors);
+    }
+    private handleMessages(response: any): any {
+        //RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
+        if (!response.messages || response.messages.length === 0)
+            return;
+        let messages: any = this.getMessagesFromResponse(response.errors);
+        RESTConnector.eventManager.publish(CommonEvent.ShowMessage, messages);
     }
     private handleException(def: Promise, exception: any) {
         RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
@@ -107,6 +119,13 @@ export class RESTConnector implements IConnector {
             validationEror.add(errorItem.key, errorItem.params);
         });
         return validationEror;
+    }
+    private getMessagesFromResponse(responseMessages: Array<any>) {
+        let messages: any = [];
+        responseMessages.forEach(function (messagesItem: any) {
+            messages.add(messagesItem.key, messagesItem.params);
+        });
+        return messages;
     }
     private getError(exception: any): ValidationException {
         let validationEror: ValidationException;

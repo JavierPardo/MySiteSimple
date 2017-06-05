@@ -24,7 +24,7 @@ User.findById = function (id, callback) {
   });
 }
 
-User.findByEmailOrUserNameAndPassword = function (user, callbackError, callbackSuccess) {
+User.findByEmailOrUserNameAndPassword = function (user) {
   return new Promise(function (resolve, reject) {
     UserDb.find(user, function (err, users) {
       if (err && err.length > 0)
