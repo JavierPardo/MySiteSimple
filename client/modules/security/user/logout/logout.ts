@@ -17,18 +17,14 @@ export class UserLogout extends BasePage implements AfterViewInit {
     constructor(router: Router, routedActivated: ActivatedRoute) {
 
         super(routedActivated);
-        this.router = router;
-        this.eventManager.publish(LoadingIndicatorEvent.Show);
+        let self = this;
+        self.router = router;
+        self.eventManager.publish(LoadingIndicatorEvent.Show);
 
     }
     ngAfterViewInit() {
         let self = this;
-        setTimeout(function () {
-            authService.removeAuth();
-            self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, false);
-            self.router.navigate(['/user/login']);
-            self.eventManager.publish(LoadingIndicatorEvent.Hide);
-
-        }, 3000);
+        self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, false);
+        self.eventManager.publish(LoadingIndicatorEvent.Hide);
     }
 }

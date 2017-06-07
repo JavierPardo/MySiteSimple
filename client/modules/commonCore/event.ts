@@ -20,6 +20,7 @@ export const CommonEvent = {
 export const HttpCode = {
     NotFound: 404,
     UnAuthorized: 401,
+    Forbidden: 403,
     BadRequest: 400
 };
 

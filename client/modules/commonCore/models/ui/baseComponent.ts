@@ -3,11 +3,11 @@ import { ResourceHelper } from '../../helpers/resourceHelper';
 import { EventManager } from '../../eventManager';
 import { ComponentType } from './componentType';
 import { Hashtable } from "../list/hashtable";
-// import { AuthenticatedEvent, ApplicationStateEvent } from "../../event";
+import { AuthenticatedEvent, ApplicationStateEvent } from "../../event";
 // import { IConnector } from "../../connectors/iconnector";
 // import { EventManager } from "../../eventManager";
-// import authService from "../../services/authService";
-// import { AuthenticationMode } from "../../enum";
+import authService from "../../services/authService";
+import { AuthenticationMode } from "../../enum";
 // import helper from '../../helpers'
 
 
@@ -23,7 +23,7 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     //public id: string = helper.guid.create();
     constructor(http: Http, componentType: any = ComponentType.Layout, routeActivated: ActivatedRoute) {
         if (routeActivated != null)
-            routeActivated.params.subscribe(params => this.routerOnActivate(params));
+            routeActivated.params.subscribe(params => this.routerOnActivate(routeActivated.snapshot));
         this.connector = window.ioc.resolve("IConnector");
         this.eventManager = window.ioc.resolve("IEventManager");
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
@@ -35,13 +35,13 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
          }
     }
     routerOnActivate(next: any): boolean | Promise<boolean> {
-        //console.log(next);
-        //  let authenticationMode = next.routeData.data["authentication"];
-        //  if (!authenticationMode || authenticationMode === AuthenticationMode.None) { return true; }
-        // let isAuthenticated: boolean = authService.isAuthorized(next);
-        //  if (!isAuthenticated) {
-        //      this.eventManager.publish(ApplicationStateEvent.UnAuthorizeRequest, next);
-        //  }
+        console.log(next.data);
+        //   let authenticationMode = next.routeData.data["authentication"];
+        //   if (!authenticationMode || authenticationMode === AuthenticationMode.None) { return true; }
+        //  let isAuthenticated: boolean = authService.isAuthorized(next);
+        //   if (!isAuthenticated) {
+        //       this.eventManager.publish(ApplicationStateEvent.UnAuthorizeRequest, next);
+        //   }
         return false;
     }
 

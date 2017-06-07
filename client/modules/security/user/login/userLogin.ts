@@ -35,7 +35,6 @@ export class UserLogin extends BasePage {
             .then(function (token: any) {
                 authService.setAuth(token);
                 self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged, true);
-                self.router.navigate([helper.config.getAppConfig().defaultUrl]);
                 var welcomeMessage = new MessageModel('common.welcomeMessage', [token.profile.name + ', ' + token.profile.lastname]);
                 self.eventManager.publish(CommonEvent.ShowMessage, [welcomeMessage]);
 

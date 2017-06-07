@@ -1,3 +1,4 @@
+import helper from '../../helpers';
 import authService from '../../services/authService';
 import { AuthenticatedEvent } from '../../event';
 import { IApplicationState } from '../../models/app/iapplicationState';
@@ -29,6 +30,13 @@ export class DefaultLayout extends BaseApplication {
         }
         this.registerEvent(AuthenticatedEvent.AuthenticationChanged, function (authenticated: boolean) {
             self.isAuthenticated = authenticated;
+            if (!authenticated) {
+                self.router.navigate([helper.config.getAppConfig().loginUrl]);
+                authService.removeAuth();
+            }
+            else
+                self.router.navigate([helper.config.getAppConfig().defaultUrl]);
+
         });
         let profile: any = authService.getUserProfile();
         if (authService.isAuthenticated(profile)) {

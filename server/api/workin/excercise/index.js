@@ -8,13 +8,38 @@ var path = require('path');
 var router = express.Router();
 var utils = require('../../../utils').getInstance();
 
-var multer=require('multer');
+var multer = require('multer');
 var upload = multer({
   dest: 'uploadFolder'
 });
 
 // route middleware to verify a token
-router.put('/', upload.any(), excerciseController.create);
+
+router.use(function (req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['authtoken'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    var token = utils.encryptation.decrypt(token);
+    console.log(token);
+    utils.tokenizer.validateToken(token)
+      .then(function () {
+        next();
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        return res.status(403).statusMessage('Token invalid.');
+
+      })
+  } else {
+    return res.status(401).statusMessage('No token provided.');
+  }
+});
+router.put('/', excerciseController.create);
 router.get('/', excerciseController.getAll);
 //router.post('/:id', controller.post);
 //router.delete('/:id', controller.delete);

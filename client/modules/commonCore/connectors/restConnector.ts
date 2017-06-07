@@ -139,6 +139,9 @@ export class RESTConnector implements IConnector {
             case HttpCode.UnAuthorized:
                 validationEror = new ValidationException("common.httpError.unAuthorized");
                 break;
+            case HttpCode.Forbidden:
+                validationEror = new ValidationException("common.httpError.forbidden");
+                break;
             default:
                 validationEror = new ValidationException("common.httpError.genericError");
                 break;

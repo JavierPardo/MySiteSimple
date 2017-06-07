@@ -32,10 +32,10 @@
           </li>
         </ul>
       </li>
-      <li>
+      <li *ngIf='isAuthenticated'>
         <a routerLink='/user/logout'> <i class="fa fa-sign-out"></i> Logout</a>
       </li>
-      <li>
+      <li *ngIf='!isAuthenticated'>
         <a routerLink='/user/login'> <i class="fa fa-sign-in"></i> Log in</a>
       </li>
       <li>
