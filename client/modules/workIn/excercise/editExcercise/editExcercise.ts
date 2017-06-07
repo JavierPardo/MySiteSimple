@@ -27,7 +27,7 @@ export class EditExcercise extends BasePage {
         .error(function (errors: any) {
             let exceptions = new ValidationException();
             errors.forEach(error => {
-                exceptions.add(error.key, error.msg);
+                exceptions.add(error.key, [error.msg]);
             });
             self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
         })

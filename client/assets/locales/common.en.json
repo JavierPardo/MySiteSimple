@@ -1,3 +1,6 @@
 {
-    "welcomeMessage": "Welcome {0} to system."
+    "welcomeMessage": "Welcome {0} to system.",
+    "httpError": {
+        "unAuthorized":"No Autorizado"
+    }
 }
