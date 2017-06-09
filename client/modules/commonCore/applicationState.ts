@@ -1,8 +1,8 @@
-import { ApplicationStateEvent, LoadingIndicatorEvent } from './event';
+import { ApplicationStateEvent, AuthenticatedEvent, LoadingIndicatorEvent } from './event';
 import { EventManager } from './eventManager';
 import { IApplicationState } from './models/app/iapplicationState';
-import {Injector} from "@angular/core";
-import {Router} from "@angular/router"; 
+import { Injector } from "@angular/core";
+import { Router } from "@angular/router";
 
 export class ApplicationState implements IApplicationState {
     private eventManager: EventManager;
@@ -23,8 +23,9 @@ export class ApplicationState implements IApplicationState {
         return this.injector;
     }
     private onUnAuthorizeRequest(routeInstruction: any) {
-        let router: Router = this.injector.get(Router);
-        //router.navigate([configHelper.getAppConfig().loginUrl]);
+        let self: ApplicationState = this;
+        console.log('unauthorized')
+        self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged,false);
     }
     private onApplicationInit(args: any) {
         /* Consider to move to event */

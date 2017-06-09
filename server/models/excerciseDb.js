@@ -8,6 +8,7 @@ var _excerciseDb =mongoose.model('excercise', {
     description: String, 
     recommendation: String
 });
+
 _excerciseDb.promiseFind = function (excercise){
 
 var promise= new Promise(function (resolve, reject) {

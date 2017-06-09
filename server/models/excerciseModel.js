@@ -1,16 +1,19 @@
 var ExcerciseDb = require("./excerciseDb");
 var validator = require("email-validator");
+var utils = require('../utils').getInstance();
 
 var Excercise = function (data) {
 
   this.name = data.name;
   this.description = data.description;
   this.recommendation = data.recommendation;
+  this.id = utils.encryptation.encrypt(data._id.toString()); 
 }
 
 Excercise.prototype.name = "";
 Excercise.prototype.description = "";
 Excercise.prototype.recommendation = "";
+Excercise.prototype.id = 0;
 
 Excercise.prototype.create = function () {
 
@@ -51,6 +54,22 @@ Excercise.getAllExcercises = function (handleResponse) {
       data.map(function (data) {
 
         mydata[mydata.length] = new Excercise(data);
+      })
+      handleResponse(mydata);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return mydata;
+}
+
+Excercise.getExcercise = function (excerciseToFind, handleResponse){
+  var mydata = null;
+  ExcerciseDb.promiseFind(excerciseToFind)
+    .then(function (data) {
+      data.map(function (data) {
+
+        mydata = new Excercise(data);
       })
       handleResponse(mydata);
     })

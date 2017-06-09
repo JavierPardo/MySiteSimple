@@ -1,11 +1,13 @@
 <div class="row">
   <div class="col-lg-4" *ngFor="let excercise of myExcercises">
-    <div class="contact-box"  style="height: 230px">
-      <div class="col-sm-12">
-        <h3><strong>{{excercise.name}}</strong></h3>
-        {{excercise.description}}
-      </div>
-      <div class="clearfix"></div>
+    <div class="contact-box" style="height: 230px">
+      <a [routerLink]="['/WorkIn/Excercise', excercise.id]"> 
+        <div class="col-sm-12">
+          <h3><strong>{{excercise.name}}</strong></h3>
+          {{excercise.description}}
+        </div>
+        <div class="clearfix"></div>
+      </a>
     </div>
   </div>
   <div class="col-lg-4">

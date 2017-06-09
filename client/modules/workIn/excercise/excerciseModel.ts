@@ -4,6 +4,7 @@ export class ExcerciseModel {
     public name: string = "";
     public description: string = "";
     public recommendation: string = "";
+    public id: number = 0;
     public isValid(): boolean {
         let validationErrors: ValidationException = new ValidationException();
         if (!this.name) {
@@ -17,5 +18,6 @@ export class ExcerciseModel {
         this.name = data.name;
         this.description = data.description;
         this.recommendation = data.recommendation;
+        this.id = data.id;
     }
 }

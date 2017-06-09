@@ -1,3 +1,4 @@
+import helper from '../../helpers';
 import { IConnector } from '../../connectors/iconnector';
 import { ResourceHelper } from '../../helpers/resourceHelper';
 import { EventManager } from '../../eventManager';
@@ -8,40 +9,38 @@ import { AuthenticatedEvent, ApplicationStateEvent } from "../../event";
 // import { EventManager } from "../../eventManager";
 import authService from "../../services/authService";
 import { AuthenticationMode } from "../../enum";
-// import helper from '../../helpers'
-
-
 import { OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Http } from "@angular/http";
+
 export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
     protected connector: IConnector;
     protected eventManager: EventManager;
     protected events: Hashtable<any>;
     public i18n: any;
     public i18nHelper: ResourceHelper;
-    //public id: string = helper.guid.create();
+    public id: string = helper.guid.create();
+    public routeActivated: ActivatedRoute;
     constructor(http: Http, componentType: any = ComponentType.Layout, routeActivated: ActivatedRoute) {
-        if (routeActivated != null)
-            routeActivated.params.subscribe(params => this.routerOnActivate(routeActivated.snapshot));
+        this.routeActivated = routeActivated;
         this.connector = window.ioc.resolve("IConnector");
         this.eventManager = window.ioc.resolve("IEventManager");
         let resourceHelper: ResourceHelper = window.ioc.resolve("IResource");
         this.i18nHelper = resourceHelper;
         this.i18n = resourceHelper.getResourceData();
         this.events = new Hashtable<any>();
-         if (componentType === ComponentType.Layout) {
-             this.connector.setHttp(http);
-         }
+        if (componentType === ComponentType.Layout) {
+            this.connector.setHttp(http);
+        }
     }
     routerOnActivate(next: any): boolean | Promise<boolean> {
-        console.log(next.data);
-        //   let authenticationMode = next.routeData.data["authentication"];
-        //   if (!authenticationMode || authenticationMode === AuthenticationMode.None) { return true; }
-        //  let isAuthenticated: boolean = authService.isAuthorized(next);
-        //   if (!isAuthenticated) {
-        //       this.eventManager.publish(ApplicationStateEvent.UnAuthorizeRequest, next);
-        //   }
+        let authenticationMode = next.data["authentication"];
+        if (!authenticationMode || authenticationMode === AuthenticationMode.None) { return true; }
+        let isAuthenticated: boolean = authService.isAuthorized(next);
+        if (!isAuthenticated) {
+            this.eventManager = window.ioc.resolve("IEventManager");
+            this.eventManager.publish(ApplicationStateEvent.UnAuthorizeRequest, next);
+        }
         return false;
     }
 
@@ -59,7 +58,10 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     }
 
     ngAfterViewInit() {
-        this.onReady();
+        this.onReady(); 
+        if (this.routeActivated && this.routeActivated != null)
+            this.routeActivated.params.subscribe(params => this.routerOnActivate(this.routeActivated.snapshot));
+
     }
 
     ngOnDestroy() {

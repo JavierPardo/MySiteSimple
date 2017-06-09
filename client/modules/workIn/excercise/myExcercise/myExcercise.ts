@@ -22,7 +22,6 @@ export class MyExcercise extends BasePage implements AfterViewInit {
                 errors.forEach(error => {
                     exceptions.add(error.key, error.params);
                 });
-                self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
             .then(function (responseServer: any) {
                 responseServer.excercises.forEach(element => {

@@ -16,8 +16,9 @@ export default {
     },
     ioc: "./config/ioc",
     modules: modules,
-    loginUrl: "user/Login",
+    loginUrl: "/user/login",
     defaultUrl: "WorkIn/Excercise",
+    defaultPublicUrl: "resume/generalInformation",
     localization: {
         lang: Languages.EN
     },

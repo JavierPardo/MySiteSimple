@@ -13,8 +13,6 @@ var upload = multer({
   dest: 'uploadFolder'
 });
 
-// route middleware to verify a token
-
 router.use(function (req, res, next) {
 
   // check header or url parameters or post parameters for token
@@ -25,21 +23,27 @@ router.use(function (req, res, next) {
 
     // verifies secret and checks exp
     var token = utils.encryptation.decrypt(token);
-    console.log(token);
     utils.tokenizer.validateToken(token)
       .then(function () {
         next();
       })
       .catch(function (erro) {
         console.log(erro);
-        return res.status(403).statusMessage('Token invalid.');
+        return res.status(403).send({ 
+        success: false, 
+        message: 'invalid token.' 
+    });
 
       })
   } else {
-    return res.status(401).statusMessage('No token provided.');
+    return res.status(401).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    });
   }
 });
 router.put('/', excerciseController.create);
+router.get('/:id', excerciseController.getExcercise);
 router.get('/', excerciseController.getAll);
 //router.post('/:id', controller.post);
 //router.delete('/:id', controller.delete);

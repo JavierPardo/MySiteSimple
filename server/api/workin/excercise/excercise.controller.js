@@ -57,3 +57,20 @@ exports.getAll = function (req, res) {
     }
   );
 }
+
+exports.getExcercise = function (req, res) {
+  var excercise = Excercise.getExcercise({
+      _id: utils.encryptation.decrypt(req.params.id.toString())
+    },
+    function (excer) {
+
+      res.json({
+        data: {
+          excercise: excer
+        },
+        messages: [],
+        errors: []
+      });
+    }
+  );
+}

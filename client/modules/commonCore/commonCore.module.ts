@@ -46,9 +46,7 @@ export function initialConfigLoad() {
         FormsModule,
         CommonModule,
         HttpModule,
-        RouterModule.forRoot([
-                  { path: '', redirectTo: helper.config.getAppConfig().defaultUrl, pathMatch:'prefix' },
-        ])
+        RouterModule.forRoot([])
     ],
     exports: [ 
         ImageContainerComponent,       

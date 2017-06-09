@@ -16,10 +16,10 @@ import { SecurityModule } from "modules/security/security.module";
   declarations: [
   ],
   imports: [
-    RouterModule.forRoot([
-      {path:'', redirectTo:'resume', pathMatch:'full'}
-    ]),
     CommonCoreModule,
+    RouterModule.forRoot([
+      {path:'', redirectTo:'resume', pathMatch:'prefix'}
+    ]),
     ResumeModule,
     SecurityModule,
     WorkInModule

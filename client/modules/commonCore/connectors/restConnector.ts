@@ -112,6 +112,7 @@ export class RESTConnector implements IConnector {
         let error: ValidationException = this.getError(exception);
         def.reject(error.errors);
         RESTConnector.eventManager.publish(CommonEvent.ValidationFail, error);
+        RESTConnector.eventManager.publish(LoadingIndicatorEvent.Hide);
     }
     private getValidationExceptionFromResponse(responseErrors: Array<any>) {
         let validationEror: ValidationException = new ValidationException();

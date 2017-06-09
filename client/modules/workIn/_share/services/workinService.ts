@@ -3,13 +3,19 @@ import { PromiseFactory, Promise } from "../../../commonCore/models/promise";
 
 let workinService = {
     create: create,
-    getExcercises: getExcercises
+    getExcercises: getExcercises,
+    getExcercise: getExcercise
 };
 
 function create(model: any): Promise {
     let connector = window.ioc.resolve("IConnector");
     let url = getAPIUrl("WorkIn/Excercise");
     return connector.put(url, model);
+}
+function getExcercise(id): Promise {
+    let connector = window.ioc.resolve("IConnector");
+    let url = getAPIUrl("WorkIn/Excercise/"+id);
+    return connector.get(url);
 }
 
 function getAPIUrl(path: String): String {
