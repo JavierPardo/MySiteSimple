@@ -9,5 +9,9 @@ module.exports = mongoose.model('UserDb', {
     name: String, 
     password: String, 
     admin: Boolean , 
-    email: String 
+    email: String,
+    Excercises:[{
+        type: Schema.Types.ObjectId,
+        ref: 'excercise'
+    }]
 });

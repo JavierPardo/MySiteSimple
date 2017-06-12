@@ -9,6 +9,7 @@ import { Component } from "@angular/core";
 import { Http } from "@angular/http";
 import { ActivatedRoute, Router } from "@angular/router";
 
+declare var $: any;
 @Component({
     selector: "default-layout",
     templateUrl: "./defaultLayout.html",
@@ -21,6 +22,9 @@ export class DefaultLayout extends BaseApplication {
         super(http, routeActivated);
         this.router = router;
         this.onInitialized();
+    }
+    getStyle(){
+        return 'margin: 0px;';
     }
 
     private onInitialized() {
@@ -36,7 +40,7 @@ export class DefaultLayout extends BaseApplication {
             }
             else
                 self.router.navigate([helper.config.getAppConfig().defaultUrl]);
-self.isAuthenticated = authenticated;
+                self.isAuthenticated = authenticated;
         });
         let profile: any = authService.getUserProfile();
         if (authService.isAuthenticated(profile)) {

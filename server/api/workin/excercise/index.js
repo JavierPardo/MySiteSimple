@@ -2,6 +2,7 @@
 
 var express = require('express');
 var excerciseController = require('./excercise.controller');
+var User = require('../../../models/userModel');
 
 var jsonfile = require('jsonfile');
 var path = require('path');
@@ -12,7 +13,7 @@ var multer = require('multer');
 var upload = multer({
   dest: 'uploadFolder'
 });
-
+var user = undefined;
 router.use(function (req, res, next) {
 
   // check header or url parameters or post parameters for token
@@ -25,25 +26,34 @@ router.use(function (req, res, next) {
     var token = utils.encryptation.decrypt(token);
     utils.tokenizer.validateToken(token)
       .then(function () {
-        next();
+        var userId = utils.tokenizer.decode(token).id;
+        User.findById(userId)
+          .then(function (data) {
+            user = data;
+            next();
+          });
       })
       .catch(function (erro) {
         console.log(erro);
-        return res.status(403).send({ 
-        success: false, 
-        message: 'invalid token.' 
-    });
+        return res.status(403).send({
+          success: false,
+          message: 'invalid token.'
+        });
 
       })
   } else {
-    return res.status(401).send({ 
-        success: false, 
-        message: 'No token provided.' 
+    return res.status(401).send({
+      success: false,
+      message: 'No token provided.'
     });
   }
 });
-router.put('/', excerciseController.create);
-router.get('/:id', excerciseController.getExcercise);
+router.put('/', function(req,res){
+excerciseController.create(req,res,user);
+});
+router.get('/:id', function(req,res){
+excerciseController.getExcercise(req,res,user);
+});
 router.get('/', excerciseController.getAll);
 //router.post('/:id', controller.post);
 //router.delete('/:id', controller.delete);

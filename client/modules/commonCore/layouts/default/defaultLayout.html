@@ -1,7 +1,21 @@
-<div >
-      <loading-indicator></loading-indicator>
+<div>
+  <loading-indicator></loading-indicator>
+  <div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation"  *ngIf='isAuthenticated'>
+      <div class="sidebar-collapse">
+        <menu-sidebar [isPublic]=false></menu-sidebar>
+      </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1" [style]="getStyle()">
+      <menu-topbar [showCollapseButton]="isAuthenticated" [isAuthenticated]="isAuthenticated"></menu-topbar>
+      <div class="row  border-bottom white-bg dashboard-header">
+        <system-message pattern=""></system-message>
+        <div>
+          <h2>Welcome, User!!</h2>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <default-authenticated-layout *ngIf='isAuthenticated'></default-authenticated-layout>
-
-  <default-unauthenticated-layout *ngIf='!isAuthenticated'></default-unauthenticated-layout>
 </div>

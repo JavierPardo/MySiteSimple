@@ -15,12 +15,14 @@ User.prototype.name = "";
 User.prototype.password = "";
 User.prototype.admin = "";
 
-User.findById = function (id, callback) {
-  db.get('users', {
-    id: id
-  }).run(function (err, data) {
-    if (err) return callback(err);
-    callback(null, new User(data));
+User.findById = function (id) {
+  return new Promise(function (resolve, reject) {
+    UserDb.findById(id, function (err, user) {
+      if (err && err.length > 0)
+        reject(err);
+      else
+        resolve(user);
+    });
   });
 }
 

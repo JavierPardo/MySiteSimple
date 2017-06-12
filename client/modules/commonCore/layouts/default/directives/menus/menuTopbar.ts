@@ -15,15 +15,14 @@ import helper from '../../../../helpers'
 export class MenuTopbar extends BaseComponent implements AfterViewInit {
 
     @Input() showCollapseButton: boolean = true;
+    @Input() isAuthenticated: boolean=false;
 
     private router: Router;
-    public isAuthenticated: boolean;
 
     constructor(router: Router, http: Http) {
         super(http, ComponentType.Control, null)
         this.router = router;
         this.menuItems = helper.config.getModuleMenuItems(true);
-        this.isAuthenticated = authService.isAuthenticated(authService.getUserProfile());
     }
 
     ngAfterViewInit(){

@@ -1,27 +1,28 @@
-<div class="middle-box text-center loginscreen   animated fadeInDown">
+<div class="text-center animated fadeInDown" style='min-height: 600px'>
   <div>
     <h3>View Excercise</h3>
     <div class="form-group">
       <h7>Name:</h7>
       <h6>
-        <div [innerHTML]="myExcercise.name">
+        <div [innerHTML]="model.name">
         </div>
       </h6>
     </div>
     <div class="form-group">
       <h7>Description:</h7>
       <h6>
-        <div innerHTML="myExcercise.description">
+        <div [innerHTML]="model.description">
         </div>
       </h6>
     </div>
     <div class="form-group">
       <h7>Recommendation:</h7>
       <h6>
-        <div [innerHTML]="myExcercise.recommendation">
+        <div [innerHTML]="model.recommendation">
         </div>
       </h6>
     </div>
+    <a (click)=onEditClicked($event) [*ngIf]="canEdit" class="btn btn-primary block full-width m-b">Create</a>
     <p class="m-t"> <small>Javier PG - Gym App</small> </p>
   </div>
 </div>

@@ -3,14 +3,12 @@ import { APP_INITIALIZER } from '@angular/core';
 import { ConfigurationService } from './services/configurationService';
 import { SystemMessage } from './layouts/default/directives/common/systemMessage';
 import { LoadingIndicator } from './layouts/default/directives/common/loadingIndicator';
-import { DefaultAuthenticatedLayout } from './layouts/default/authenticatedLayout';
 import helper from './helpers';
 import { ValidationDirective } from './directives/validation';
 import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
 import { BasePage } from './models/ui/basePage';
 import { MenuItem } from './layouts/default/directives/menus/menuItem';
 import { MenuSidebar } from './layouts/default/directives/menus/menuSidebar';
-import { DefaultUnauthenticatedLayout } from './layouts/default/unauthenticatedLayout';
 import { DefaultLayout } from './layouts/default/defaultLayout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -30,8 +28,6 @@ export function initialConfigLoad() {
     declarations: [
         DefaultLayout,
         ImageContainerComponent,
-        DefaultUnauthenticatedLayout,
-        DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuTopbar,
         SimpleMenuItem,
@@ -56,8 +52,6 @@ export function initialConfigLoad() {
         HttpModule,
         SimpleMenuItem,
         DefaultLayout,
-        DefaultUnauthenticatedLayout,
-        DefaultAuthenticatedLayout,
         MenuSidebar,
         MenuItem,
         SystemMessage,

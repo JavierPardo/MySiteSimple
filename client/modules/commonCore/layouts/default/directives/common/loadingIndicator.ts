@@ -4,12 +4,10 @@ import {EventManager} from "../../../../eventManager";
 
 @Component({
     selector: "loading-indicator",
-    template: `<div id='loaderIndicator' class='loading {{model}}'>&nbsp;
-    LOADING....
-    </div>`
+    templateUrl: "./loadingIndicator.html"
 })
 export class LoadingIndicator {
-    public model: string = LoadingIndicatorEvent.Show;
+    public model: boolean = false;
     private showRequest: boolean = false;
     constructor() {
         let self: LoadingIndicator = this;
@@ -20,13 +18,10 @@ export class LoadingIndicator {
     public onShow(): void {
         this.showRequest = true;
         let self: LoadingIndicator = this;
-        window.setTimeout(function () {
-            if (self.showRequest !== true) { return; }
-            self.model = "show";
-        }, 300);
+            self.model = true;
     }
     public onHide(): void {
         this.showRequest = false;
-        this.model = "hide";
+        this.model = false;
     }
 }

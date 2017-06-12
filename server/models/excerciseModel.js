@@ -7,21 +7,24 @@ var Excercise = function (data) {
   this.name = data.name;
   this.description = data.description;
   this.recommendation = data.recommendation;
-  this.id = utils.encryptation.encrypt(data._id.toString()); 
+  if (data._id)
+    this.id = utils.encryptation.encrypt(data._id.toString());
 }
 
 Excercise.prototype.name = "";
 Excercise.prototype.description = "";
 Excercise.prototype.recommendation = "";
 Excercise.prototype.id = 0;
+Excercise.prototype.user = undefined;
 
 Excercise.prototype.create = function () {
 
   var newExcercise = new ExcerciseDb({
     name: this.name,
     description: this.description,
-    recommendation: this.recommendation
-  });
+    recommendation: this.recommendation,
+    User: this.user
+    });
 
   return newExcercise.save(function (err, excercise, numAffected) {
     if (err) {
@@ -52,7 +55,7 @@ Excercise.getAllExcercises = function (handleResponse) {
   ExcerciseDb.promiseFind({})
     .then(function (data) {
       data.map(function (data) {
-
+        data.UserId = undefined;
         mydata[mydata.length] = new Excercise(data);
       })
       handleResponse(mydata);
@@ -63,12 +66,11 @@ Excercise.getAllExcercises = function (handleResponse) {
   return mydata;
 }
 
-Excercise.getExcercise = function (excerciseToFind, handleResponse){
+Excercise.getExcercise = function (excerciseToFind, handleResponse) {
   var mydata = null;
   ExcerciseDb.promiseFind(excerciseToFind)
     .then(function (data) {
       data.map(function (data) {
-
         mydata = new Excercise(data);
       })
       handleResponse(mydata);

@@ -6,7 +6,11 @@ mongoose.Promise =Promise;
 var _excerciseDb =mongoose.model('excercise', {
     name:String, 
     description: String, 
-    recommendation: String
+    recommendation: String,
+    User: {
+      type: Schema.Types.ObjectId,
+      ref: 'UserDb'
+    }
 });
 
 _excerciseDb.promiseFind = function (excercise){

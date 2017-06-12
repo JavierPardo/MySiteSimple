@@ -12,10 +12,11 @@ import { ActivatedRoute } from "@angular/router";
     templateUrl: "./viewExcercise.html"
 })
 export class ViewExcercise extends BasePage implements AfterViewInit {
-    public myExcercise: ExcerciseModel = new ExcerciseModel();
+    public model: ExcerciseModel = new ExcerciseModel();
     public canEdit: boolean = false;
     constructor(activatedRoute: ActivatedRoute) {
         super(activatedRoute);
+        let self: ViewExcercise = this;
         let id = activatedRoute.snapshot.params['Id'];
         workinService.getExcercise(id)
             .error(function (errors: any) {
@@ -25,10 +26,10 @@ export class ViewExcercise extends BasePage implements AfterViewInit {
                 });
             })
             .then(function (responseServer: any) {
-                let self: ViewExcercise = this;
-                let excercise = new ExcerciseModel();
-                excercise.import(responseServer.excercise);
-                self.myExcercise = excercise;
+                let excercise: ExcerciseModel = new ExcerciseModel();
+                self.model.import(responseServer.excercise);
+                this.canEdit=!!self.model.id;
+                console.log(self.model)
             });
     }
     ngAfterViewInit() {

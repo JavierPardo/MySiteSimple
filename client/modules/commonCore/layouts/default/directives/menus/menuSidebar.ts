@@ -18,6 +18,7 @@ export class MenuSidebar implements AfterViewInit {
     public title: string = "";
     ngAfterViewInit() {
         this.initializedSidebar();
+        $('#side-menu').metisMenu();
     }
     /* tslint:disable */
     private initializedSidebar(): any {
