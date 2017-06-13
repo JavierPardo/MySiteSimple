@@ -21,7 +21,7 @@
           name="recomendation" />
       </div>
       <a (click)=onCreateClicked($event) *ngIf="isNew" class="btn btn-primary block full-width m-b">Create</a>
-      <a (click)=onUpdateClicked($event) *ngIf="!isNew" class="btn btn-primary block full-width m-b">Update</a>
+      <a (click)=onUpdateClicked($event) *ngIf="!isNew && canUpdate" class="btn btn-primary block full-width m-b">Update</a>
     </form>
     <p class="m-t"> <small>Javier PG - Gym App</small> </p>
   </div>

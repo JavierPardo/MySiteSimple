@@ -3,6 +3,8 @@ import { EventManager } from './eventManager';
 import { IApplicationState } from './models/app/iapplicationState';
 import { Injector } from "@angular/core";
 import { Router } from "@angular/router";
+import authService from './services/authService';
+import helper from './helpers';
 
 export class ApplicationState implements IApplicationState {
     private eventManager: EventManager;
@@ -24,12 +26,11 @@ export class ApplicationState implements IApplicationState {
     }
     private onUnAuthorizeRequest(routeInstruction: any) {
         let self: ApplicationState = this;
-        console.log('unauthorized')
-        self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged,false);
+        self.eventManager.publish(AuthenticatedEvent.AuthenticationChanged,authService.isAuthenticated(authService.getUserProfile()));
     }
     private onApplicationInit(args: any) {
         /* Consider to move to event */
-        document.title = 'Javier PG';//configHelper.getAppConfig().app.name;
+        document.title = helper.config.getAppConfig().app.name;
     }
     private onApplicationBeforeReady(args: any) {
     }

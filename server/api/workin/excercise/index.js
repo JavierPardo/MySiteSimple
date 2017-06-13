@@ -51,6 +51,9 @@ router.use(function (req, res, next) {
 router.put('/', function(req,res){
 excerciseController.create(req,res,user);
 });
+router.post('/', function(req,res){
+excerciseController.update(req,res,user);
+});
 router.get('/:id', function(req,res){
 excerciseController.getExcercise(req,res,user);
 });

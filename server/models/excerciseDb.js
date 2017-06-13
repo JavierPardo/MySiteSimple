@@ -8,8 +8,7 @@ var _excerciseDb =mongoose.model('excercise', {
     description: String, 
     recommendation: String,
     User: {
-      type: Schema.Types.ObjectId,
-      ref: 'UserDb'
+      type: Schema.ObjectId
     }
 });
 

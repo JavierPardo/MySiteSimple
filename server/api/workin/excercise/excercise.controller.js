@@ -11,22 +11,57 @@ var validator = require("email-validator");
 
 exports.create = function (req, res, user) {
   var excercise = new Excercise(req.body);
-  
+
   var resJson = excercise.validate();
   if (resJson.success) {
-    excercise.user=user;
+    excercise.user = user;
     var dataCreate = excercise.create();
     var ret = {
       errors: [],
       success: false
     };
-    
+
     dataCreate.then(function (user) {
         console.log('Excersice created successfully');
         res.json({
           data: {
             messages: [{
               key: 'excercise.created',
+              params: []
+            }]
+          },
+          errors: []
+        });
+      })
+      .catch(function (err) {
+        ret.success = false;
+        res.json({
+          data: {
+            messages: []
+          },
+          errors: validUser.errors
+        });
+      })
+  }
+}
+
+exports.update = function (req, res, user) {
+  var excercise = new Excercise(req.body);
+
+  var resJson = excercise.validate();
+  if (resJson.success) {
+    excercise.user = user;
+    var ret = {
+      errors: [],
+      success: false
+    };
+    excercise.update()
+      .then(function (user) {
+        console.log('Excersice updated successfully');
+        res.json({
+          data: {
+            messages: [{
+              key: 'excercise.updated',
               params: []
             }]
           },
@@ -60,16 +95,15 @@ exports.getAll = function (req, res) {
   );
 }
 
-exports.getExcercise = function (req, res,user) {
+exports.getExcercise = function (req, res, user) {
   var excercise = Excercise.getExcercise({
       _id: utils.encryptation.decrypt(req.params.id.toString())
     },
     function (excer) {
-      console.log(excer, user)
-      if (excer.User != user) {
-        excer.Id = undefined;
+      if (user._id.toString() !== excer.user.toString()) {
+        delete excer.id;
       }
-      excer.UserId = undefined;
+      delete excer.user;
       res.json({
         data: {
           excercise: excer

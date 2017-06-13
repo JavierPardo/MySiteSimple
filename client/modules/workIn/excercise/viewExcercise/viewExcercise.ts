@@ -28,13 +28,12 @@ export class ViewExcercise extends BasePage implements AfterViewInit {
             .then(function (responseServer: any) {
                 let excercise: ExcerciseModel = new ExcerciseModel();
                 self.model.import(responseServer.excercise);
-                this.canEdit=!!self.model.id;
-                console.log(self.model)
+
+                self.canEdit=!!self.model.id;
             });
     }
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        let self = this;
     }
 
 }

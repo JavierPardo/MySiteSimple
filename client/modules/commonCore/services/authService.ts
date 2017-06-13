@@ -1,5 +1,5 @@
-import {PromiseFactory} from "../models/promise";
-import {CACHE_CONSTANT} from "./cacheService";
+import { PromiseFactory } from "../models/promise";
+import { CACHE_CONSTANT } from "./cacheService";
 import cacheService from "./cacheService";
 let authService: any = {
     getUserProfile: getUserProfile,

@@ -11,7 +11,6 @@ module.exports = mongoose.model('UserDb', {
     admin: Boolean , 
     email: String,
     Excercises:[{
-        type: Schema.Types.ObjectId,
-        ref: 'excercise'
+        type: Schema.ObjectId
     }]
 });

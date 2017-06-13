@@ -22,7 +22,8 @@
         </div>
       </h6>
     </div>
-    <a (click)=onEditClicked($event) [*ngIf]="canEdit" class="btn btn-primary block full-width m-b">Create</a>
+    <a [routerLink]="['/WorkIn/Excercise/Edit', model.id]" *ngIf="canEdit" 
+    class="btn btn-primary block full-width m-b">Edit</a>
     <p class="m-t"> <small>Javier PG - Gym App</small> </p>
   </div>
 </div>
