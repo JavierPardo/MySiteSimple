@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input } from '@angular/core';
 import { ModalPopUpEvent } from "../../../../event";
 import { EventManager } from "../../../../eventManager";
 
@@ -9,8 +9,18 @@ declare var $: any;
     selector: "carousel-images",
     templateUrl: "./carouselImages.html"
 })
-export class CarouselImages  {
-    
+export class CarouselImages implements AfterViewChecked {
+    ngAfterViewChecked(): void {
+        if (this.canShow) {
+            if (this.element.nativeElement.querySelector('.active') == null) {
+                this.element.nativeElement.querySelector('.item')
+                .classList.add('active');
+            }
+
+
+        }
+    }
+
     private _images;
     public canShow: boolean = false;
 
@@ -23,6 +33,7 @@ export class CarouselImages  {
     get images(): string {
         return this._images;
     }
+
     constructor(private element: ElementRef) {
     }
 
