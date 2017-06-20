@@ -14,9 +14,7 @@ export class ModalPopUp {
     constructor(private element: ElementRef) {
         let self: ModalPopUp = this;
         let eventManager: EventManager = window.ioc.resolve("IEventManager");
-        console.log('subcribing event ',ModalPopUpEvent.Show);
         eventManager.subscribe(ModalPopUpEvent.Show, (options: any) => self.onShow(options));
-        // eventManager.subscribe(ModalPopUpEvent.Hide, () => self.onHide());
     }
     public onShow(options: any): void {
         this.model = true;

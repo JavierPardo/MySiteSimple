@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from "@angular/common";
 import { ImageContainerComponent } from "modules/commonCore/layouts/default/directives/ui/form/imageContainer";
+import { CarouselImages } from "modules/commonCore/layouts/default/directives/common/carouselImages";
 
 export function initialConfigLoad() {
   var config = new ConfigurationService();
@@ -37,7 +38,8 @@ export function initialConfigLoad() {
         LoadingIndicator,
         SystemMessage,
         ValidationDirective,
-        ModalPopUp
+        ModalPopUp,
+        CarouselImages
     ],
     imports: [
         BrowserModule,
@@ -60,7 +62,8 @@ export function initialConfigLoad() {
         BasePage,
         LoadingIndicator,
         ValidationDirective,
-        ModalPopUp
+        ModalPopUp,
+        CarouselImages
     ],
     providers: [{
       provide: APP_INITIALIZER,

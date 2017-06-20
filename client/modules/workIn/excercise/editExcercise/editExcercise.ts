@@ -15,6 +15,7 @@ export class EditExcercise extends BasePage {
     public model: ExcerciseModel = new ExcerciseModel();
     public canUpdate: Boolean;
     public isNew: Boolean;
+    public excerciseImages;
     constructor(private route: ActivatedRoute) {
         super(route)
         let self = this;
@@ -79,15 +80,19 @@ export class EditExcercise extends BasePage {
         console.log('end-end');
     }
 
-    onFilePopUpClicked(){
-        let opts={
-            modalType:ModalType.SelectFile,
-            callback:this.loadNewImage
+    onFilePopUpClicked() {
+        let opts = {
+            modalType: ModalType.SelectFile,
+            callback: this.loadNewImage.bind(this)
         }
-        this.eventManager.publish(ModalPopUpEvent.Show,opts);
+        this.eventManager.publish(ModalPopUpEvent.Show, opts);
     }
 
-    loadNewImage(image){
-        this.model.newImages[this.model.newImages.length]=image;
+    loadNewImage(image) {
+        console.log('setNewImage');
+        this.excerciseImages = this.model.newImages;
+
+        this.excerciseImages[this.excerciseImages.length] = image;
+        this.model.newImages=this.excerciseImages;
     }
 }
