@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ExcerciseModel } from '../excerciseModel';
 import { Component } from '@angular/core';
 import { BasePage } from "modules/commonCore/models/ui/basePage";
-import { CommonEvent, AuthenticatedEvent, ApplicationStateEvent, ValidationEvent } from '../../../commonCore/event';
+import { CommonEvent, AuthenticatedEvent, ApplicationStateEvent, ValidationEvent, ModalPopUpEvent } from '../../../commonCore/event';
+import { ModalType } from "modules/commonCore/models/ui/componentType";
 
 @Component({
     selector: "EditExcercise",
@@ -46,7 +47,8 @@ export class EditExcercise extends BasePage {
 
     public onCreateClicked($event) {
         let self: EditExcercise = this;
-        workinService.create(this.model)
+        console.log(self.model)
+        workinService.create(self.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
                 errors.forEach(error => {
@@ -70,5 +72,22 @@ export class EditExcercise extends BasePage {
             })
             .then(function (responseServer: any) {
             });
+    }
+
+    fileChange(event) {
+        console.log(event);
+        console.log('end-end');
+    }
+
+    onFilePopUpClicked(){
+        let opts={
+            modalType:ModalType.SelectFile,
+            callback:this.loadNewImage
+        }
+        this.eventManager.publish(ModalPopUpEvent.Show,opts);
+    }
+
+    loadNewImage(image){
+        this.model.newImages[this.model.newImages.length]=image;
     }
 }

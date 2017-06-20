@@ -3,3 +3,6 @@ export const ComponentType = {
     Page: "page",
     Control: "control"
 };
+export const ModalType = {
+    SelectFile: "SelectFile"
+}

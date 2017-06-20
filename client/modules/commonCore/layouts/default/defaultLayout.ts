@@ -24,7 +24,10 @@ export class DefaultLayout extends BaseApplication {
         this.onInitialized();
     }
     getStyle(){
-        return 'margin: 0px;';
+        if(this.isAuthenticated)
+        return '';
+        else
+        return '0px';
     }
 
     private onInitialized() {

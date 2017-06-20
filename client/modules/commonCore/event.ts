@@ -10,6 +10,10 @@ export const LoadingIndicatorEvent = {
     Show: "loading.show",
     Hide: "loading.hide"
 };
+export const ModalPopUpEvent = {
+    Show: "modalPopUp.show",
+    Hide: "modalPopUp.hide"
+};
 
 export const CommonEvent = {
     ValidationFail: "ValidationFail",

@@ -1,4 +1,9 @@
-import { ElementRef, Component } from '@angular/core';
+import { BaseComponent } from '../../../../../models/ui/baseComponent';
+import { ComponentType } from '../../../../../models/ui/componentType';
+
+import { Component, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Http } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'image-container',
@@ -8,15 +13,20 @@ import { ElementRef, Component } from '@angular/core';
     `,
 })
 export class ImageContainerComponent {
-    constructor(private element: ElementRef) {}
+    @Output() image: any = new EventEmitter();
+    constructor(private element: ElementRef ) { 
+        
+    }
 
     changeListner(event) {
+        let self: ImageContainerComponent=this;
         var reader = new FileReader();
-        var image = this.element.nativeElement.querySelector('.image');
-console.log(event.target.files[0]);
-        reader.onload = function(e:any) {
-            var src = e.target.result;
-            image.src = src;
+        var imageEl = this.element.nativeElement.querySelector('.image');
+        imageEl = event.target.files[0];
+        reader.onloadend = function (e: any) {
+            var src = e.target.result;        
+            imageEl.src = src;
+            self.image.emit(src);
         };
 
         reader.readAsDataURL(event.target.files[0]);

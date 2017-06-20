@@ -48,7 +48,7 @@ router.use(function (req, res, next) {
     });
   }
 });
-router.put('/', function(req,res){
+router.put('/', upload.single('images'), function(req,res){
 excerciseController.create(req,res,user);
 });
 router.post('/', function(req,res){

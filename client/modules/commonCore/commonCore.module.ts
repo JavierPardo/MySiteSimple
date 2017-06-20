@@ -1,15 +1,16 @@
 import { SimpleMenuItem } from './layouts/default/directives/menus/simpleMenuItem';
 import { APP_INITIALIZER } from '@angular/core';
 import { ConfigurationService } from './services/configurationService';
-import { SystemMessage } from './layouts/default/directives/common/systemMessage';
-import { LoadingIndicator } from './layouts/default/directives/common/loadingIndicator';
-import helper from './helpers';
 import { ValidationDirective } from './directives/validation';
-import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
-import { BasePage } from './models/ui/basePage';
+import helper from './helpers';
+import { DefaultLayout } from './layouts/default/defaultLayout';
+import { LoadingIndicator } from './layouts/default/directives/common/loadingIndicator';
+import { ModalPopUp } from './layouts/default/directives/common/modalPopUp';
+import { SystemMessage } from './layouts/default/directives/common/systemMessage';
 import { MenuItem } from './layouts/default/directives/menus/menuItem';
 import { MenuSidebar } from './layouts/default/directives/menus/menuSidebar';
-import { DefaultLayout } from './layouts/default/defaultLayout';
+import { BasePage } from './models/ui/basePage';
+import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, RouterLink } from '@angular/router';
@@ -35,7 +36,8 @@ export function initialConfigLoad() {
         BasePage,
         LoadingIndicator,
         SystemMessage,
-        ValidationDirective
+        ValidationDirective,
+        ModalPopUp
     ],
     imports: [
         BrowserModule,
@@ -57,7 +59,8 @@ export function initialConfigLoad() {
         SystemMessage,
         BasePage,
         LoadingIndicator,
-        ValidationDirective
+        ValidationDirective,
+        ModalPopUp
     ],
     providers: [{
       provide: APP_INITIALIZER,
