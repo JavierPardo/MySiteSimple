@@ -80,19 +80,21 @@ export class EditExcercise extends BasePage {
         console.log('end-end');
     }
 
-    onFilePopUpClicked() {
+    onManageImagesClicked() {
+        this.excerciseImages = this.model.newImages;
         let opts = {
-            modalType: ModalType.SelectFile,
-            callback: this.loadNewImage.bind(this)
+            modalType: ModalType.ManageImages,
+            callback: this.loadNewImage.bind(this),
+            images:this.excerciseImages
         }
         this.eventManager.publish(ModalPopUpEvent.Show, opts);
     }
 
-    loadNewImage(image) {
-        console.log('setNewImage');
-        this.excerciseImages = this.model.newImages;
+    loadNewImage(images) {
+        console.log(images);
+        this.excerciseImages = null;
 
-        this.excerciseImages[this.excerciseImages.length] = image;
+        this.excerciseImages = images;
         this.model.newImages=this.excerciseImages;
     }
 }

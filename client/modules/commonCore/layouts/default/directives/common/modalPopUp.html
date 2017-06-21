@@ -8,14 +8,24 @@
           <h4 class="modal-title">Select File</h4>
         </div>
         <div class="modal-body">
-          <img class="image block full-width" style="min-height: 0px !important; height: 300px; background-color: gray;">
-          <div class="form-group">
-            <label title="Upload image file" for="inputImage" class="btn btn-primary block full-width m-b">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div style="height: 300px; overflow-y: auto;" >
+                <!--; let i = index-->
+            <div class="col-sm-3 col-md-3" *ngFor='let image of images' style="padding-left: 0;background-color: red; height: 100px; border-color: yellow; border-width: 2;">
+            <img src="{{image}}" style="width: 135px; height: auto"/>
+            </div>
+            
+              </div>
+              <div class="form-group">
+                <label title="Upload image file" for="inputImage" class="btn btn-primary block full-width m-b">
               <input  name="file" class="hide" 
               accept="image/*" id="inputImage" 
               type="file" (change)="onSelectFileClicked($event)" />
               Select File
             </label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

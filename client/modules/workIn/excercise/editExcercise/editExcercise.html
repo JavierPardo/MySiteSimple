@@ -6,9 +6,9 @@
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Name" required="" [(ngModel)]="model.name" name="name" />
       </div>
-      <carousel-images [images]=this.excerciseImages></carousel-images>
+      <carousel-images [images]=excerciseImages></carousel-images>
       <div class="form-group">
-        <button id="hide-button" (click)="onFilePopUpClicked()" type="submit" class="btn btn-primary block full-width m-b">Add Image</button>
+        <button id="hide-button" (click)="onManageImagesClicked()" type="submit" class="btn btn-primary block full-width m-b">Manage Images</button>
       </div>
       <div class="form-group">
         <textarea class="form-control" placeholder="Description" required="" [(ngModel)]="model.description" name="description"></textarea>

@@ -4,5 +4,6 @@ export const ComponentType = {
     Control: "control"
 };
 export const ModalType = {
-    SelectFile: "SelectFile"
+    SelectFile: "SelectFile",
+    ManageImages: "ManageImages"
 }

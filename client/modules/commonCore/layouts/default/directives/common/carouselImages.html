@@ -1,13 +1,13 @@
-<div class="carousel slide" *ngIf="images && images.length > 0" id="carousel1">
-  <div class="carousel-inner" >
-    <div class="item" *ngFor='let image of images'>
-      <img class="image" src="{{image}}" style="min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; width: 150px; height: 100px; background-color: gray;">
+  <div class="carousel slide " *ngIf="canShow" id="{{id}}">
+    <div class="carousel-inner">
+      <div class="item" *ngFor='let image of images'>
+        <img class="image" src="{{image}}" style="min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; width: 150px; height: 100px; background-color: gray;">
+      </div>
     </div>
-  </div>
-  <a data-slide="prev" href="#carousel1" class="left carousel-control">
+    <a data-slide="prev" href="#{{id}}" class="left carousel-control">
           <span class="icon-prev"></span>
           </a>
-  <a data-slide="next" href="#carousel1" class="right carousel-control">
+    <a data-slide="next" href="#{{id}}" class="right carousel-control">
       <span class="icon-next"></span>
       </a>
-</div>
+  </div>
