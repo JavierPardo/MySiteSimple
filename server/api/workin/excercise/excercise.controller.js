@@ -10,6 +10,7 @@ var utils = require('../../../utils').getInstance();
 var validator = require("email-validator");
 
 exports.create = function (req, res, user) {
+  console.log(req.body);
   var excercise = new Excercise(req.body);
 
   var resJson = excercise.validate();
@@ -39,13 +40,14 @@ exports.create = function (req, res, user) {
           data: {
             messages: []
           },
-          errors: validUser.errors
+          errors: err
         });
       })
   }
 }
 
 exports.update = function (req, res, user) {
+  console.log(req.body);
   var excercise = new Excercise(req.body);
 
   var resJson = excercise.validate();
@@ -74,7 +76,7 @@ exports.update = function (req, res, user) {
           data: {
             messages: []
           },
-          errors: validUser.errors
+          errors: err
         });
       })
   }

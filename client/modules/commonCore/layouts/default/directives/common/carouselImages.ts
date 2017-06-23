@@ -11,29 +11,22 @@ declare var $: any;
     selector: "carousel-images",
     templateUrl: "./carouselImages.html"
 })
-export class CarouselImages extends BaseComponent implements AfterViewChecked{
+export class CarouselImages extends BaseComponent implements AfterViewChecked {
     ngAfterViewChecked(): void {
-            console.log('reload');
-        if (this.canShow) {
-            console.log('reload1');
-        alert(this.element.nativeElement.innetHtml);
+
+        if (this._images && this._images.length > 0) {
             if (this.element.nativeElement.querySelector('.active') == null) {
-                this.element.nativeElement.querySelector('.item')
-                .classList.add('active');
+                if (this.element.nativeElement.querySelector('.item') != null)
+                    this.element.nativeElement.querySelector('.item').classList.add('active');
             }
-
-
         }
     }
 
     private _images;
-    public canShow: boolean = false;
+    public canShow: boolean;
 
     @Input()
     set images(newImages) {
-        console.log('images changed');
-        console.log(newImages);
-        this.canShow = newImages && newImages.length > 0;
         this._images = newImages;
     }
 
@@ -42,7 +35,8 @@ export class CarouselImages extends BaseComponent implements AfterViewChecked{
     }
 
     constructor(private element: ElementRef, http: Http, routeActivated: ActivatedRoute) {
-        super(http, ComponentType.Control,routeActivated)
+        super(http, ComponentType.Control, routeActivated)
+        this.canShow = this._images && this._images.length > 0;
     }
 
 }

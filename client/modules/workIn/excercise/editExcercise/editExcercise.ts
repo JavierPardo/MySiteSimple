@@ -4,8 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ExcerciseModel } from '../excerciseModel';
 import { Component } from '@angular/core';
 import { BasePage } from "modules/commonCore/models/ui/basePage";
-import { CommonEvent, AuthenticatedEvent, ApplicationStateEvent, ValidationEvent, ModalPopUpEvent } from '../../../commonCore/event';
+import { CommonEvent, AuthenticatedEvent, ApplicationStateEvent, ValidationEvent, ModalPopUpEvent, LoadingIndicatorEvent } from '../../../commonCore/event';
 import { ModalType } from "modules/commonCore/models/ui/componentType";
+import { LoadingIndicator } from "modules/commonCore/layouts/default/directives/common/loadingIndicator";
 
 @Component({
     selector: "EditExcercise",
@@ -48,7 +49,6 @@ export class EditExcercise extends BasePage {
 
     public onCreateClicked($event) {
         let self: EditExcercise = this;
-        console.log(self.model)
         workinService.create(self.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
@@ -63,6 +63,8 @@ export class EditExcercise extends BasePage {
 
     public onUpdateClicked($event) {
         let self: EditExcercise = this;
+        let images = this.model.newImages;
+        delete this.model.newImages;
         workinService.update(this.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
@@ -72,12 +74,9 @@ export class EditExcercise extends BasePage {
                 self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
             .then(function (responseServer: any) {
-            });
-    }
+                self.eventManager.publish(LoadingIndicatorEvent.Show, 'uploading images');
 
-    fileChange(event) {
-        console.log(event);
-        console.log('end-end');
+            });
     }
 
     onManageImagesClicked() {
@@ -91,10 +90,6 @@ export class EditExcercise extends BasePage {
     }
 
     loadNewImage(images) {
-        console.log(images);
-        this.excerciseImages = null;
-
         this.excerciseImages = images;
-        this.model.newImages=this.excerciseImages;
     }
 }

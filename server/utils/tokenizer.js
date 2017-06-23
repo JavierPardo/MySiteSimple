@@ -23,7 +23,7 @@ exports.Tokenizer = function () {
   this.sign = function (obj) {
     return jwt.sign(obj,
       _app.get('superSecret'), {
-        expiresIn: "1 days" // expires in 24 hours
+        expiresIn: "7 days" // expires in 24 hours
       });
   }
   this.decode = function (tkn) {

@@ -1,4 +1,4 @@
-<div class="middle-box text-center loginscreen   animated fadeInDown">
+<div class="middle-box text-center animated fadeInDown">
   <div>
     <h3 *ngIf="isNew">Create Excercise</h3>
     <h3 *ngIf="!isNew">Update Excercise</h3>
@@ -6,7 +6,9 @@
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Name" required="" [(ngModel)]="model.name" name="name" />
       </div>
-      <carousel-images [images]=excerciseImages></carousel-images>
+      <carousel-images [images]="this.excerciseImages" style="height: 300px !important; width: 300px !important;
+      max-height: 300px !important; max-width: 300px !important;
+      min-height: 300px !important; min-width: 300px !important;"></carousel-images>
       <div class="form-group">
         <button id="hide-button" (click)="onManageImagesClicked()" type="submit" class="btn btn-primary block full-width m-b">Manage Images</button>
       </div>
