@@ -13,17 +13,18 @@ var bodyParser = require('body-parser');
 var config = require('./config/environment');
 var utils = require("./utils")
 var localconfig = require('./config/local.env.sample'); // get our config file
-var mongoose    = require('mongoose');
- 
+var mongoose = require('mongoose');
+
 // Setup server
 var app = express();
+app.use(bodyParser.json({limit: '2mb'}));
 mongoose.connect(localconfig.database); // connect to database
-app.set('superSecret', localconfig.secret); 
-app.set('encryptationKey', localconfig.encKey); 
+app.set('superSecret', localconfig.secret);
+app.set('encryptationKey', localconfig.encKey);
 var server = require('http').createServer(app);
 require('./config/express')(app);
 app.use(morgan('dev'));
-app.use(bodyParser({limit: '2mb'}));
+
 utils.getInstance();
 utils.setApp(app);
 require('./routes')(app);

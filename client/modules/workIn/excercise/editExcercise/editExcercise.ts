@@ -64,7 +64,7 @@ export class EditExcercise extends BasePage {
     public onUpdateClicked($event) {
         let self: EditExcercise = this;
         let images = this.model.newImages;
-        delete this.model.newImages;
+        this.model.newImages = undefined;
         workinService.update(this.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
@@ -74,8 +74,15 @@ export class EditExcercise extends BasePage {
                 self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
             .then(function (responseServer: any) {
-                self.eventManager.publish(LoadingIndicatorEvent.Show, 'uploading images');
-
+                self.model.newImages=images;
+                self.eventManager.publish(LoadingIndicatorEvent.Show, 'uploading images...');
+                workinService.sendImages({
+                    id: self.model.id,
+                    images: images
+                })
+                    .then(function () {
+                        self.eventManager.publish(LoadingIndicatorEvent.Hide);
+                    });
             });
     }
 
@@ -84,7 +91,7 @@ export class EditExcercise extends BasePage {
         let opts = {
             modalType: ModalType.ManageImages,
             callback: this.loadNewImage.bind(this),
-            images:this.excerciseImages
+            images: this.excerciseImages
         }
         this.eventManager.publish(ModalPopUpEvent.Show, opts);
     }

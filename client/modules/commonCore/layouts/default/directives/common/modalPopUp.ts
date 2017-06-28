@@ -11,7 +11,6 @@ import resizeImage from 'resize-image';
     templateUrl: "./modalPopUp.html"
 })
 export class ModalPopUp extends BaseComponent {
-    private image: any;
     public model: boolean = false;
     private callback: any;
     public images;
@@ -42,15 +41,13 @@ export class ModalPopUp extends BaseComponent {
         let self = this;
         self.eventManager.publish(LoadingIndicatorEvent.Show, 'processing images...');
 
-        for (let image of this.newImages) {
-
-            var img = new Image();
+        for (let imageForProcess of this.newImages) {
+            let img = new Image();
             img.onload = function () {
                 var data = resizeImage.resize(img, 320, 240, resizeImage.JPEG);
                 self.images[self.images.length] = data;
-
             };
-            img.src = image;
+            img.src = imageForProcess;
         }
         self.eventManager.publish(LoadingIndicatorEvent.Hide);
 

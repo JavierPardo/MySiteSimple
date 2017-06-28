@@ -10,7 +10,6 @@ var utils = require('../../../utils').getInstance();
 var validator = require("email-validator");
 
 exports.create = function (req, res, user) {
-  console.log(req.body);
   var excercise = new Excercise(req.body);
 
   var resJson = excercise.validate();
@@ -47,8 +46,7 @@ exports.create = function (req, res, user) {
 }
 
 exports.update = function (req, res, user) {
-  console.log(req.body);
-  var excercise = new Excercise(req.body);
+    var excercise = new Excercise(req.body);
 
   var resJson = excercise.validate();
   if (resJson.success) {
@@ -106,6 +104,27 @@ exports.getExcercise = function (req, res, user) {
         delete excer.id;
       }
       delete excer.user;
+      res.json({
+        data: {
+          excercise: excer
+        },
+        messages: [],
+        errors: []
+      });
+    }
+  );
+}
+exports.uploadImages = function (req, res, user) {
+
+  var excercise = Excercise.getExcercise({
+      _id: utils.encryptation.decrypt(req.body.id.toString())
+    },
+    function (excer) {
+      if (user._id.toString() !== excer.user.toString()) {
+        delete excer.id;
+      }
+      delete excer.user;
+      excer.SaveImages(req.body.images);
       res.json({
         data: {
           excercise: excer

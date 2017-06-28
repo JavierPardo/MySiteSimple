@@ -1,7 +1,9 @@
 var ExcerciseDb = require("./excerciseDb");
 var validator = require("email-validator");
 var utils = require('../utils').getInstance();
-
+var fs = require('fs');
+var ObjectImageModel = require('./objectImageModel');
+var ObjectType = require('./objectTypeEnum');
 var Excercise = function (data) {
 
   this.name = data.name;
@@ -79,6 +81,26 @@ Excercise.prototype.validate = function (isNew) {
   }
   return ret;
 }
+
+Excercise.prototype.SaveImages = function (images) {
+  var excer = this;
+  for (var i = 0; i < images.length; i++) {
+    var imageURL = excer.id + "-" + i;
+
+    var objectImage = new ObjectImageModel({
+      publicId: "",
+      ObjectId: excer.id,
+      ObjectType: ObjectType.Excercise,
+      src: images[i]
+    });
+
+    objectImage.storeSrc(imageURL).then(
+      function () {
+        objectImage.save();
+      });
+  }
+}
+
 Excercise.getAllExcercises = function (handleResponse) {
   var mydata = [];
   ExcerciseDb.promiseFind({})

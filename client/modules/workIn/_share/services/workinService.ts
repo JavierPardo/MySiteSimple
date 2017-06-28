@@ -5,7 +5,8 @@ let workinService = {
     create: create,
     update: update,
     getExcercises: getExcercises,
-    getExcercise: getExcercise
+    getExcercise: getExcercise,
+    sendImages: sendImages
 };
 
 function create(model: any): Promise {
@@ -18,6 +19,11 @@ function update(model: any): Promise {
     let connector = window.ioc.resolve("IConnector");
     let url = getAPIUrl("WorkIn/Excercise");
     return connector.post(url, model);
+}
+function sendImages(model): Promise {
+    let connector = window.ioc.resolve("IConnector");
+    let url = getAPIUrl("WorkIn/Excercise/Images");
+    return connector.put(url, model);
 }
 function getExcercise(id): Promise {
     let connector = window.ioc.resolve("IConnector");

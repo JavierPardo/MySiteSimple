@@ -8,5 +8,7 @@ function getByPath(object: any, path: string) {
     pathItems.forEach(element => {
         value = value[element];
     });
+    if (!value)
+        value = 'Resource not Found';
     return value;
 }
