@@ -34,6 +34,6 @@ export class LoadingIndicator {
         setTimeout(function () {
             self.model = false;
             self.messageIndicator = '';
-        }, 2300);
+        }, 1700);
     }
 }

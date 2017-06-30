@@ -1,16 +1,20 @@
-  <div class="carousel slide " *ngIf="this._images && this._images.length > 0" id="{{id}}" style="width: 100% !important; height: 100% !important;">
-    <div class="carousel-inner">
-      <div class="item" *ngFor='let image of images'>
-        <img class="image" src="{{image}}" style="
-        min-width: 0px !important; min-height: 0px !important; 
-        max-width: none !important; max-height: none !important; 
-        background-color: gray;">
+<div style= "width: 320px; height: 242px;max-width: 320px; max-height: 242px;min-width: 320px; min-height: 242px;" *ngIf="!!!this._images || this._images.length <= 0"></div>
+<div class="carousel slide" style="width: 320px; height: 242px;
+max-width: 320px; max-height: 242px;
+min-width: 320px; min-height: 242px;"
+*ngIf="this._images && this._images.length > 0" id="{{id}}"
+   >
+  <div class="carousel-inner">
+    <div class="item" *ngFor='let image of images'>
+      <div class="centered-canvas" style="">
+        <img class="image" src="{{image}}" >
       </div>
     </div>
-    <a data-slide="prev" href="#{{id}}" class="left carousel-control">
+  </div>
+  <a data-slide="prev" href="#{{id}}" class="left carousel-control">
           <span class="icon-prev"></span>
           </a>
-    <a data-slide="next" href="#{{id}}" class="right carousel-control">
+  <a data-slide="next" href="#{{id}}" class="right carousel-control">
       <span class="icon-next"></span>
       </a>
-  </div>
+</div>

@@ -9,7 +9,10 @@ import { ComponentType, ModalType } from '../../../../models/ui/componentType';
 declare var $: any;
 @Component({
     selector: "carousel-images",
-    templateUrl: "./carouselImages.html"
+    templateUrl: "./carouselImages.html",
+    styles: [
+        ``
+    ]
 })
 export class CarouselImages extends BaseComponent implements AfterViewChecked {
     ngAfterViewChecked(): void {
