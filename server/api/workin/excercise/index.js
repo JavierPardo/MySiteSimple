@@ -61,6 +61,9 @@ router.post('/', function (req, res) {
 router.get('/:id', function (req, res) {
   excerciseController.getExcercise(req, res, user);
 });
+router.get('/:id/Images', function (req, res) {
+  excerciseController.getExcerciseImages(req, res, user);
+});
 router.get('/', excerciseController.getAll);
 //router.post('/:id', controller.post);
 //router.delete('/:id', controller.delete);

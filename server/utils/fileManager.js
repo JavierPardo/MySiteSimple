@@ -26,7 +26,7 @@ exports.FileManager = function () {
       if (error) {
         throw error;
       }
-      console.log('Deleted ',filePath,'!!');
+      console.log('---Deleted ',filePath,'!!');
     });
   };
   this.storeToCloud = function (filePath) {

@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
+import cloudinary from 'cloudinary';
 import { ModalPopUpEvent, LoadingIndicatorEvent } from '../../../../event';
 import { EventManager } from '../../../../eventManager';
 import { BaseComponent } from '../../../../models/ui/baseComponent';

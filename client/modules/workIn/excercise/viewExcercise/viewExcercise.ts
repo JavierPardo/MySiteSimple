@@ -30,6 +30,10 @@ export class ViewExcercise extends BasePage implements AfterViewInit {
                 self.model.import(responseServer.excercise);
 
                 self.canEdit=!!self.model.id;
+                workinService.getImages(id)
+                .then(function(responseServer: any){
+                    self.model.images=responseServer.images;
+                })
             });
     }
     ngAfterViewInit() {

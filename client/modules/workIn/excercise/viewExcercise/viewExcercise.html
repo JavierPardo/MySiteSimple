@@ -1,29 +1,37 @@
 <div class="text-center animated fadeInDown" style='min-height: 600px'>
   <div>
-    <h3>View Excercise</h3>
-    <div class="form-group">
-      <h7>Name:</h7>
-      <h6>
-        <div [innerHTML]="model.name">
+    <h3>
+      <div [innerHTML]="model.name">
+      </div>
+    </h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <carousel-images [images]="model.images" style="
+          height: 300px !important; width: 300px !important;
+          max-height: 300px !important; max-width: 300px !important;
+          min-height: 300px !important; min-width: 300px !important;">
+        </carousel-images>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <h7>Description:</h7>
+          <h6>
+            <div [innerHTML]="model.description">
+            </div>
+          </h6>
         </div>
-      </h6>
-    </div>
-    <div class="form-group">
-      <h7>Description:</h7>
-      <h6>
-        <div [innerHTML]="model.description">
+        <div class="form-group">
+          <h7>Recommendation:</h7>
+          <h6>
+            <div [innerHTML]="model.recommendation">
+            </div>
+          </h6>
         </div>
-      </h6>
+      </div>
     </div>
-    <div class="form-group">
-      <h7>Recommendation:</h7>
-      <h6>
-        <div [innerHTML]="model.recommendation">
-        </div>
-      </h6>
-    </div>
-    <a [routerLink]="['/WorkIn/Excercise/Edit', model.id]" *ngIf="canEdit" 
-    class="btn btn-primary block full-width m-b">Edit</a>
+
+    <a [routerLink]="['/WorkIn/Excercise/Edit', model.id]" *ngIf="canEdit" class="btn btn-primary m-b">Edit</a>
     <p class="m-t"> <small>Javier PG - Gym App</small> </p>
   </div>
 </div>

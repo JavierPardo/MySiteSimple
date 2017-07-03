@@ -62,6 +62,21 @@ Excercise.prototype.update = function () {
     })
   });
   return promise;
+}
+
+
+Excercise.prototype.getImages = function () {
+
+  var self = this;
+  var promise = new Promise(function (resolve, reject) {
+    ObjectImageModel.getImages({
+        ObjectId: utils.encryptation.decrypt(self.id),
+        objectType: ObjectType.Excercise
+      }).then(function(images){
+        resolve(images);
+      })
+  });
+  return promise;
 
 }
 
@@ -85,9 +100,9 @@ Excercise.prototype.validate = function (isNew) {
 Excercise.prototype.SaveImages = function (images) {
   var excer = this;
   for (var i = 0; i < images.length; i++) {
-    var imageURL = excer.id + "-" + i;
+    let imageURL = excer.id + "-" + i;
 
-    var objectImage = new ObjectImageModel({
+    let objectImage = new ObjectImageModel({
       publicId: "",
       ObjectId: excer.id,
       ObjectType: ObjectType.Excercise,
@@ -102,7 +117,7 @@ Excercise.prototype.SaveImages = function (images) {
 }
 
 Excercise.getAllExcercises = function (handleResponse) {
-  var mydata = [];
+  let mydata = [];
   ExcerciseDb.promiseFind({})
     .then(function (data) {
       data.map(function (data) {

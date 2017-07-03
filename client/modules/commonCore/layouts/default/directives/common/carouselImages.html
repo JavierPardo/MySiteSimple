@@ -1,13 +1,16 @@
-<div style= "width: 320px; height: 242px;max-width: 320px; max-height: 242px;min-width: 320px; min-height: 242px;" *ngIf="!!!this._images || this._images.length <= 0"></div>
+<div style= "width: 320px; height: 242px; margin: auto;
+max-width: 320px; max-height: 242px;
+min-width: 320px; min-height: 242px;" class="no-image" 
+*ngIf="!!!this._images || this._images.length <= 0"></div>
 <div class="carousel slide" style="width: 320px; height: 242px;
 max-width: 320px; max-height: 242px;
-min-width: 320px; min-height: 242px;"
+min-width: 320px; min-height: 242px; margin: auto;"
 *ngIf="this._images && this._images.length > 0" id="{{id}}"
    >
   <div class="carousel-inner">
     <div class="item" *ngFor='let image of images'>
-      <div class="centered-canvas" style="">
-        <img class="image" src="{{image}}" >
+      <div class="centered-canvas" >
+        <img class="image" src="{{image?image.url:''}}" >
       </div>
     </div>
   </div>

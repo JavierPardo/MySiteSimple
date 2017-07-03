@@ -5,6 +5,7 @@ var jsonfile = require('jsonfile');
 var path = require('path');
 var Excercise = require('../../../models/excerciseModel');
 var User = require('../../../models/userModel');
+var ObjectImage = require('../../../models/objectImageModel');
 var bodyParser = require('body-parser');
 var utils = require('../../../utils').getInstance();
 var validator = require("email-validator");
@@ -46,7 +47,7 @@ exports.create = function (req, res, user) {
 }
 
 exports.update = function (req, res, user) {
-    var excercise = new Excercise(req.body);
+  var excercise = new Excercise(req.body);
 
   var resJson = excercise.validate();
   if (resJson.success) {
@@ -91,6 +92,25 @@ exports.getAll = function (req, res) {
         messages: [],
         errors: []
       });
+    }
+  );
+}
+
+exports.getExcerciseImages = function (req, res, user) {
+  var excercise = Excercise.getExcercise({
+      _id: utils.encryptation.decrypt(req.params.id.toString())
+    },
+    function (excer) {
+      var images = excer.getImages()
+        .then(function (images) {
+          res.json({
+            data: {
+              images: images
+            },
+            messages: [],
+            errors: []
+          });
+        });
     }
   );
 }
