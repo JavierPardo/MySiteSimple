@@ -15,25 +15,6 @@
       <!--{{i18n.topMenu.users.lenguages}}-->
     </span>
       </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
-          <i class="fa fa-globe"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-messages">
-          <li>
-            <div class="dropdown-messages-box">
-              <a class="pull-left">
-                <img alt="image" class="img-circle" src="">
-              </a>
-              <div class="media-body">
-                <small class="pull-right">46h ago</small>
-                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
       <li *ngIf='isAuthenticated'>
         <a routerLink='/user/logout'> <i class="fa fa-sign-out"></i> Logout</a>
       </li>
