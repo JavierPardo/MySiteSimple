@@ -98,21 +98,23 @@ Excercise.prototype.validate = function (isNew) {
 }
 
 Excercise.prototype.SaveImages = function (images) {
-  var excer = this;
+  var self = this;
   for (var i = 0; i < images.length; i++) {
-    let imageURL = excer.id + "-" + i;
+    if(images[i].src){
+    let imageURL = self.id + "-" + i;
 
     let objectImage = new ObjectImageModel({
       publicId: "",
-      ObjectId: excer.id,
-      ObjectType: ObjectType.Excercise,
-      src: images[i]
+      ObjectId: utils.encryptation.decrypt(self.id),
+      objectType: ObjectType.Excercise,
+      src: images[i].src
     });
 
     objectImage.storeSrc(imageURL).then(
       function () {
         objectImage.save();
       });
+    }
   }
 }
 

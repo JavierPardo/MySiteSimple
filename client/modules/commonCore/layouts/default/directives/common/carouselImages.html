@@ -8,9 +8,9 @@ min-width: 320px; min-height: 242px; margin: auto;"
 *ngIf="this._images && this._images.length > 0" id="{{id}}"
    >
   <div class="carousel-inner">
-    <div class="item" *ngFor='let image of images'>
+    <div class="item" *ngFor='let image of this._images'>
       <div class="centered-canvas" >
-        <img class="image" src="{{image?image.url:''}}" >
+        <img class="image" src="{{image.name?image.url:image.src}}" >
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@ let workinService = {
     sendImages: sendImages,
     getImages: getImages
 };
-function getImages(model: any) {
+function getImages(model: any): Promise {
     let connector = window.ioc.resolve("IConnector");
     let url = getAPIUrl("WorkIn/Excercise/" + model + "/Images");
     return connector.get(url, model);

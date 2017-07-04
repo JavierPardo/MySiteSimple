@@ -35,12 +35,17 @@ export class EditExcercise extends BasePage {
                         let excercise: ExcerciseModel = new ExcerciseModel();
                         self.model.import(responseServer.excercise);
                         self.canUpdate = !!self.model.id;
+                        workinService.getImages(queryParam["Id"])
+                            .then(function (responseServer: any) {
+                                self.model.newImages = responseServer.images;
+                                self.excerciseImages= self.model.newImages;
+                                console.log(self.excerciseImages);
+                            })
                         if (!self.model.id) {
                             let exceptions = new ValidationException();
                             exceptions.add('excercise.notAuthorized', []);
                             self.eventManager.publish(ValidationEvent.ValidationFail, exceptions);
                             self.eventManager.publish(ApplicationStateEvent.UnAuthorizeRequest);
-
                         }
                     });
             }
@@ -74,7 +79,7 @@ export class EditExcercise extends BasePage {
                 self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
             .then(function (responseServer: any) {
-                self.model.newImages=images;
+                self.model.newImages = images;
                 self.eventManager.publish(LoadingIndicatorEvent.Show, 'uploading images...');
                 workinService.sendImages({
                     id: self.model.id,

@@ -14,7 +14,7 @@
                 <!--; let i = index-->
             <div class="col-sm-3 col-md-3" *ngFor='let image of images' 
             class="centered-canvas-carousel">
-            <img src="{{cloudinary.image(image.name)}}" />
+            <img src="{{image.src?image.src:image.url}}" />
             </div>
             <div class="col-sm-3 col-md-3" *ngFor='let image of newImages' 
             class="centered-canvas-carousel">

@@ -7,6 +7,7 @@ import { EventManager } from '../../../../eventManager';
 import { BaseComponent } from '../../../../models/ui/baseComponent';
 import { ComponentType, ModalType } from '../../../../models/ui/componentType';
 import resizeImage from 'resize-image';
+
 @Component({
     selector: "modal-popup",
     templateUrl: "./modalPopUp.html"
@@ -26,37 +27,56 @@ export class ModalPopUp extends BaseComponent {
     public onShow(options: any): void {
         this.model = true;
         this.callback = options.callback;
-        this.images = options.images
-        this.newImages=[];
+        let modalImages = options.images
+
+        this.images = [];        
+        if (modalImages)
+            for (let i = 0; i < modalImages.length; i++) {
+                if (modalImages[i].name)
+                    modalImages[i].url = cloudinary.utils.url(modalImages[i].name, {
+                        cloud_name: 'dbas3m4wb'
+                    });
+            }
+        this.images = modalImages;
+
+
+        this.newImages = [];
     }
     public onOkClicked(): void {
-        this.processNewImages();
-        this.callback(this.images);
-        this.onCloseClicked();
+        let self: ModalPopUp = this;
+        this.processNewImages().then(function () {
+            self.eventManager.publish(LoadingIndicatorEvent.Hide);
+            self.callback(self.images);
+            self.onCloseClicked();
+        });
     }
     public onCloseClicked(): void {
         this.model = false;
     }
 
-    processNewImages() {
+    processNewImages(): Promise<any> {
         let self = this;
-        self.eventManager.publish(LoadingIndicatorEvent.Show, 'processing images...');
-
-        for (let imageForProcess of this.newImages) {
-            let img = new Image();
-            img.onload = function () {
-                var data = resizeImage.resize(img, 320, 240, resizeImage.JPEG);
-                self.images[self.images.length] = data;
-            };
-            img.src = imageForProcess;
-        }
-        self.eventManager.publish(LoadingIndicatorEvent.Hide);
+        var imageProcessor = new Promise(function (resolve, reject) {
+            self.eventManager.publish(LoadingIndicatorEvent.Show, 'processing images...');
+            for (let imageForProcess of self.newImages) {
+                let isLast = self.newImages[self.newImages.length - 1] === imageForProcess;
+                let img = new Image();
+                img.onload = function () {
+                    var data = resizeImage.resize(img, 320, 240, resizeImage.JPEG);
+                    self.images[self.images.length] = { src: data };
+                    if (isLast) {
+                        resolve();
+                    }
+                };
+                img.src = imageForProcess;
+            }
+        });
+        return imageProcessor;
 
     }
 
     onSelectFileClicked(event) {
         let self: ModalPopUp = this;
-        //self.eventManager.publish(LoadingIndicatorEvent.Show, 'loading image....');
         var reader = new FileReader();
         self.eventManager.publish(LoadingIndicatorEvent.Show, 'loading image....');
 
