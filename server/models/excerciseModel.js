@@ -96,9 +96,18 @@ Excercise.prototype.validate = function (isNew) {
   }
   return ret;
 }
+Excercise.prototype.deleteAllImages = function () {
+  var self = this;
+  console.log('deleting images!! id: ',self.id);
+  ObjectImageModel.deleteImagesFromObject({
+    ObjectId:self._id,
+    objectType: ObjectType.Excercise
+  });
+}
 
 Excercise.prototype.SaveImages = function (images) {
   var self = this;
+  self.deleteAllImages();
   for (var i = 0; i < images.length; i++) {
     if(images[i].src){
     let imageURL = self.id + "-" + i;

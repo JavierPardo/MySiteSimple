@@ -8,34 +8,58 @@
           <h4 class="modal-title">Select File</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12 col-md-12">
-              <div style="height: 300px; overflow-y: auto;" >
-                <!--; let i = index-->
-            <div class="col-sm-3 col-md-3" *ngFor='let image of images' 
-            class="centered-canvas-carousel">
-            <img src="{{image.src?image.src:image.url}}" />
-            </div>
-            <div class="col-sm-3 col-md-3" *ngFor='let image of newImages' 
-            class="centered-canvas-carousel">
-            <img src="{{image}}" />
-            </div>
-            
+
+          <div class="caption-over-item">
+            <div class="item-container">
+              <div class="row">
+                <div class="col-sm-12 col-md-12" style="height: 300px; overflow-y: hidden;">
+
+                  <div class="col-sm-3 col-md-3" *ngFor='let image of images; let i=index' class="centered-canvas-carousel">
+                    <a class="caption-over a-link" (click)="deleteItem(i,images)">
+                      <div class="caption-over canvas" >
+                        <div class="caption-over content">
+                          <i class="fa fa-trash-o fa-3x" ></i>
+                          </div>
+                      </div>
+                      <!--<img src="img/portfolio/cake.png" class="img-responsive" alt="Slice of cake">-->
+                      <img src="{{image.src?image.src:image.url}}" />
+
+                    </a>
+                  </div>
+
+                  <div class="col-sm-3 col-md-3" *ngFor='let image of newImages; let i=index' class="centered-canvas-carousel">
+                    <a class="caption-over a-link" (click)="deleteItem(i,newImages)">
+                      <div class="caption-over canvas" >
+                        <div class="caption-over content">
+                          <i class="fa fa-trash-o fa-3x" ></i>
+                          </div>
+                      </div>
+                      <!--<img src="img/portfolio/cake.png" class="img-responsive" alt="Slice of cake">-->
+                      <img src="{{image}}" />
+
+                    </a>
+                  </div>
+                </div>
+
               </div>
-              <div class="form-group">
-                <label title="Upload image file" for="inputImage" class="btn btn-primary block full-width m-b">
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group">
+              <label title="Upload image file" for="inputImage" class="btn btn-primary block full-width m-b">
               <input  name="file" class="hide" 
               accept="image/*" id="inputImage" 
               type="file" (change)="onSelectFileClicked($event)" />
               Select File
             </label>
-              </div>
             </div>
+
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" (click)="onCloseClicked($event)" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button id="hide-button" (click)="onOkClicked($event)" type="submit" class="btn btn-primary">Ok</button>
+          <div class="modal-footer">
+            <button type="button" (click)="onCloseClicked($event)" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="hide-button" (click)="onOkClicked($event)" type="submit" class="btn btn-primary">Ok</button>
+          </div>
         </div>
       </div>
     </div>

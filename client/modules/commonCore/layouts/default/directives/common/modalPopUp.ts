@@ -29,7 +29,7 @@ export class ModalPopUp extends BaseComponent {
         this.callback = options.callback;
         let modalImages = options.images
 
-        this.images = [];        
+        this.images = [];
         if (modalImages)
             for (let i = 0; i < modalImages.length; i++) {
                 if (modalImages[i].name)
@@ -54,10 +54,22 @@ export class ModalPopUp extends BaseComponent {
         this.model = false;
     }
 
+    deleteItem($index, list) {
+        let r = confirm("Do you want to delete that image?");
+        if (r == true) {
+            list.splice($index, 1);
+        }
+    }
+
     processNewImages(): Promise<any> {
         let self = this;
         var imageProcessor = new Promise(function (resolve, reject) {
-            self.eventManager.publish(LoadingIndicatorEvent.Show, 'processing images...');
+            if (self.newImages.length != 0) {
+                self.eventManager.publish(LoadingIndicatorEvent.Show, 'processing images...');
+            }
+            else {
+                resolve();
+            }
             for (let imageForProcess of self.newImages) {
                 let isLast = self.newImages[self.newImages.length - 1] === imageForProcess;
                 let img = new Image();
@@ -65,6 +77,7 @@ export class ModalPopUp extends BaseComponent {
                     var data = resizeImage.resize(img, 320, 240, resizeImage.JPEG);
                     self.images[self.images.length] = { src: data };
                     if (isLast) {
+
                         resolve();
                     }
                 };

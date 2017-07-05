@@ -22,6 +22,10 @@ ObjectImage.prototype.ObjectId = "";
 ObjectImage.prototype.ObjectType = "";
 ObjectImage.prototype.src = undefined;
 
+ObjectImage.deleteImagesFromObject = function(object){
+  ObjectImageDb.find(object).remove().exec();
+}
+
 ObjectImage.prototype.save = function () {
   var objImgDb = new ObjectImageDb();
   objImgDb.objectType = this.ObjectType;

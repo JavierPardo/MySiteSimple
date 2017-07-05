@@ -4,6 +4,37 @@
   border: 1px #000;
 }
 
+.caption-over.a-link {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto
+}
+
+.caption-over.canvas {
+  background: rgba(24, 188, 156, .9);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all ease .5s;
+  -webkit-transition: all ease .5s;
+  -moz-transition: all ease .5s;
+}
+
+.caption-over.canvas:hover {
+  opacity: 1;
+}
+
+.caption-over.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+
 .centered-canvas {
   width: 320px;
   height: 242px;
@@ -11,14 +42,19 @@
   text-align: center;
 }
 
+.centered-canvas-carousel img {
+  max-width: 100%;
+  max-height: 130px;
+}
+
 .centered-canvas-carousel {
   text-align: center;
   float: left;
   margin-right: 1px;
   margin-bottom: 1px;
-  width: 130px; 
+  width: 130px;
   line-height: 130px;
-  background-color: gray; 
+  background-color: gray;
   height: 130px;
 }
 

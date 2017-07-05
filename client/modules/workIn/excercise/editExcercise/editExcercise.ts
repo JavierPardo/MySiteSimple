@@ -39,7 +39,6 @@ export class EditExcercise extends BasePage {
                             .then(function (responseServer: any) {
                                 self.model.newImages = responseServer.images;
                                 self.excerciseImages= self.model.newImages;
-                                console.log(self.excerciseImages);
                             })
                         if (!self.model.id) {
                             let exceptions = new ValidationException();
@@ -54,6 +53,7 @@ export class EditExcercise extends BasePage {
 
     public onCreateClicked($event) {
         let self: EditExcercise = this;
+        let images = this.model.newImages;
         workinService.create(self.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
@@ -62,7 +62,17 @@ export class EditExcercise extends BasePage {
                 });
                 self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
-            .then(function (responseServer: any) {
+            .then(function (responseServer: any) {                
+                self.model.newImages = images;
+                self.eventManager.publish(LoadingIndicatorEvent.Show, 'Uploading images...');
+
+                workinService.sendImages({
+                    id: self.model.id,
+                    images: images
+                })
+                    .then(function () {
+                        self.eventManager.publish(LoadingIndicatorEvent.Hide);
+                    });
             });
     }
 
