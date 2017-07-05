@@ -7,17 +7,17 @@ export class UserRegisterModel {
     public userName: string = "";
     public isValid(): boolean {
         let validationErrors: ValidationException = new ValidationException();
-        if (!this.email) {
-            validationErrors.add("registration.signin.emailRequired");
+        if (!this.email|| this.email === '') {
+            validationErrors.add("user.register.emailRequired");
         }
-        if (!this.password) {
-            validationErrors.add("registration.signin.pwdRequired");
+        if (!this.password|| this.password === '') {
+            validationErrors.add("user.register.pwdRequired");
         }
-        if (!this.name) {
-            validationErrors.add("registration.signin.nameRequired");
+        if (!this.name|| this.name === '') {
+            validationErrors.add("user.register.nameRequired");
         }
-        if (!this.userName) {
-            validationErrors.add("registration.signin.userNameRequired");
+        if (!this.userName|| this.userName === '') {
+            validationErrors.add("user.register.userNameRequired");
         }
         validationErrors.throwIfHasError();
         return !validationErrors.hasError();

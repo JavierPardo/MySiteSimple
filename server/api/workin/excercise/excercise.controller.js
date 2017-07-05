@@ -120,6 +120,7 @@ exports.getExcercise = function (req, res, user) {
       _id: utils.encryptation.decrypt(req.params.id.toString())
     },
     function (excer) {
+      console.log(user);
       if (user._id.toString() !== excer.user.toString()) {
         delete excer.id;
       }

@@ -77,14 +77,11 @@ exports.validate = function (req, res) {
 };
 
 exports.register = function (req, res) {
-
   var newUser = new User(req.body);
   var validUser = newUser.validate(true);
   if (!validUser.success) {
     res.json({
-      data: {
-        messages: []
-      },
+      data: {},
       errors: validUser.errors
     });
     return;
@@ -100,7 +97,8 @@ exports.register = function (req, res) {
       console.log('User saved successfully');
       res.json({
         data: {
-          messages: ["your Email will be verified soon."]
+          messages: ["user.register.emailVerifiedSoon",
+          "user.register.successful"]
         },
         errors: []
       });

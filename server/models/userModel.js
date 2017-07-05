@@ -53,6 +53,9 @@ User.prototype.create = function () {
       console.log(err);
       throw err;
     }
+    else{
+      console.log('userCreated!!');
+    }
   });
 }
 
@@ -64,15 +67,15 @@ User.prototype.validate = function (isNew) {
   };
 
   if (!this.name) {
-    ret.errors.push("Name is required");
+    ret.errors.push("user.register.nameRequired");
   }
   if (!this.password) {
-    ret.errors.push("Password is required");
+    ret.errors.push("user.register.passwordRequired");
   }
   if (!this.email) {
-    ret.errors.push("Email is required");
+    ret.errors.push("user.register.emailRequired");
   } else if (!validator.validate(this.email)) {
-    ret.errors.push("Email is not valid");
+    ret.errors.push({key:"user.emailNotValid"});
   }
   if (ret.errors.length == 0) {
     ret.success = true;

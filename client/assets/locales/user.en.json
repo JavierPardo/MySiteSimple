@@ -1,3 +1,12 @@
 {
-    "notFound": "User not Found"
+    "notFound": "User not Found",
+    "register": {
+        "emailRequired":"email is required",
+        "pwdRequired":"password is required",
+        "nameRequired":"name is required",
+        "userNameRequired":"username is required",
+        "emailVerifiedSoon":"Email will be verified soon.",
+        "successful":"User was successfully created!"
+    },
+    "emailNotValid": "Email not valid!"
 }
