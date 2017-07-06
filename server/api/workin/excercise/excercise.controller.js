@@ -120,7 +120,6 @@ exports.getExcercise = function (req, res, user) {
       _id: utils.encryptation.decrypt(req.params.id.toString())
     },
     function (excer) {
-      console.log(user);
       if (user._id.toString() !== excer.user.toString()) {
         delete excer.id;
       }
@@ -141,9 +140,6 @@ exports.uploadImages = function (req, res, user) {
       _id: utils.encryptation.decrypt(req.body.id.toString())
     },
     function (excer) {
-      if (user._id.toString() !== excer.user.toString()) {
-        delete excer.id;
-      }
       delete excer.user;
       excer.SaveImages(req.body.images);
       res.json({

@@ -8,6 +8,16 @@ exports.FileManager = function () {
     _app = app;
   }
 
+  this.downloadFile = function (fromUrl, toFileName) {
+    let http = require('http');
+    let fs = require('fs');
+
+    let file = fs.createWriteStream(image.name);
+    let request = http.get(image.url, function (response) {
+      response.pipe(file);
+    });
+  }
+
   this.writeBufferToFile = function (buffer, filePath) {
     filePath = localconfig.uploadFolder + "/" + filePath;
     base64Data = buffer.replace(/^data:image\/jpeg;base64,/, ""),
@@ -22,32 +32,38 @@ exports.FileManager = function () {
   }
 
   this.deleteFile = function (filePath) {
+    console.log('--removing: ', filePath)
     require('fs').unlink(filePath, function (error) {
       if (error) {
         throw error;
       }
-      console.log('---Deleted ',filePath,'!!');
+      console.log('---Deleted ', filePath, '!!');
     });
   };
-  this.storeToCloud = function (filePath) {
-    var name = filePath;
-    filePath = localconfig.uploadFolder + "/" + filePath;
+
+  this.uploadFile = function (fromUrl, toUrl) {
+
     cloudinary.config({
       cloud_name: localconfig.cloudinary.cloud_name,
       api_key: localconfig.cloudinary.api_key,
       api_secret: localconfig.cloudinary.api_secret
     });
-
     return new Promise(function (resolve, reject) {
       cloudinary.uploader.upload(
-        filePath,
+        fromUrl,
         function (result) {
           resolve();
         }, {
-          public_id: name
+          public_id: toUrl
         }
       )
     });
+  }
+  this.storeToCloud = function (filePath) {
+    var name = filePath;
+    filePath = localconfig.uploadFolder + "/" + filePath;
+
+    return this.uploadFile(filePath, name);
   }
 
 }

@@ -4,6 +4,8 @@ var utils = require('../utils').getInstance();
 var fs = require('fs');
 var ObjectImageModel = require('./objectImageModel');
 var ObjectType = require('./objectTypeEnum');
+var localconfig = require('../config/local.env.sample'); // get our config file
+
 var Excercise = function (data) {
 
   this.name = data.name;
@@ -70,11 +72,11 @@ Excercise.prototype.getImages = function () {
   var self = this;
   var promise = new Promise(function (resolve, reject) {
     ObjectImageModel.getImages({
-        ObjectId: utils.encryptation.decrypt(self.id),
-        objectType: ObjectType.Excercise
-      }).then(function(images){
-        resolve(images);
-      })
+      ObjectId: utils.encryptation.decrypt(self.id),
+      objectType: ObjectType.Excercise
+    }).then(function (images) {
+      resolve(images);
+    })
   });
   return promise;
 
@@ -98,31 +100,41 @@ Excercise.prototype.validate = function (isNew) {
 }
 Excercise.prototype.deleteAllImages = function () {
   var self = this;
-  console.log('deleting images!! id: ',self.id);
   ObjectImageModel.deleteImagesFromObject({
-    ObjectId:self._id,
+    ObjectId: utils.encryptation.decrypt(self.id),
     objectType: ObjectType.Excercise
   });
 }
 
 Excercise.prototype.SaveImages = function (images) {
   var self = this;
+  //ObjectImageModel.downloadImages(images);
   self.deleteAllImages();
   for (var i = 0; i < images.length; i++) {
-    if(images[i].src){
     let imageURL = self.id + "-" + i;
 
     let objectImage = new ObjectImageModel({
-      publicId: "",
+      name: imageURL,
       ObjectId: utils.encryptation.decrypt(self.id),
-      objectType: ObjectType.Excercise,
-      src: images[i].src
+      objectType: ObjectType.Excercise
     });
 
-    objectImage.storeSrc(imageURL).then(
-      function () {
-        objectImage.save();
-      });
+    //new images
+    if (images[i].src) {
+      objectImage.src = images[i].src
+      objectImage.storeSrc(imageURL).then(
+        function () {
+          objectImage.save();
+        });
+    }
+    //old images
+    else {
+      utils.fileManager.uploadFile(images[i].url, imageURL)
+        .then(function () {
+
+        utils.fileManager.deleteFile(localconfig.uploadFolder + "/" + imageURL);
+          objectImage.save();
+        });
     }
   }
 }

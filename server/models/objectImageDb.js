@@ -1,20 +1,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose.Promise =Promise;
+mongoose.Promise = Promise;
 
-var _objectImageDb =mongoose.model('ObjectImage', {
-    ObjectId:{
-      type: Schema.ObjectId
-    }, 
-    objectType: String, 
-    name: String,
+var _objectImageDb = mongoose.model('ObjectImage', {
+  ObjectId: {
+    type: Schema.ObjectId
+  },
+  objectType: String,
+  name: String,
 });
 
-_objectImageDb.promiseFind = function (objectImage){
+_objectImageDb.promiseFind = function (parameterObject) {
+  parameterObject.ObjectId = mongoose.mongo.ObjectId(parameterObject.ObjectId);
+  var promise = new Promise(function (resolve, reject) {
 
-var promise= new Promise(function (resolve, reject) {
+    _objectImageDb.find(parameterObject, null, {
+      sort: {
+        name: 1
+      }
+    }, function (err, objectImages) {
 
-    _objectImageDb.find(objectImage, function (err, objectImages) {        
       if (err && err.length > 0)
         reject(err);
       else
@@ -25,20 +30,5 @@ var promise= new Promise(function (resolve, reject) {
   return promise;
 }
 
-_objectImageDb.promiseFind = function(parameterObject){
-  parameterObject.ObjectId=mongoose.mongo.ObjectId(parameterObject.ObjectId);
-  var promise= new Promise(function (resolve, reject) {
 
-    _objectImageDb.find(parameterObject, function (err, objectImages) {        
-      if (err && err.length > 0)
-        reject(err);
-      else
-        resolve(objectImages);
-    });
-
-  });
-  return promise;
-}
-
-  
 module.exports = _objectImageDb;

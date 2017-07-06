@@ -90,6 +90,8 @@ export class ModalPopUp extends BaseComponent {
 
     onSelectFileClicked(event) {
         let self: ModalPopUp = this;
+        if (!event.target.files || event.target.files.length <= 0)
+            return;
         var reader = new FileReader();
         self.eventManager.publish(LoadingIndicatorEvent.Show, 'loading image....');
 
