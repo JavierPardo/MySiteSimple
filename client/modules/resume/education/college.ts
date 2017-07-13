@@ -15,7 +15,7 @@ export class College extends BasePage {
 
     constructor(routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
+        super(routedActivated,null);
         let self: College = this;
         resumeService.education.getCollegeHist()
             .error(function (error: any) {

@@ -16,11 +16,9 @@ import { Component } from '@angular/core';
 })
 export class UserRegister extends BasePage {
     public model: UserRegisterModel = new UserRegisterModel();
-    private router: Router;
     constructor(router: Router, routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
-        this.router = router;
+        super(routedActivated,router);
         authService.removeAuth();
         // this.setResources(["signin"]);
         // this.i18n.load(['signin']);

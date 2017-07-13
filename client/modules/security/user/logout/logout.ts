@@ -13,10 +13,10 @@ import { Component, AfterViewInit } from '@angular/core';
     template: "",
 })
 export class UserLogout extends BasePage implements AfterViewInit {
-    private router: Router;
+    public router: Router;
     constructor(router: Router, routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
+        super(routedActivated,router);
         let self = this;
         self.router = router;
         self.eventManager.publish(LoadingIndicatorEvent.Show);

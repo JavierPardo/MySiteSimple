@@ -25,7 +25,6 @@ function isAuthenticated(profile: any) {
 function setAuth(auth: any) {
     cacheService.set(CACHE_CONSTANT.USER_PROFILE, auth.profile);
     cacheService.set(CACHE_CONSTANT.TOKEN, auth.token);
-    console.log("Token", cacheService.get(CACHE_CONSTANT.TOKEN));
 }
 function getAuth(): any {
     let auth: any = {

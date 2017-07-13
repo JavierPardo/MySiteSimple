@@ -18,7 +18,7 @@ export class EditExcercise extends BasePage {
     public isNew: Boolean;
     public excerciseImages;
     constructor(private route: ActivatedRoute) {
-        super(route)
+        super(route,null)
         let self = this;
         route.params.subscribe((queryParam: any) => {
             self.isNew = queryParam["Id"] == undefined;
@@ -54,6 +54,7 @@ export class EditExcercise extends BasePage {
     public onCreateClicked($event) {
         let self: EditExcercise = this;
         let images = this.model.newImages;
+        this.model.newImages = undefined;
         workinService.create(self.model)
             .error(function (errors: any) {
                 let exceptions = new ValidationException();
@@ -62,12 +63,11 @@ export class EditExcercise extends BasePage {
                 });
                 self.eventManager.publish(CommonEvent.ValidationFail, exceptions);
             })
-            .then(function (responseServer: any) {                
+            .then(function (responseServer: any) {
                 self.model.newImages = images;
                 self.eventManager.publish(LoadingIndicatorEvent.Show, 'Uploading images...');
-
                 workinService.sendImages({
-                    id: self.model.id,
+                    id: responseServer.excerciseId,
                     images: images
                 })
                     .then(function () {

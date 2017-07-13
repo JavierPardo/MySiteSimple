@@ -110,6 +110,7 @@ Excercise.prototype.SaveImages = function (images) {
   var self = this;
   //ObjectImageModel.downloadImages(images);
   self.deleteAllImages();
+
   for (var i = 0; i < images.length; i++) {
     let imageURL = self.id + "-" + i;
 
@@ -120,8 +121,9 @@ Excercise.prototype.SaveImages = function (images) {
     });
 
     //new images
-    if (images[i].src) {
-      objectImage.src = images[i].src
+    console.log(images[i]);
+    if (images[i].url) {
+      objectImage.src = images[i].url
       objectImage.storeSrc(imageURL).then(
         function () {
           objectImage.save();
@@ -129,12 +131,9 @@ Excercise.prototype.SaveImages = function (images) {
     }
     //old images
     else {
-      utils.fileManager.uploadFile(images[i].url, imageURL)
-        .then(function () {
-
-        utils.fileManager.deleteFile(localconfig.uploadFolder + "/" + imageURL);
-          objectImage.save();
-        });
+      console.log('renaming ', images[i].name, ' to ', imageURL);
+      utils.fileManager.renameFile(images[i].name, imageURL);
+      objectImage.save();
     }
   }
 }

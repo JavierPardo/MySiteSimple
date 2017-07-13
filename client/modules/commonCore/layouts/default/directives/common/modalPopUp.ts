@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import cloudinary from 'cloudinary';
 import { ModalPopUpEvent, LoadingIndicatorEvent } from '../../../../event';
 import { EventManager } from '../../../../eventManager';
 import { BaseComponent } from '../../../../models/ui/baseComponent';
@@ -32,10 +31,7 @@ export class ModalPopUp extends BaseComponent {
         this.images = [];
         if (modalImages)
             for (let i = 0; i < modalImages.length; i++) {
-                if (modalImages[i].name)
-                    modalImages[i].url = cloudinary.utils.url(modalImages[i].name, {
-                        cloud_name: 'dbas3m4wb'
-                    });
+                
             }
         this.images = modalImages;
 
@@ -75,7 +71,7 @@ export class ModalPopUp extends BaseComponent {
                 let img = new Image();
                 img.onload = function () {
                     var data = resizeImage.resize(img, 320, 240, resizeImage.JPEG);
-                    self.images[self.images.length] = { src: data };
+                    self.images[self.images.length] = { url: data };
                     if (isLast) {
 
                         resolve();

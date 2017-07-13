@@ -15,7 +15,7 @@ export class Certifications extends BasePage {
 
     constructor(routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
+        super(routedActivated,null);
         let self: Certifications = this;
         resumeService.education.getCertifications()
             .error(function (error: any) {

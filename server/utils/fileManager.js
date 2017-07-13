@@ -1,5 +1,4 @@
 var localconfig = require('../config/local.env.sample'); // get our config file
-var cloudinary = require('cloudinary');
 
 exports.FileManager = function () {
   var _app;
@@ -43,22 +42,15 @@ exports.FileManager = function () {
 
   this.uploadFile = function (fromUrl, toUrl) {
 
-    cloudinary.config({
-      cloud_name: localconfig.cloudinary.cloud_name,
-      api_key: localconfig.cloudinary.api_key,
-      api_secret: localconfig.cloudinary.api_secret
-    });
     return new Promise(function (resolve, reject) {
-      cloudinary.uploader.upload(
-        fromUrl,
-        function (result) {
-          resolve();
-        }, {
-          public_id: toUrl
-        }
-      )
+      resolve();
     });
   }
+
+  this.renameFile =  function (oldName, newName){
+    require('fs').renameSync(localconfig.uploadFolder + "/" +oldName,localconfig.uploadFolder + "/" +newName);
+  }
+  
   this.storeToCloud = function (filePath) {
     var name = filePath;
     filePath = localconfig.uploadFolder + "/" + filePath;

@@ -15,11 +15,9 @@ import { UserLoginModel } from "./userLoginModel";
 })
 export class UserLogin extends BasePage {
     public model: UserLoginModel = new UserLoginModel();
-    private router: Router;
     constructor(router: Router, routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
-        this.router = router;
+        super(routedActivated,router);
         authService.removeAuth();
         // this.setResources(["signin"]);
         // this.i18n.load(['signin']);
@@ -31,6 +29,7 @@ export class UserLogin extends BasePage {
     public onSignInClicked(event: any) {
         let self: UserLogin = this;
         if (!this.model.isValid()) { return; }
+        console.log(this.model);
         userService.signin(this.model)
             .then(function (token: any) {
                 authService.setAuth(token);

@@ -13,7 +13,7 @@ export class Objectives extends BasePage {
     public objectives: string[];
     constructor(routedActivated: ActivatedRoute) {
 
-        super(routedActivated);
+        super(routedActivated,null);
         let self = this;
         resumeService.getObjectives()
             .error(function (error: any) {

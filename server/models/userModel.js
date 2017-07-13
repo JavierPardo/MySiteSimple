@@ -29,9 +29,9 @@ User.findById = function (id) {
 User.findByEmailOrUserNameAndPassword = function (user) {
   return new Promise(function (resolve, reject) {
     UserDb.find(user, function (err, users) {
-      if (err && err.length > 0)
+      if (err && err.length > 0) {
         reject(err);
-      else
+      } else
         resolve(users);
     });
   });
@@ -52,8 +52,7 @@ User.prototype.create = function () {
     if (err) {
       console.log(err);
       throw err;
-    }
-    else{
+    } else {
       console.log('userCreated!!');
     }
   });
@@ -75,7 +74,9 @@ User.prototype.validate = function (isNew) {
   if (!this.email) {
     ret.errors.push("user.register.emailRequired");
   } else if (!validator.validate(this.email)) {
-    ret.errors.push({key:"user.emailNotValid"});
+    ret.errors.push({
+      key: "user.emailNotValid"
+    });
   }
   if (ret.errors.length == 0) {
     ret.success = true;

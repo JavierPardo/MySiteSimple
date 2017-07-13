@@ -10,7 +10,7 @@ var utils = require('../../utils').getInstance();
 var validator = require("email-validator");
 
 exports.authenticate = function (req, res) {
-  console.log(req.body.email);
+  console.log(req.body.alias);
   console.log(req.body.pwd);
   var parameter = '';
   var userToFind;
@@ -22,10 +22,10 @@ exports.authenticate = function (req, res) {
     parameter = 'email';
   } else {
     userToFind = {
-      userName: req.body.email,
+      userName: req.body.alias,
       password: req.body.pwd
     };
-    parameter = 'userName';
+    parameter = 'alias';
   }
 
   var userDb = User.findByEmailOrUserNameAndPassword(userToFind)

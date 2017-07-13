@@ -5,7 +5,6 @@ import { ModalPopUpEvent } from '../../../../event';
 import { EventManager } from '../../../../eventManager';
 import { BaseComponent } from '../../../../models/ui/baseComponent';
 import { ComponentType, ModalType } from '../../../../models/ui/componentType';
-import cloudinary from 'cloudinary';
 
 declare var $: any;
 @Component({
@@ -32,14 +31,6 @@ export class CarouselImages extends BaseComponent implements AfterViewChecked {
     @Input()
     set images(newImages) {
         this._images = [];
-        //this._images=newImages;
-        if (newImages)
-            for (let i = 0; i < newImages.length; i++) {
-                if (newImages[i].name)
-                    newImages[i].url = cloudinary.utils.url(newImages[i].name, {
-                        cloud_name: 'dbas3m4wb'
-                    });
-            }
         this._images = newImages;
     }
 

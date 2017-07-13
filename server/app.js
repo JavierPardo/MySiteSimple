@@ -22,6 +22,7 @@ mongoose.connect(localconfig.database); // connect to database
 app.set('superSecret', localconfig.secret);
 app.set('encryptationKey', localconfig.encKey);
 var server = require('http').createServer(app);
+
 require('./config/express')(app);
 app.use(morgan('dev'));
 

@@ -1,4 +1,4 @@
-import { ApplicationStateEvent, AuthenticatedEvent, LoadingIndicatorEvent } from './event';
+import { ApplicationStateEvent, AuthenticatedEvent, LoadingIndicatorEvent, RountingEvent } from './event';
 import { EventManager } from './eventManager';
 import { IApplicationState } from './models/app/iapplicationState';
 import { Injector } from "@angular/core";

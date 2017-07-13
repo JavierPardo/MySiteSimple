@@ -2,10 +2,10 @@ var ObjectImageDb = require("./objectImageDb");
 var validator = require("email-validator");
 var utils = require('../utils').getInstance();
 var fs = require('fs');
-var cloudinary = require('cloudinary');
 var utils = require('../utils').getInstance();
 var localconfig = require('../config/local.env.sample'); // get our config file
 var mongoose = require('mongoose');
+var localconfig = require('../config/local.env.sample'); // get our config file
 
 var ObjectImage = function (data) {
 
@@ -26,7 +26,7 @@ ObjectImage.downloadImages = function (images) {
 
   images.forEach(function (image) {
     if (image.url) {
-      utils.fileManager.downloadFile(image.url,image.name);
+      utils.fileManager.downloadFile(image.url, image.name);
     }
   });
 
@@ -58,20 +58,14 @@ ObjectImage.prototype.save = function () {
 
 ObjectImage.prototype.storeSrc = function (imagePath1) {
   var self = this;
-  
-    cloudinary.config({
-      cloud_name: localconfig.cloudinary.cloud_name,
-      api_key: localconfig.cloudinary.api_key,
-      api_secret: localconfig.cloudinary.api_secret
-    });
+
   return new Promise(function (resolve, rejected) {
     utils.fileManager.writeBufferToFile(self.src, imagePath1).then(function () {
       console.log('-uploading:', imagePath1)
       utils.fileManager.storeToCloud(imagePath1).then(function () {
-         utils.fileManager.deleteFile(localconfig.uploadFolder + "/" + imagePath1 );
-         self.name = imagePath1;
-         self.src = cloudinary.utils.url(imagePath1);
-         resolve();
+        self.name = imagePath1;
+        self.src = localconfig.imagesUrl + '/' + imagePath1;
+        resolve();
       });
     });
   });
@@ -84,6 +78,7 @@ ObjectImage.getImages = function (parametersObject) {
     ObjectImageDb.promiseFind(parametersObject)
       .then(function (data) {
         data.map(function (data) {
+          data.src=localconfig.imagesUrl + '/' + data.name;
           mydata[mydata.length] = new ObjectImage(data);
         })
         resolve(mydata);

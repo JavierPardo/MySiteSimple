@@ -1,16 +1,16 @@
-import { MessageModel } from '../models/ui/messageModel';
-import { SystemMessage } from '../layouts/default/directives/common/systemMessage';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 // import {Observable} from "rxjs/Observable";
 
+import { CommonEvent, HttpCode, LoadingIndicatorEvent, RountingEvent } from '../event';
+import { EventManager } from '../eventManager';
+import { SystemMessage } from '../layouts/default/directives/common/systemMessage';
 import { ValidationException } from '../models/exceptions';
 import { JsonHeaders } from '../models/http/jsonHeader';
-import { PromiseFactory, Promise } from "../models/promise";
-import { CommonEvent, HttpCode, LoadingIndicatorEvent } from '../event';
-import { EventManager } from "../eventManager";
-import { IConnector } from "./iconnector";
+import { Promise, PromiseFactory } from '../models/promise';
+import { MessageModel } from '../models/ui/messageModel';
+import { IConnector } from './iconnector';
 @Injectable()
 export class RESTConnector implements IConnector {
     private static http: Http;
@@ -130,12 +130,15 @@ export class RESTConnector implements IConnector {
     }
     private getError(exception: any): ValidationException {
         let validationEror: ValidationException;
+        let restConnector: RESTConnector= this;
         switch (exception.status) {
             case HttpCode.BadRequest:
                 validationEror = new ValidationException("common.httpError.badRequest");
                 break;
             case HttpCode.NotFound:
                 validationEror = new ValidationException("common.httpError.notFound");
+                RESTConnector.eventManager.publish(RountingEvent.RedirectPage, "notFound");
+                console.log('redirecting app');
                 break;
             case HttpCode.UnAuthorized:
                 validationEror = new ValidationException("common.httpError.unAuthorized");

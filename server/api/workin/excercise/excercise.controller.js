@@ -22,14 +22,15 @@ exports.create = function (req, res, user) {
       success: false
     };
 
-    dataCreate.then(function (user) {
+    dataCreate.then(function (excer) {
         console.log('Excersice created successfully');
         res.json({
           data: {
             messages: [{
               key: 'excercise.created',
               params: []
-            }]
+            }],
+            excerciseId: utils.encryptation.encrypt(excer._id.toString())
           },
           errors: []
         });
@@ -120,22 +121,29 @@ exports.getExcercise = function (req, res, user) {
       _id: utils.encryptation.decrypt(req.params.id.toString())
     },
     function (excer) {
-      if (user._id.toString() !== excer.user.toString()) {
-        delete excer.id;
+      if (excer) {
+        if (user._id.toString() !== excer.user.toString()) {
+          delete excer.id;
+        }
+        delete excer.user;
+        res.json({
+          data: {
+            excercise: excer
+          },
+          messages: [],
+          errors: []
+        });
+      } else {
+        return res.status(404).send({
+          success: false,
+          message: 'invalid token.'
+        });
+
       }
-      delete excer.user;
-      res.json({
-        data: {
-          excercise: excer
-        },
-        messages: [],
-        errors: []
-      });
     }
   );
 }
 exports.uploadImages = function (req, res, user) {
-
   var excercise = Excercise.getExcercise({
       _id: utils.encryptation.decrypt(req.body.id.toString())
     },

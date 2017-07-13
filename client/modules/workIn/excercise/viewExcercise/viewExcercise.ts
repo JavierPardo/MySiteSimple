@@ -2,10 +2,10 @@ import { ExcerciseModel } from '../excerciseModel';
 import { CommonEvent } from '../../../commonCore/event';
 import workinService from '../../_share/services/workinService';
 import { ValidationException } from '../../../commonCore/models/exceptions';
-import { AfterViewInit } from '@angular/core/core';
 import { Component } from '@angular/core';
-import { BasePage } from "modules/commonCore/models/ui/basePage";
-import { ActivatedRoute } from "@angular/router";
+import { AfterViewInit } from '@angular/core/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BasePage } from 'modules/commonCore/models/ui/basePage';
 
 @Component({
     selector: "ViewExcercise",
@@ -14,8 +14,8 @@ import { ActivatedRoute } from "@angular/router";
 export class ViewExcercise extends BasePage implements AfterViewInit {
     public model: ExcerciseModel = new ExcerciseModel();
     public canEdit: boolean = false;
-    constructor(activatedRoute: ActivatedRoute) {
-        super(activatedRoute);
+    constructor(activatedRoute: ActivatedRoute, router: Router) {
+        super(activatedRoute,router);
         let self: ViewExcercise = this;
         let id = activatedRoute.snapshot.params['Id'];
         workinService.getExcercise(id)
@@ -23,6 +23,7 @@ export class ViewExcercise extends BasePage implements AfterViewInit {
                 let exceptions = new ValidationException();
                 errors.forEach(error => {
                     exceptions.add(error.key, error.params);
+                    console.log(error);
                 });
             })
             .then(function (responseServer: any) {

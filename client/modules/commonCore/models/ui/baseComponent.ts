@@ -1,17 +1,17 @@
 import helper from '../../helpers';
 import { IConnector } from '../../connectors/iconnector';
-import { ResourceHelper } from '../../helpers/resourceHelper';
+import { AuthenticationMode } from '../../enum';
+import { ApplicationStateEvent, AuthenticatedEvent, RountingEvent } from '../../event';
 import { EventManager } from '../../eventManager';
+import { ResourceHelper } from '../../helpers/resourceHelper';
+import authService from '../../services/authService';
+import { Hashtable } from '../list/hashtable';
 import { ComponentType } from './componentType';
-import { Hashtable } from "../list/hashtable";
-import { AuthenticatedEvent, ApplicationStateEvent } from "../../event";
 // import { IConnector } from "../../connectors/iconnector";
 // import { EventManager } from "../../eventManager";
-import authService from "../../services/authService";
-import { AuthenticationMode } from "../../enum";
-import { OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Http } from "@angular/http";
+import { AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
 
 export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
     protected connector: IConnector;
@@ -21,7 +21,8 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     public i18nHelper: ResourceHelper;
     public id: string = helper.guid.create();
     public routeActivated: ActivatedRoute;
-    constructor(http: Http, componentType: any = ComponentType.Layout, routeActivated: ActivatedRoute) {
+    constructor(http: Http, componentType: any = ComponentType.Layout,
+        routeActivated: ActivatedRoute) {
         this.routeActivated = routeActivated;
         this.connector = window.ioc.resolve("IConnector");
         this.eventManager = window.ioc.resolve("IEventManager");
@@ -58,7 +59,7 @@ export class BaseComponent implements OnInit, AfterContentInit, AfterViewInit, O
     }
 
     ngAfterViewInit() {
-        this.onReady(); 
+        this.onReady();
         if (this.routeActivated && this.routeActivated != null)
             this.routeActivated.params.subscribe(params => this.routerOnActivate(this.routeActivated.snapshot));
 

@@ -15,7 +15,7 @@ export class GeneralInformation extends BasePage {
     
     constructor(routedActivated: ActivatedRoute){
         
-        super(routedActivated);
+        super(routedActivated,null);
         let self: GeneralInformation = this;
         resumeService.getGenInfo()
         .error(function (error: any){

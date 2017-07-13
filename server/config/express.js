@@ -26,11 +26,10 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  
+  app.use('/Images', express.static(path.join(config.root, 'server','config','uploadFolder')))
   app.use(express.static(path.join(config.root, 'dist')));
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'dist', 'favicon.ico')));
-    app.use(express.static(path.join(config.root, 'dist')));
     app.set('appPath', config.root + '/dist');
     app.use(morgan('dev'));
   }

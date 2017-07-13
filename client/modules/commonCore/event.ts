@@ -6,6 +6,10 @@ export const ApplicationStateEvent = {
     UnAuthorizeRequest: "UnAuthorizeRequest"
 };
 
+export const RountingEvent = {
+    RedirectPage: "Redirect.Page"
+}
+
 export const LoadingIndicatorEvent = {
     Show: "loading.show",
     Hide: "loading.hide"
