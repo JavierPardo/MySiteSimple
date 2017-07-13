@@ -9,8 +9,9 @@ import { ModalPopUp } from './layouts/default/directives/common/modalPopUp';
 import { SystemMessage } from './layouts/default/directives/common/systemMessage';
 import { MenuItem } from './layouts/default/directives/menus/menuItem';
 import { MenuSidebar } from './layouts/default/directives/menus/menuSidebar';
-import { BasePage } from './models/ui/basePage';
 import { MenuTopbar } from './layouts/default/directives/menus/menuTopbar';
+import { BasePage } from './models/ui/basePage';
+import { NotFound } from './pages/NotFound';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, RouterLink } from '@angular/router';
@@ -39,18 +40,22 @@ export function initialConfigLoad() {
         SystemMessage,
         ValidationDirective,
         ModalPopUp,
-        CarouselImages
+        NotFound,
+        CarouselImages 
     ],
     imports: [
         BrowserModule,
         FormsModule,
         CommonModule,
         HttpModule,
-        RouterModule.forRoot([])
+        RouterModule.forRoot([
+            { path: 'notFound', component: NotFound },
+        ])
     ],
     exports: [ 
         ImageContainerComponent,       
         BrowserModule,
+        NotFound,
         FormsModule,
         CommonModule,
         HttpModule,
