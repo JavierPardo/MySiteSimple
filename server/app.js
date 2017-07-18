@@ -17,8 +17,13 @@ var mongoose = require('mongoose');
 
 // Setup server
 var app = express();
-app.use(bodyParser.json({limit: '2mb'}));
-mongoose.connect(localconfig.database); // connect to database
+app.use(bodyParser.json({
+  limit: '2mb'
+}));
+console.log('Connected to database: %s, in %s mode', localconfig.database, app.get('env'));
+mongoose.connect(localconfig.database, {
+  useMongoClient: true
+});
 app.set('superSecret', localconfig.secret);
 app.set('encryptationKey', localconfig.encKey);
 var server = require('http').createServer(app);
