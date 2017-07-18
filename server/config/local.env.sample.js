@@ -13,8 +13,8 @@ module.exports = {
   DEBUG: '',
   secret: 'JavierSecretKey',
   encKey: 'encrypt!@#!%%',
-  database: 'mongodb://root:root@ds149511.mlab.com:49511/usrsdb',
   uploadFolder: __dirname + '\\uploadFolder',
+  imagesUrl:'/Images',
   cloudinary: {
     api_secret: 'O51hmGXG2sGBpjvEwyfsXGvTHkI',
     api_key: '323896856514465',

@@ -1,4 +1,6 @@
 var localconfig = require('../config/local.env.sample'); // get our config file
+var storage = require('@google-cloud/storage');
+const path = require('path');
 
 exports.FileManager = function () {
   var _app;
@@ -17,15 +19,28 @@ exports.FileManager = function () {
     });
   }
 
-  this.writeBufferToFile = function (buffer, filePath) {
-    filePath = localconfig.uploadFolder + "/" + filePath;
+  this.writeBufferToFile = function (buffer, filePathName) {
+
+    var gcs = storage({
+      projectId: 'gymapp-174018',
+      keyFilename: path.join(__dirname, '../config/GymApp-acea88cca092.json')
+    });
+
+var bucket = gcs.bucket('lofty-mix-1468');
+    var filePath = localconfig.uploadFolder + "/dontdelete";// + filePath;
     base64Data = buffer.replace(/^data:image\/jpeg;base64,/, ""),
       binaryData = new Buffer(base64Data, 'base64').toString('binary');
 
     return new Promise(function (resolve, reject) {
       require("fs").writeFile(filePath, binaryData, "binary", function (err) {
         if (err) reject(err)
-        else resolve();
+        else {
+          
+var localReadStream = fs.createReadStream(filePath);
+var remoteWriteStream = bucket.file(filePathName).createWriteStream();
+localReadStream.pipe(remoteWriteStream);
+          resolve();
+        }
       });
     });
   }
@@ -47,10 +62,10 @@ exports.FileManager = function () {
     });
   }
 
-  this.renameFile =  function (oldName, newName){
-    require('fs').renameSync(localconfig.uploadFolder + "/" +oldName,localconfig.uploadFolder + "/" +newName);
+  this.renameFile = function (oldName, newName) {
+    require('fs').renameSync(localconfig.uploadFolder + "/" + oldName, localconfig.uploadFolder + "/" + newName);
   }
-  
+
   this.storeToCloud = function (filePath) {
     var name = filePath;
     filePath = localconfig.uploadFolder + "/" + filePath;
