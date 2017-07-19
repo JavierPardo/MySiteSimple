@@ -16,6 +16,9 @@ module.exports = {
   database: 'mongodb://root:root@ds149511.mlab.com:49511/usrsdb',
   uploadFolder: __dirname + '\\uploadFolder',
   imagesUrl:'/Images',
+  googleCloudStorage: {
+    bucket: 'lofty-mix-1468'
+  },
   cloudinary: {
     api_secret: 'O51hmGXG2sGBpjvEwyfsXGvTHkI',
     api_key: '323896856514465',

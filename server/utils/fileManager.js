@@ -28,7 +28,7 @@ exports.FileManager = function () {
       keyFilename: path.join(__dirname, '../config/GymApp-acea88cca092.json')
     });
 
-    let bucket = gcs.bucket('lofty-mix-1468');
+    let bucket = gcs.bucket(localconfig.googleCloudStorage.bucket);
     let base64Data = buffer.replace(/^data:image\/jpeg;base64,/, ""),
       binaryData = new Buffer(base64Data, 'base64').toString('binary');
 
