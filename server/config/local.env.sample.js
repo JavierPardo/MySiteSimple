@@ -17,7 +17,8 @@ module.exports = {
   uploadFolder: __dirname + '\\uploadFolder',
   imagesUrl:'/Images',
   googleCloudStorage: {
-    bucket: 'lofty-mix-1468'
+    bucket: 'lofty-mix-1468',
+    projectId: 'gymapp-174018'
   },
   cloudinary: {
     api_secret: 'O51hmGXG2sGBpjvEwyfsXGvTHkI',

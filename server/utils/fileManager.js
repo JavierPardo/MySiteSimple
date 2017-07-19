@@ -24,7 +24,7 @@ exports.FileManager = function () {
   this.writeBufferToFile = function (buffer, filePathName) {
 
     let gcs = storage({
-      projectId: 'gymapp-174018',
+      projectId: localconfig.googleCloudStorage.projectId,
       keyFilename: path.join(__dirname, '../config/GymApp-acea88cca092.json')
     });
 
@@ -33,13 +33,13 @@ exports.FileManager = function () {
       binaryData = new Buffer(base64Data, 'base64').toString('binary');
 
     let readStream = new stream.PassThrough();
-    readStream.push(base64Data,'base64');
+    readStream.push(base64Data, 'base64');
     readStream.end();
     let remoteWriteStream = bucket.file(filePathName).createWriteStream();
     readStream.pipe(remoteWriteStream);
     console.log('uploaded to google storage...');
     return new Promise(function (resolve, reject) {
-          resolve();
+      resolve();
     });
   }
 

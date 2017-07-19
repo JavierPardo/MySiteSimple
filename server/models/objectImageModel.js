@@ -78,7 +78,7 @@ ObjectImage.getImages = function (parametersObject) {
     ObjectImageDb.promiseFind(parametersObject)
       .then(function (data) {
         data.map(function (data) {
-          data.src=localconfig.imagesUrl + '/' + data.name;
+          data.src = 'https://storage.googleapis.com/' + localconfig.googleCloudStorage.bucket + '/' + data.name;
           mydata[mydata.length] = new ObjectImage(data);
         })
         resolve(mydata);
