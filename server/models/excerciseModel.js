@@ -120,8 +120,6 @@ Excercise.prototype.SaveImages = function (images) {
       objectType: ObjectType.Excercise
     });
 
-    //new images
-    console.log(images[i]);
     if (images[i].url) {
       objectImage.src = images[i].url
       objectImage.storeSrc(imageURL).then(
@@ -129,7 +127,6 @@ Excercise.prototype.SaveImages = function (images) {
           objectImage.save();
         });
     }
-    //old images
     else {
       console.log('renaming ', images[i].name, ' to ', imageURL);
       utils.fileManager.renameFile(images[i].name, imageURL);

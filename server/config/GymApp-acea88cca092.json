@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gymapp-174018",
+  "private_key_id": "acea88cca0929f5592607d4d792aebf1e1cea79a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCvHW5wypE7vCXK\nTkjnF2+RQkX9QQ01+T3hLaEYzi3o6LSF1XeRFRJ04h0R9JDJ/76JqoezFibSCASo\nh2axSPbBE1mwD/ApibnsYh5Y9zFZ+svZ3oN5TSzh9VKsvj+f/9UrxOu/h5vUy3UV\nj+cOqGeD1Q7FFz3f6iVeqBkhcl5qRvSKO75Kwjr6+dAbnLfAI5GvNjydEr5DWh/T\ngrWddjr83zK8CuG7iVNjuiwkoveJDs3AKzJQB6R3bJUJR5eChfTvZka0eMLTSmOx\nwGQffrQa93anFVW+UCF6H++ACOo8tM1f5dXP1jkPkOPasHXdOx5k7lIvGLVqV2gh\nw670SJ8rAgMBAAECggEAFyrnJh/+p+8D9uh1h7FXjtm8Rb26ADaJ48U0J4J7m3FS\nFNTBnV2y0+joXKxFDZx6ul7n1h8roqTx7NQBF5pmHvQu7Pam2PACO45donqNunBO\nUPQ54638rqZUukrvQv1HWCOU5wGLcdM7Gc+wi4VnMI9bBWNGSd4B9Kx7qqulZxzk\n4nOeDfClqg5uErDk24+MBUMIEDEGRiWE1Ng8w0565Cox5bQU/FAv3gErbJVjjYKC\nPZ93srWguKWtnK4uV/HOaezMzLPpQEjtae8u2tzqUZ4/EFWsVOa8pKbN84UYsRPN\nD94CLgHxnLEF+UDrzYqTOouBATdv04nwu6SY4y+qvQKBgQDk8EzuNO0PXApuBHmq\n73x52uUymShzh48WWO3pEQ5yQsWLOt/jaMT3vF3qZG1oeVv+lgcgpBaVe2fLgZWM\nHH9vXiaf59nmiu9EizA/Lln1tcaj4wOAP+SZHRKbmn7jREvDvvfvZOfGsexX2qJq\nUwODA/4poF+AkLfBKRNaj6nrPwKBgQDD0GwD3wNJNsvUrMXK6mqbnyPIJv0hUbMf\nQgIv/RyIYwb6SDMEzqaIM7GLBn/9BFRSD8TAZdLuDjWVxrV0OYqBJYEO9v9/nINI\n/gHO/f5t3R74RokRQERdrEy+yKWr6KxpFEw3s15M2YrH9Uf8rMuJN40ohX+dqn5E\nB4P7SrHtFQKBgBB4hWBh6GhBe/KcWdCFeFQf/ntcb3+YUiAOd9dbxclMqn+w1ai7\nwef84ljZrtFkYcz4KD0d8Q4CGd6XTRYOetCdWnQIrzGZ70rkJK12/TvjPw5NZ9QT\nRLQLVmphfB2HrVfA5n+Pp+kwpctQTH0PyeHkKKYABr7uKno4JU9PpK7rAoGAQrZn\nlooMXI1GtJaIbLGg0JRPZImkBA4JsMSUajUZ232hivO+Lg0Zv52dB3iXcmRfNfYZ\nWlNWobRFnVmtyIMyJP3aEnckZR21vNCNXTA71sJXIs8lM7Npl2B0ZSuHBiKnWsWH\nkhKSNiyHk8iFVhio338FoKCa8eR8UEEfPiYcqGECgYAg7l7+UV4wV8qVINGOlwhf\nRDjyuKv6zJT8vKi487YuKirm4R4bkWzRIpJX6NcL/00WDIJ1LOOldvTgopCTEs9E\nSz4B3gfuJYg0c8wn+K7Kn7xbpjRRsAV3z65YkBjTOeKeQN1RpCJ+yfKkfVcFj+b0\ngIEKzi6XehFIvOvBjaEkRg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "root-255@gymapp-174018.iam.gserviceaccount.com",
+  "client_id": "113649427488610449674",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/root-255%40gymapp-174018.iam.gserviceaccount.com"
+}
