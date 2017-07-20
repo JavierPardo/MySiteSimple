@@ -5,7 +5,8 @@ var fs = require('fs');
 var ObjectImageModel = require('./objectImageModel');
 var ObjectType = require('./objectTypeEnum');
 var localconfig = require('../config/local.env.sample'); // get our config file
-
+var storage = require('@google-cloud/storage');
+var path = require("path");
 var Excercise = function (data) {
 
   this.name = data.name;
@@ -110,7 +111,6 @@ Excercise.prototype.SaveImages = function (images) {
   var self = this;
   //ObjectImageModel.downloadImages(images);
   self.deleteAllImages();
-
   for (var i = 0; i < images.length; i++) {
     let imageURL = self.id + "-" + i;
 
@@ -126,10 +126,26 @@ Excercise.prototype.SaveImages = function (images) {
         function () {
           objectImage.save();
         });
-    }
-    else {
-      console.log('renaming ', images[i].name, ' to ', imageURL);
-      utils.fileManager.renameFile(images[i].name, imageURL);
+    } else {
+      console.log('renaming ', images[i].src, ' to ', imageURL);
+
+      var options = {
+        destination: imageURL
+      };
+      let gcs = storage({
+        projectId: localconfig.googleCloudStorage.projectId,
+        keyFilename: path.join(__dirname, '../config/GymApp-acea88cca092.json')
+      });
+
+      let bucket = gcs.bucket(localconfig.googleCloudStorage.bucket);
+      if (imageURL != images[i].name) {
+        console.log('delete:', images[i].name);
+        bucket.deleteFiles({
+          prefix: images[i].name
+        }, console.log)
+        console.log('upload:', images[i].src, " as ", imageURL);
+        bucket.upload(images[i].src, options, function (err, file) {});
+      }
       objectImage.save();
     }
   }

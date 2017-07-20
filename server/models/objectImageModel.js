@@ -61,7 +61,6 @@ ObjectImage.prototype.storeSrc = function (imagePath1) {
 
   return new Promise(function (resolve, rejected) {
     utils.fileManager.writeBufferToFile(self.src, imagePath1).then(function () {
-      console.log('-uploading:', imagePath1)
       utils.fileManager.storeToCloud(imagePath1).then(function () {
         self.name = imagePath1;
         self.src = localconfig.imagesUrl + '/' + imagePath1;
